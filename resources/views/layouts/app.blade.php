@@ -63,7 +63,7 @@
                 </a>
 
                 <!-- Desktop Navigation Links -->
-                <nav class="hidden xl:flex items-center gap-6 text-sm font-semibold text-slate-700">
+                <nav class="hidden lg:flex items-center gap-4 xl:gap-6 text-[13px] xl:text-sm font-semibold text-slate-700">
                     <a href="{{ route('home') }}" class="transition hover:text-[#16325c] {{ request()->routeIs('home') ? 'text-[#16325c] font-bold border-b-2 border-[#c89a3b] pb-1' : '' }}">
                         {{ __('app.nav_home') }}
                     </a>
@@ -139,7 +139,7 @@
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <div class="flex items-center xl:hidden">
+                <div class="flex items-center lg:hidden">
                     <button type="button" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="p-2.5 rounded-xl text-slate-700 hover:text-[#16325c] hover:bg-slate-100 focus:outline-hidden" aria-label="Toggle navigation">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                     </button>
