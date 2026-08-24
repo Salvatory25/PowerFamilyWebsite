@@ -145,73 +145,8 @@
 </section>
 
 
-<!-- 3. FEATURED LAND PROJECTS SHOWCASE -->
-@if(isset($featuredProjects) && $featuredProjects->count() > 0)
-<section class="py-20 bg-white border-t border-b border-slate-200/80">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-            <div>
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#16325c]/10 text-[#16325c] text-xs font-extrabold tracking-wider uppercase border border-[#16325c]/20">
-                    Proven Track Record
-                </span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-[#16325c] tracking-tight mt-2">
-                    {{ __('app.featured_projects_title') }}
-                </h2>
-                <p class="text-sm text-slate-600 mt-1 max-w-2xl">
-                    {{ __('app.featured_projects_subtitle') }}
-                </p>
-            </div>
-            <a href="{{ route('projects.index') }}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-[#16325c] text-[#16325c] hover:text-white font-bold text-xs transition">
-                <span>{{ __('app.view_all_projects') }}</span>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-            </a>
-        </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            @foreach($featuredProjects as $project)
-                <div class="bg-slate-50 rounded-3xl overflow-hidden border border-slate-200 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="{{ $project->image_url }}" alt="{{ $project->name }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        <div class="absolute top-3 left-3 flex flex-col gap-1.5">
-                            <span class="px-2.5 py-1 rounded-lg bg-[#0c1c34]/90 text-[#dfb256] text-[10px] font-extrabold uppercase backdrop-blur-md">
-                                {{ $project->project_type }}
-                            </span>
-                        </div>
-                        <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] text-white bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-lg">
-                            <span class="font-medium truncate">{{ $project->location_name }}</span>
-                            <span class="font-bold text-[#dfb256] shrink-0">{{ $project->size_covered }}</span>
-                        </div>
-                    </div>
-
-                    <div class="p-5 flex-grow flex flex-col justify-between space-y-3">
-                        <div>
-                            <h3 class="font-extrabold text-sm text-[#16325c] leading-snug line-clamp-2 group-hover:text-[#c89a3b] transition">
-                                {{ $project->name }}
-                            </h3>
-                            <p class="text-xs text-slate-500 mt-2 line-clamp-2">
-                                {{ $project->short_description }}
-                            </p>
-                        </div>
-
-                        <div class="pt-3 border-t border-slate-200/80 flex items-center justify-between text-xs">
-                            <span class="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md">
-                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                                {{ ucfirst($project->project_status) }}
-                            </span>
-                            <a href="{{ route('projects.show', $project->slug) }}" class="font-bold text-[#16325c] hover:text-[#c89a3b] transition">
-                                Case Study &rarr;
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </div>
-</section>
-@endif
-
-
-<!-- 4. AVAILABLE VERIFIED PLOTS (PUBLISHED PLOTS INTEGRATION) -->
+<!-- 3. AVAILABLE VERIFIED PLOTS (PUBLISHED PLOTS INTEGRATION) -->
 @if(isset($featuredPlots) && $featuredPlots->count() > 0)
 <section class="py-20 bg-slate-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
