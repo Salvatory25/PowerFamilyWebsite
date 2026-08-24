@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+@source "../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php";
+@source "../../storage/framework/views/*.php";
+@source "../**/*.blade.php";
+@source "../**/*.js";
+
+@theme {
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+    /* RELAND Logo Signature Palette */
+    --color-reland-navy: #16325c;
+    --color-reland-navy-light: #20457c;
+    --color-reland-navy-dark: #0c1c34;
+    --color-reland-navy-950: #07101f;
+    
+    --color-reland-gold: #c89a3b;
+    --color-reland-gold-light: #dfb256;
+    --color-reland-gold-dark: #a97e28;
+    --color-reland-gold-50: #fbf6ea;
+    --color-reland-gold-100: #f5e9c9;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        font-family: var(--font-sans);
+        color: #0f172a;
+        background-color: #f8fafc;
+    }
+}
+
+/* Custom logo theme utility classes */
+.bg-reland-navy {
+    background-color: #16325c;
+}
+.bg-reland-navy-dark {
+    background-color: #0c1c34;
+}
+.text-reland-navy {
+    color: #16325c;
+}
+.border-reland-navy {
+    border-color: #16325c;
+}
+
+.bg-reland-gold {
+    background-color: #c89a3b;
+}
+.bg-reland-gold-light {
+    background-color: #fbf6ea;
+}
+.text-reland-gold {
+    color: #c89a3b;
+}
+.text-reland-gold-dark {
+    color: #a97e28;
+}
+.border-reland-gold {
+    border-color: #c89a3b;
+}
+
+/* Custom premium utility micro-animations */
+.luxury-glass {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.luxury-card-hover {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.luxury-card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(22, 50, 92, 0.08), 0 8px 10px -6px rgba(22, 50, 92, 0.04);
+}
+
+/* Custom modern scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
