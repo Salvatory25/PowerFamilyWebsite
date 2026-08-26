@@ -6,7 +6,21 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title', 'RELAND | Professional Land Surveying & Formalization Solutions &bull; Arusha, Tanzania')</title>
-    <meta name="description" content="@yield('meta_description', 'Reliable land surveying, formalization, and plot solutions in Arusha, Tanzania. Certified cadastral surveys, beacon pegging, title deeds, and verified plot sales.')">
+    
+    <!-- SEO & Open Graph Meta Tags -->
+    <meta name="description" content="@yield('meta_description', 'Tanzania\'s leading Digital Land Services Platform. Upimaji wa ardhi, urasimishaji wa makazi, ugawaji wa viwanja na huduma za kisheria za ardhi.')">
+    <meta name="keywords" content="upimaji ardhi, urasimishaji makazi, viwanja, land surveying, tanzania, arusha, hati miliki, reland consult">
+    
+    <meta property="og:title" content="@yield('title', 'RELAND CONSULT LTD | Digital Land Services')">
+    <meta property="og:description" content="@yield('meta_description', 'Tanzania\'s leading Digital Land Services Platform. Upimaji wa ardhi, urasimishaji wa makazi, ugawaji wa viwanja na huduma za kisheria za ardhi.')">
+    <meta property="og:image" content="{{ asset('images/reland-og-share.jpg') }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="website">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="@yield('title', 'RELAND CONSULT LTD | Digital Land Services')">
+    <meta name="twitter:description" content="@yield('meta_description', 'Tanzania\'s leading Digital Land Services Platform. Upimaji wa ardhi, urasimishaji wa makazi, ugawaji wa viwanja na huduma za kisheria za ardhi.')">
+    <meta name="twitter:image" content="{{ asset('images/reland-og-share.jpg') }}">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
@@ -22,13 +36,13 @@
 
     <!-- Top Announcement & Language Switcher Bar -->
     <div class="bg-[#0c1c34] text-slate-300 text-xs py-2.5 px-4 border-b border-slate-800">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+        <div class="w-full max-w-[1720px] mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
             <div class="flex items-center gap-3">
                 <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#c89a3b]/15 text-[#dfb256] font-bold text-[11px] ring-1 ring-[#c89a3b]/30">
                     <span class="w-1.5 h-1.5 rounded-full bg-[#dfb256] animate-pulse"></span>
-                    {{ __('app.arusha_badge') }}
+                    {{ $siteLocationBadge ?: __('app.arusha_badge') }}
                 </span>
-                <span class="text-slate-300 font-medium hidden md:inline">{{ __('app.brand_tagline') }}</span>
+                <span class="text-slate-300 font-medium hidden md:inline">{{ $siteTagline ?: __('app.brand_tagline') }}</span>
             </div>
             
             <div class="flex items-center gap-6">
@@ -51,30 +65,30 @@
 
     <!-- Main Navigation Header -->
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
+        <div class="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20 gap-4">
                 <!-- Brand Logo -->
-                <a href="{{ route('home') }}" class="flex items-center gap-3 group">
-                    <img src="{{ asset('images/logo.png') }}" alt="RELAND Logo" class="h-11 w-auto object-contain drop-shadow-xs group-hover:scale-105 transition transform">
+                <a href="{{ route('home') }}" class="flex items-center gap-3 shrink-0 group">
+                    <img src="{{ asset('images/logo.png') }}" alt="RELAND Logo" class="h-10 sm:h-11 w-auto object-contain drop-shadow-xs group-hover:scale-105 transition transform">
                     <div class="flex flex-col">
-                        <span class="font-extrabold text-2xl tracking-tight text-[#16325c] leading-none">RE<span class="text-[#c89a3b]">LAND</span></span>
-                        <span class="text-[9px] font-extrabold tracking-wider text-slate-500 uppercase mt-0.5">Land Services &bull; Arusha</span>
+                        <span class="font-extrabold text-xl sm:text-2xl tracking-tight text-[#16325c] leading-none">RE<span class="text-[#c89a3b]">LAND</span></span>
+                        <span class="text-[9px] font-extrabold tracking-wider text-slate-500 uppercase mt-0.5 whitespace-nowrap">{{ $siteBrandSubtext ?: 'Land Services • Arusha' }}</span>
                     </div>
                 </a>
 
                 <!-- Desktop Navigation Links -->
-                <nav class="hidden lg:flex items-center gap-4 xl:gap-6 text-[13px] xl:text-sm font-semibold text-slate-700">
-                    <a href="{{ route('home') }}" class="transition hover:text-[#16325c] {{ request()->routeIs('home') ? 'text-[#16325c] font-bold border-b-2 border-[#c89a3b] pb-1' : '' }}">
+                <nav class="hidden lg:flex items-center gap-1.5 xl:gap-3 2xl:gap-4 text-[13px] xl:text-sm font-semibold text-slate-700">
+                    <a href="{{ route('home') }}" class="px-2.5 py-1.5 rounded-lg whitespace-nowrap transition-colors hover:text-[#16325c] hover:bg-slate-100/60 {{ request()->routeIs('home') ? 'text-[#16325c] font-bold bg-[#fbf6ea] text-[#16325c]' : '' }}">
                         {{ __('app.nav_home') }}
                     </a>
 
-                    <a href="{{ route('pages.about') }}" class="transition hover:text-[#16325c] {{ request()->routeIs('pages.about') ? 'text-[#16325c] font-bold border-b-2 border-[#c89a3b] pb-1' : '' }}">
+                    <a href="{{ route('pages.about') }}" class="px-2.5 py-1.5 rounded-lg whitespace-nowrap transition-colors hover:text-[#16325c] hover:bg-slate-100/60 {{ request()->routeIs('pages.about') ? 'text-[#16325c] font-bold bg-[#fbf6ea]' : '' }}">
                         {{ __('app.nav_about') }}
                     </a>
 
                     <!-- Services Mega/Dropdown Link -->
-                    <div class="relative group py-2">
-                        <a href="{{ route('pages.services') }}" class="flex items-center gap-1 transition hover:text-[#16325c] {{ request()->routeIs('pages.services') || request()->routeIs('services.*') ? 'text-[#16325c] font-bold border-b-2 border-[#c89a3b] pb-1' : '' }}">
+                    <div class="relative group py-1.5">
+                        <a href="{{ route('pages.services') }}" class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg whitespace-nowrap transition-colors hover:text-[#16325c] hover:bg-slate-100/60 {{ request()->routeIs('pages.services') || request()->routeIs('services.*') ? 'text-[#16325c] font-bold bg-[#fbf6ea]' : '' }}">
                             <span>{{ __('app.nav_services') }}</span>
                             <svg class="w-3.5 h-3.5 text-slate-400 group-hover:text-[#16325c] transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                         </a>
@@ -106,33 +120,38 @@
                         </div>
                     </div>
 
-                    <a href="{{ route('projects.index') }}" class="transition hover:text-[#16325c] {{ request()->routeIs('projects.*') ? 'text-[#16325c] font-bold border-b-2 border-[#c89a3b] pb-1' : '' }}">
+                    <a href="{{ route('projects.index') }}" class="px-2.5 py-1.5 rounded-lg whitespace-nowrap transition-colors hover:text-[#16325c] hover:bg-slate-100/60 {{ request()->routeIs('projects.*') ? 'text-[#16325c] font-bold bg-[#fbf6ea]' : '' }}">
                         {{ __('app.nav_projects') }}
                     </a>
 
-                    <a href="{{ route('plots.index') }}" class="transition hover:text-[#16325c] {{ request()->routeIs('plots.*') ? 'text-[#16325c] font-bold border-b-2 border-[#c89a3b] pb-1' : '' }}">
+                    <a href="{{ route('plots.index') }}" class="px-2.5 py-1.5 rounded-lg whitespace-nowrap transition-colors hover:text-[#16325c] hover:bg-slate-100/60 {{ request()->routeIs('plots.*') ? 'text-[#16325c] font-bold bg-[#fbf6ea]' : '' }}">
                         {{ __('app.nav_plots') }}
                     </a>
 
-                    <a href="{{ route('locations.index') }}" class="transition hover:text-[#16325c] {{ request()->routeIs('locations.*') ? 'text-[#16325c] font-bold border-b-2 border-[#c89a3b] pb-1' : '' }}">
+                    <a href="{{ route('locations.index') }}" class="px-2.5 py-1.5 rounded-lg whitespace-nowrap transition-colors hover:text-[#16325c] hover:bg-slate-100/60 {{ request()->routeIs('locations.*') ? 'text-[#16325c] font-bold bg-[#fbf6ea]' : '' }}">
                         {{ __('app.nav_locations') }}
                     </a>
 
-                    <a href="{{ route('pages.insights') }}" class="transition hover:text-[#16325c] {{ request()->routeIs('pages.insights') || request()->routeIs('pages.blog') ? 'text-[#16325c] font-bold border-b-2 border-[#c89a3b] pb-1' : '' }}">
+                    <a href="{{ route('pages.insights') }}" class="px-2.5 py-1.5 rounded-lg whitespace-nowrap transition-colors hover:text-[#16325c] hover:bg-slate-100/60 {{ request()->routeIs('pages.insights') || request()->routeIs('pages.blog') ? 'text-[#16325c] font-bold bg-[#fbf6ea]' : '' }}">
                         {{ __('app.nav_insights') }}
                     </a>
 
-                    <a href="{{ route('pages.contact') }}" class="transition hover:text-[#16325c] {{ request()->routeIs('pages.contact') ? 'text-[#16325c] font-bold border-b-2 border-[#c89a3b] pb-1' : '' }}">
+                    <a href="{{ route('pages.track') }}" class="px-2.5 py-1.5 rounded-lg whitespace-nowrap transition-colors flex items-center gap-1 hover:text-[#16325c] hover:bg-slate-100/60 {{ request()->routeIs('pages.track', 'track.check') ? 'text-[#16325c] font-bold bg-[#fbf6ea]' : '' }}">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        Mchakato
+                    </a>
+
+                    <a href="{{ route('pages.contact') }}" class="px-2.5 py-1.5 rounded-lg whitespace-nowrap transition-colors hover:text-[#16325c] hover:bg-slate-100/60 {{ request()->routeIs('pages.contact') ? 'text-[#16325c] font-bold bg-[#fbf6ea]' : '' }}">
                         {{ __('app.nav_contact') }}
                     </a>
                 </nav>
 
                 <!-- Header Actions -->
-                <div class="hidden lg:flex items-center gap-3">
+                <div class="hidden lg:flex items-center gap-3 shrink-0">
                     @php
                         $headerWaMsg = 'Hello RELAND Arusha, I would like to consult on land surveying and formalization services.';
                     @endphp
-                    <a href="https://wa.me/{{ $siteWhatsappClean ?? '255742448965' }}?text={{ rawurlencode($headerWaMsg) }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#16325c] hover:bg-[#0c1c34] text-white text-xs font-bold shadow-md shadow-[#16325c]/20 hover:shadow-lg transition transform hover:-translate-y-0.5 border border-[#c89a3b]/40">
+                    <a href="https://wa.me/{{ $siteWhatsappClean ?? '255742448965' }}?text={{ rawurlencode($headerWaMsg) }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-3.5 xl:px-4 py-2 xl:py-2.5 rounded-xl bg-[#16325c] hover:bg-[#0c1c34] text-white text-xs font-bold shadow-md shadow-[#16325c]/20 hover:shadow-lg transition transform hover:-translate-y-0.5 border border-[#c89a3b]/40 whitespace-nowrap">
                         <svg class="w-4 h-4 text-[#dfb256]" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.073-2.115-.515-1.748-.722-2.887-2.493-2.975-2.609-.088-.116-.708-.941-.708-1.792s.445-1.272.603-1.446c.159-.175.346-.219.462-.219.116 0 .232.001.332.006.106.005.249-.04.39.299.144.348.491 1.199.535 1.287.044.088.073.19.014.307-.058.117-.088.19-.174.292-.088.102-.185.228-.264.306-.088.087-.18.182-.078.357.102.175.454.748.974 1.211.67.595 1.235.779 1.41.867.175.088.277.073.38-.044.102-.117.438-.511.554-.686.117-.175.234-.146.394-.088.16.058 1.02.481 1.195.568.175.088.292.131.335.204.044.073.044.423-.1.828z"/></svg>
                         <span>{{ __('app.talk_to_us') }}</span>
                     </a>
@@ -148,7 +167,7 @@
         </div>
 
         <!-- Mobile Drawer Menu -->
-        <div id="mobile-menu" class="hidden xl:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-6 space-y-1 shadow-lg max-h-[85vh] overflow-y-auto">
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-6 space-y-1 shadow-lg max-h-[85vh] overflow-y-auto">
             <a href="{{ route('home') }}" class="block px-3 py-2 rounded-lg text-sm font-semibold {{ request()->routeIs('home') ? 'bg-[#fbf6ea] text-[#16325c]' : 'text-slate-700 hover:bg-slate-50' }}">
                 {{ __('app.nav_home') }}
             </a>
@@ -235,7 +254,7 @@
 
     <!-- Public Corporate Footer -->
     <footer class="bg-[#0c1c34] text-slate-400 border-t border-slate-800 pt-16 pb-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800/80">
                 <!-- Column 1: Brand & Bio -->
                 <div class="space-y-4">
@@ -276,6 +295,7 @@
                         <li><a href="{{ route('projects.index') }}" class="hover:text-[#dfb256] transition">{{ __('app.nav_projects') }}</a></li>
                         <li><a href="{{ route('plots.index') }}" class="hover:text-[#dfb256] transition">{{ __('app.nav_plots') }}</a></li>
                         <li><a href="{{ route('locations.index') }}" class="hover:text-[#dfb256] transition">{{ __('app.nav_locations') }}</a></li>
+                        <li><a href="{{ route('pages.track') }}" class="hover:text-[#dfb256] transition flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#dfb256]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Fuatilia Mchakato</a></li>
                         <li><a href="{{ route('pages.insights') }}" class="hover:text-[#dfb256] transition">{{ __('app.nav_insights') }}</a></li>
                         <li><a href="{{ route('pages.contact') }}" class="hover:text-[#dfb256] transition">{{ __('app.nav_contact') }}</a></li>
                     </ul>

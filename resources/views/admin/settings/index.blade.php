@@ -21,12 +21,44 @@
             </h2>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div class="sm:col-span-2">
+                <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
-                        Top Bar City / Location Badge
+                        Top Bar City / Regional Coverage Badge
                     </label>
-                    <input type="text" name="top_bar_location_badge" value="{{ $settings['top_bar_location_badge'] ?? 'Arusha & Northern Tanzania' }}" placeholder="e.g. Arusha & Northern Tanzania" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:ring-2 focus:ring-[#c89a3b] font-bold">
-                    <span class="text-[11px] text-slate-400 mt-1 block">Appears in the glowing badge at the top of the website</span>
+                    <input type="text" name="top_bar_location_badge" value="{{ $settings['top_bar_location_badge'] ?? 'Arusha & Northern Tanzania' }}" placeholder="e.g. Arusha & Northern Tanzania or Tanzania & East Africa" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:ring-2 focus:ring-[#c89a3b] font-bold">
+                    <span class="text-[11px] text-slate-400 mt-1 block">Appears in the glowing badge at the very top of the website</span>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
+                        Logo Tagline / Subtitle
+                    </label>
+                    <input type="text" name="brand_subtext" value="{{ $settings['brand_subtext'] ?? 'Land Services • Arusha' }}" placeholder="e.g. Land Services • Arusha or Land Services • Tanzania" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:ring-2 focus:ring-[#c89a3b] font-semibold">
+                    <span class="text-[11px] text-slate-400 mt-1 block">Displayed right below the RELAND logo across all headers</span>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
+                        Active Field Operations &amp; Coverage Areas
+                    </label>
+                    <input type="text" name="coverage_regions" value="{{ $settings['coverage_regions'] ?? 'Arusha City • Meru • Monduli • Northern Zone' }}" placeholder="e.g. Arusha City • Meru • Monduli • Northern Zone" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:ring-2 focus:ring-[#c89a3b] font-semibold">
+                    <span class="text-[11px] text-slate-400 mt-1 block">Displayed under the hero field image showcase card</span>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
+                        Hero Upper Trust Badge (Kiswahili)
+                    </label>
+                    <input type="text" name="hero_badge_sw" value="{{ $settings['hero_badge_sw'] ?? 'Wapimaji & Wataalamu Waliosajiliwa wa Ardhi • Arusha, Tanzania' }}" placeholder="e.g. Wapimaji & Wataalamu Waliosajiliwa wa Ardhi • Arusha, Tanzania" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:ring-2 focus:ring-[#c89a3b] font-semibold">
+                    <span class="text-[11px] text-slate-400 mt-1 block">Radar pulse badge in the homepage hero (Swahili)</span>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
+                        Hero Upper Trust Badge (English)
+                    </label>
+                    <input type="text" name="hero_badge_en" value="{{ $settings['hero_badge_en'] ?? 'Certified Land Surveyors & Planners • Arusha, Tanzania' }}" placeholder="e.g. Certified Land Surveyors & Planners • Arusha, Tanzania" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:ring-2 focus:ring-[#c89a3b] font-semibold">
+                    <span class="text-[11px] text-slate-400 mt-1 block">Radar pulse badge in the homepage hero (English)</span>
                 </div>
 
                 <div>
@@ -36,7 +68,7 @@
                     <input type="text" name="top_bar_tagline_sw" value="{{ $settings['top_bar_tagline_sw'] ?? 'Suluhisho la Kitaalamu la Upimaji, Urasimishaji na Viwanja' }}" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:ring-2 focus:ring-[#c89a3b] font-semibold">
                 </div>
 
-                <div>
+                <div class="sm:col-span-2">
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
                         Top Bar Tagline (English) *
                     </label>

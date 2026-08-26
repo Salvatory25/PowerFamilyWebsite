@@ -29,7 +29,37 @@ class PageController extends Controller
 
     public function insights(): View
     {
-        return view('public.pages.insights');
+        $articles = \App\Models\Article::latest('published_at')->paginate(9);
+        return view('public.pages.insights', compact('articles'));
+    }
+
+    public function showArticle($slug): View
+    {
+        $article = \App\Models\Article::where('slug', $slug)->firstOrFail();
+        return view('public.pages.article', compact('article'));
+    }
+
+    public function trackStatus(): View
+    {
+        return view('public.pages.track');
+    }
+
+    public function checkStatus(Request $request)
+    {
+        $validated = $request->validate([
+            'tracking_reference' => 'required|string|max:50',
+            'phone' => 'required|string|max:50',
+        ]);
+
+        $enquiry = Enquiry::where('tracking_reference', $validated['tracking_reference'])
+            ->where('phone', $validated['phone'])
+            ->first();
+
+        if (!$enquiry) {
+            return back()->with('error', 'Hakuna taarifa zilizopatikana. Tafadhali hakiki namba yako ya kumbukumbu na namba ya simu. / No record found. Please verify your tracking reference and phone number.');
+        }
+
+        return view('public.pages.track', compact('enquiry'));
     }
 
     public function submitEnquiry(Request $request): RedirectResponse
@@ -44,8 +74,11 @@ class PageController extends Controller
             'preferred_contact_method' => 'required|in:whatsapp,phone,email',
             'message' => 'required|string|max:3000',
         ]);
+        
+        $trackingRef = 'REQ-' . strtoupper(substr(uniqid(), -6));
 
         Enquiry::create([
+            'tracking_reference' => $trackingRef,
             'name' => $validated['name'],
             'phone' => $validated['phone'],
             'email' => $validated['email'] ?? null,
@@ -57,6 +90,6 @@ class PageController extends Controller
             'status' => 'new',
         ]);
 
-        return redirect()->back()->with('success', __('app.form_success'));
+        return redirect()->back()->with('success', __('app.form_success') . ' Namba yako ya kumbukumbu ni / Your tracking reference is: ' . $trackingRef);
     }
 }

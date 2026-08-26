@@ -48,7 +48,10 @@ Route::get('/locations/{slug}', [LocationController::class, 'show'])->name('loca
 // Institutional & Content Pages
 Route::get('/about', [PageController::class, 'about'])->name('pages.about');
 Route::get('/contact', [PageController::class, 'contact'])->name('pages.contact');
+Route::get('/track', [PageController::class, 'trackStatus'])->name('pages.track');
+Route::post('/track', [PageController::class, 'checkStatus'])->name('track.check');
 Route::get('/insights', [PageController::class, 'insights'])->name('pages.insights');
+Route::get('/insights/{slug}', [PageController::class, 'showArticle'])->name('pages.article');
 Route::get('/blog', [PageController::class, 'insights'])->name('pages.blog'); // Alias
 Route::post('/enquiry', [PageController::class, 'submitEnquiry'])->name('enquiry.submit');
 

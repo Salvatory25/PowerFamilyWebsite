@@ -87,6 +87,68 @@
     </div>
 </div>
 
+<!-- Document Requirements Section -->
+<div class="bg-slate-50 py-16 sm:py-24 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+            <h2 class="text-2xl sm:text-4xl font-black text-[#16325c] tracking-tight mb-4">
+                {{ $isSw ? 'Unahitaji Nini Kuanza?' : 'What Do You Need to Start?' }}
+            </h2>
+            <p class="text-sm sm:text-base text-slate-600 font-medium leading-relaxed">
+                {{ $isSw ? 'Ili kuharakisha mchakato wa upimaji au urasimishaji wa ardhi yako, tafadhali andaa baadhi ya nyaraka zifuatazo kulingana na aina ya huduma unayohitaji.' : 'To expedite the surveying or formalization process, please prepare the following documents depending on the service you require.' }}
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Doc 1 -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-lg shadow-slate-200/50 hover:-translate-y-1 transition transform duration-300">
+                <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-5">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"/></svg>
+                </div>
+                <h3 class="text-base font-bold text-slate-800 mb-2">{{ $isSw ? 'Utambulisho (ID)' : 'Identification' }}</h3>
+                <p class="text-xs text-slate-500 leading-relaxed">{{ $isSw ? 'Nakala ya Kitambulisho cha NIDA, Mpiga Kura au Hati ya Kusafiria ya mmiliki.' : 'Copy of NIDA ID, Voter ID, or Passport of the property owner.' }}</p>
+            </div>
+            
+            <!-- Doc 2 -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-lg shadow-slate-200/50 hover:-translate-y-1 transition transform duration-300">
+                <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-5">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                </div>
+                <h3 class="text-base font-bold text-slate-800 mb-2">{{ $isSw ? 'Mkataba wa Mauziano' : 'Sales Agreement' }}</h3>
+                <p class="text-xs text-slate-500 leading-relaxed">{{ $isSw ? 'Kama umenunua hivi karibuni, mkataba wa mauziano unaothibitisha umiliki.' : 'If recently purchased, a sales agreement proving ownership transfer.' }}</p>
+            </div>
+
+            <!-- Doc 3 -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-lg shadow-slate-200/50 hover:-translate-y-1 transition transform duration-300">
+                <div class="w-12 h-12 rounded-xl bg-[#fbf6ea] text-[#c89a3b] flex items-center justify-center mb-5">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+                </div>
+                <h3 class="text-base font-bold text-slate-800 mb-2">{{ $isSw ? 'Ramani ya Zamani' : 'Old Survey Plan' }}</h3>
+                <p class="text-xs text-slate-500 leading-relaxed">{{ $isSw ? 'Kama eneo lilipimwa zamani, ramani ya mchoro (Deed Plan) ya awali inahitajika.' : 'If previously surveyed, an old sketch or Deed Plan is highly useful.' }}</p>
+            </div>
+
+            <!-- Doc 4 -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-lg shadow-slate-200/50 hover:-translate-y-1 transition transform duration-300">
+                <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mb-5">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                </div>
+                <h3 class="text-base font-bold text-slate-800 mb-2">{{ $isSw ? 'Barua ya Serikali Mtaa' : 'Local Govt Letter' }}</h3>
+                <p class="text-xs text-slate-500 leading-relaxed">{{ $isSw ? 'Barua ya utambulisho kutoka ofisi ya serikali ya mtaa kwa ajili ya urasimishaji.' : 'Introduction letter from local authorities for formalization cases.' }}</p>
+            </div>
+        </div>
+
+        <div class="mt-10 max-w-3xl mx-auto bg-amber-50 rounded-xl p-4 sm:p-5 border border-amber-200/60 flex items-start gap-3 sm:gap-4">
+            <svg class="w-5 h-5 text-amber-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <div>
+                <h4 class="text-sm font-bold text-amber-800">{{ $isSw ? 'Angalizo Muhimu:' : 'Important Note:' }}</h4>
+                <p class="text-xs sm:text-sm text-amber-700/80 mt-1">
+                    {{ $isSw ? 'Mahitaji ya nyaraka yanaweza kutofautiana kulingana na aina ya huduma, eneo na taratibu za mamlaka husika (Wizara ya Ardhi).' : 'Document requirements may vary depending on the specific service, location, and the current procedures of the Ministry of Lands.' }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Consultation Direct CTA Banner -->
 <div class="bg-[#16325c] text-white py-16 border-t border-slate-800">
     <div class="max-w-4xl mx-auto px-4 text-center space-y-4">

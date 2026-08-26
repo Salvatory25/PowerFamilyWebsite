@@ -6,67 +6,141 @@
 @section('content')
 
 <!-- 1. PREMIUM CORPORATE HERO SECTION -->
-<section class="relative bg-[#0c1c34] text-white overflow-hidden pt-16 pb-24 lg:pt-24 lg:pb-32 border-b border-[#c89a3b]/20">
-    <!-- Ambient Background Lighting & Cadastral Imagery -->
-    <div class="absolute inset-0 z-0 opacity-20 pointer-events-none">
-        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=2000&q=80" 
-             alt="Land Surveying and Engineering" 
-             class="w-full h-full object-cover">
-        <div class="absolute inset-0 bg-gradient-to-t from-[#0c1c34] via-[#0c1c34]/85 to-[#0c1c34]/90"></div>
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(200,154,59,0.2),transparent_50%)]"></div>
-    </div>
+<section class="relative bg-[#0c1c34] text-white overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28 border-b border-[#c89a3b]/20">
+    <!-- Ambient Background Lighting & Cadastral Grid Layer -->
+    <div class="absolute inset-0 z-0 cadastral-grid opacity-30 pointer-events-none"></div>
+    
+    <!-- Ambient Glow Mesh -->
+    <div class="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-[#c89a3b]/15 blur-[120px] pointer-events-none"></div>
+    <div class="absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-[#20457c]/40 blur-[140px] pointer-events-none"></div>
 
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-4xl mx-auto text-center space-y-6">
-            <!-- Badge -->
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#16325c]/90 border border-[#c89a3b]/40 text-[#dfb256] text-xs font-extrabold tracking-wide backdrop-blur-md shadow-lg">
-                <svg class="w-4 h-4 text-[#dfb256]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-                <span>{{ __('app.hero_badge') }}</span>
+    <div class="relative z-10 w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            
+            <!-- Left Column: Corporate Value Proposition -->
+            <div class="lg:col-span-7 space-y-6 text-left">
+                
+                <!-- Trust Badge with Radar Pulse -->
+                <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#16325c]/90 border border-[#c89a3b]/40 text-[#dfb256] text-xs font-extrabold tracking-wide backdrop-blur-md shadow-lg shadow-black/20">
+                    <span class="relative flex h-2.5 w-2.5">
+                        <span class="animate-radar absolute inline-flex h-full w-full rounded-full bg-[#dfb256] opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#dfb256]"></span>
+                    </span>
+                    <span>{{ $siteHeroBadge ?: __('app.hero_badge') }}</span>
+                </div>
+
+                <!-- Main Headline -->
+                <h1 class="text-3xl sm:text-5xl lg:text-[52px] font-black tracking-tight text-white leading-[1.12]">
+                    {{ $siteHeroTitle ?: __('app.hero_title') }}
+                </h1>
+
+                <!-- Supporting Text -->
+                <p class="text-base sm:text-lg text-slate-300 font-normal leading-relaxed max-w-3xl">
+                    {{ $siteHeroSubtitle ?: __('app.hero_subtitle') }}
+                </p>
+
+                <!-- Value Highlights Pills -->
+                <div class="flex flex-wrap gap-2.5 pt-1">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-200 text-xs font-semibold">
+                        <svg class="w-3.5 h-3.5 text-[#dfb256]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                        RTK GNSS GPS &bull; &plusmn;2cm Precision
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-200 text-xs font-semibold">
+                        <svg class="w-3.5 h-3.5 text-[#dfb256]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                        Ministry Approved Deed Plans
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-200 text-xs font-semibold">
+                        <svg class="w-3.5 h-3.5 text-[#dfb256]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                        100% Dispute-Free Title Deeds
+                    </span>
+                </div>
+
+                <!-- Call to Actions -->
+                <div class="pt-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
+                    <a href="{{ route('pages.services') }}" class="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-2xl bg-gradient-to-r from-[#c89a3b] to-[#dfb256] hover:from-[#b5882e] hover:to-[#c89a3b] text-[#0c1c34] font-extrabold text-sm shadow-xl shadow-[#c89a3b]/25 hover:shadow-2xl transition transform hover:-translate-y-0.5">
+                        <span>{{ __('app.hero_cta_primary') }}</span>
+                        <svg class="w-4 h-4 text-[#0c1c34]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </a>
+
+                    <a href="{{ route('pages.contact') }}" class="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-[#16325c]/80 hover:bg-[#16325c] text-white font-bold text-sm border border-[#c89a3b]/30 shadow-lg hover:shadow-xl backdrop-blur-md transition transform hover:-translate-y-0.5">
+                        <span>{{ __('app.hero_cta_secondary') }}</span>
+                    </a>
+
+                    @php
+                        $heroWaMsg = 'Hello RELAND, I would like to consult on land surveying and formalization services.';
+                    @endphp
+                    <a href="https://wa.me/{{ $siteWhatsappClean ?? '255742448965' }}?text={{ rawurlencode($heroWaMsg) }}" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 px-5 py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-lg shadow-emerald-900/30 hover:shadow-xl transition transform hover:-translate-y-0.5">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.073-2.115-.515-1.748-.722-2.887-2.493-2.975-2.609-.088-.116-.708-.941-.708-1.792s.445-1.272.603-1.446c.159-.175.346-.219.462-.219.116 0 .232.001.332.006.106.005.249-.04.39.299.144.348.491 1.199.535 1.287.044.088.073.19.014.307-.058.117-.088.19-.174.292-.088.102-.185.228-.264.306-.088.087-.18.182-.078.357.102.175.454.748.974 1.211.67.595 1.235.779 1.41.867.175.088.277.073.38-.044.102-.117.438-.511.554-.686.117-.175.234-.146.394-.088.16.058 1.02.481 1.195.568.175.088.292.131.335.204.044.073.044.423-.1.828z"/></svg>
+                        <span>WhatsApp</span>
+                    </a>
+                </div>
             </div>
 
-            <!-- Main Headline -->
-            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.12]">
-                {{ __('app.hero_title') }}
-            </h1>
+            <!-- Right Column: Visual Showcase with Live Animated Floating Elements -->
+            <div class="lg:col-span-5 relative mt-6 lg:mt-0">
+                
+                <!-- Main Showcase Image Card with Frame -->
+                <div class="relative rounded-3xl overflow-hidden border-2 border-[#c89a3b]/40 shadow-2xl shadow-black/60 bg-[#16325c] group">
+                    <img src="{{ asset('images/hero-survey.jpg') }}" 
+                         alt="Professional Land Surveyors in Arusha with Mount Meru and RTK GNSS GPS" 
+                         class="w-full h-[380px] sm:h-[420px] object-cover group-hover:scale-105 transition-transform duration-700">
+                    
+                    <!-- Gradient Vignette -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0c1c34]/90 via-[#0c1c34]/20 to-transparent"></div>
+                    
+                    <!-- Bottom Overlay Caption -->
+                    <div class="absolute bottom-0 inset-x-0 p-5 backdrop-blur-xs bg-[#0c1c34]/60 border-t border-white/10 flex items-center justify-between">
+                        <div>
+                            <span class="text-[11px] font-bold text-[#dfb256] uppercase tracking-wider block">Cadastral &amp; RTK GNSS Field Operations</span>
+                            <p class="text-xs font-semibold text-white">{{ $siteCoverageRegions ?: 'Arusha City • Meru • Monduli • Northern Zone' }}</p>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-md bg-[#c89a3b]/20 border border-[#c89a3b]/40 text-[#dfb256] font-bold text-[10px]">
+                            ACTIVE
+                        </span>
+                    </div>
+                </div>
 
-            <!-- Supporting Text -->
-            <p class="text-base sm:text-xl text-slate-300 font-normal leading-relaxed max-w-3xl mx-auto">
-                {{ __('app.hero_subtitle') }}
-            </p>
+                <!-- Floating Dynamic Badge 1 (Top Left) -->
+                <div class="animate-float-slow absolute -top-5 -left-5 sm:-left-8 luxury-glass-dark p-3.5 rounded-2xl shadow-xl z-20 flex items-center gap-3 border border-[#c89a3b]/40 max-w-[220px]">
+                    <div class="w-10 h-10 rounded-xl bg-[#c89a3b]/20 border border-[#c89a3b]/50 text-[#dfb256] flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-extrabold text-slate-300 uppercase tracking-wider block">Beacon Pegging</span>
+                        <span class="text-xs font-bold text-white block leading-tight">&plusmn;2cm High Precision</span>
+                    </div>
+                </div>
 
-            <!-- Call to Actions -->
-            <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="{{ route('pages.services') }}" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-[#c89a3b] hover:bg-[#b5882e] text-[#0c1c34] font-extrabold text-sm shadow-xl shadow-[#c89a3b]/20 hover:shadow-2xl transition transform hover:-translate-y-0.5">
-                    <span>{{ __('app.hero_cta_primary') }}</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                </a>
+                <!-- Floating Dynamic Badge 2 (Bottom Right) -->
+                <div class="animate-float-delayed absolute -bottom-5 -right-4 sm:-right-6 luxury-glass-dark p-3.5 rounded-2xl shadow-xl z-20 flex items-center gap-3 border border-emerald-500/40 max-w-[240px]">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-400/50 text-emerald-300 flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-extrabold text-emerald-400 uppercase tracking-wider block">Official Deed Plans</span>
+                        <span class="text-xs font-bold text-white block leading-tight">Ministry Registered &bull; 100%</span>
+                    </div>
+                </div>
 
-                <a href="{{ route('pages.contact') }}" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-[#16325c] hover:bg-[#1a3d70] text-white font-bold text-sm border border-slate-700 shadow-lg hover:shadow-xl transition transform hover:-translate-y-0.5">
-                    <span>{{ __('app.hero_cta_secondary') }}</span>
-                </a>
-
-                <a href="https://wa.me/{{ $siteWhatsappClean ?? '255742448965' }}?text={{ rawurlencode('Hello RELAND, I would like to consult on Land Surveying / Formalization services in Arusha.') }}" target="_blank" rel="noopener" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-lg hover:shadow-xl transition transform hover:-translate-y-0.5">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.073-2.115-.515-1.748-.722-2.887-2.493-2.975-2.609-.088-.116-.708-.941-.708-1.792s.445-1.272.603-1.446c.159-.175.346-.219.462-.219.116 0 .232.001.332.006.106.005.249-.04.39.299.144.348.491 1.199.535 1.287.044.088.073.19.014.307-.058.117-.088.19-.174.292-.088.102-.185.228-.264.306-.088.087-.18.182-.078.357.102.175.454.748.974 1.211.67.595 1.235.779 1.41.867.175.088.277.073.38-.044.102-.117.438-.511.554-.686.117-.175.234-.146.394-.088.16.058 1.02.481 1.195.568.175.088.292.131.335.204.044.073.044.423-.1.828z"/></svg>
-                    <span>{{ __('app.hero_cta_whatsapp') }}</span>
-                </a>
             </div>
+
         </div>
 
         <!-- Corporate Trust Indicators / Counters Banner -->
-        <div class="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
-            <div class="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md text-center">
+        <div class="mt-16 pt-12 border-t border-white/10 grid grid-cols-2 lg:grid-cols-4 gap-4 w-full max-w-[1720px] mx-auto">
+            <div class="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md text-center hover:border-[#c89a3b]/40 transition duration-300">
                 <span class="block text-3xl sm:text-4xl font-extrabold text-[#dfb256]">{{ $stats['surveyed_plots'] ?? '1,450+' }}</span>
                 <span class="text-xs sm:text-sm text-slate-300 font-semibold mt-1 block">{{ __('app.stat_1_label') }}</span>
             </div>
-            <div class="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md text-center">
+            <div class="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md text-center hover:border-[#c89a3b]/40 transition duration-300">
                 <span class="block text-3xl sm:text-4xl font-extrabold text-[#dfb256]">{{ $stats['formalized_acres'] ?? '850+' }}</span>
                 <span class="text-xs sm:text-sm text-slate-300 font-semibold mt-1 block">{{ __('app.stat_2_label') }}</span>
             </div>
-            <div class="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md text-center">
+            <div class="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md text-center hover:border-[#c89a3b]/40 transition duration-300">
                 <span class="block text-3xl sm:text-4xl font-extrabold text-[#dfb256]">{{ $stats['clean_titles'] ?? '100%' }}</span>
                 <span class="text-xs sm:text-sm text-slate-300 font-semibold mt-1 block">{{ __('app.stat_3_label') }}</span>
             </div>
-            <div class="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md text-center">
+            <div class="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md text-center hover:border-[#c89a3b]/40 transition duration-300">
                 <span class="block text-3xl sm:text-4xl font-extrabold text-[#dfb256]">{{ $stats['years_experience'] ?? '10+' }}</span>
                 <span class="text-xs sm:text-sm text-slate-300 font-semibold mt-1 block">{{ __('app.stat_4_label') }}</span>
             </div>
@@ -77,7 +151,7 @@
 
 <!-- 2. CORE SERVICES OVERVIEW (6 PRIMARY SERVICES) -->
 <section class="py-20 bg-slate-50 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-3xl mx-auto text-center space-y-3 mb-16">
             <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#fbf6ea] text-[#16325c] text-xs font-extrabold tracking-wider uppercase border border-[#f5e9c9]">
                 Professional Expertise
@@ -149,7 +223,7 @@
 <!-- 3. AVAILABLE VERIFIED PLOTS (PUBLISHED PLOTS INTEGRATION) -->
 @if(isset($featuredPlots) && $featuredPlots->count() > 0)
 <section class="py-20 bg-slate-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
             <div>
                 <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-extrabold tracking-wider uppercase border border-emerald-200">
@@ -227,7 +301,7 @@
 
 <!-- 5. WHY CHOOSE RELAND (INSTITUTIONAL VALUE PILLARS) -->
 <section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-3xl mx-auto text-center space-y-3 mb-16">
             <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#fbf6ea] text-[#16325c] text-xs font-extrabold tracking-wider uppercase border border-[#f5e9c9]">
                 Trust & Authority
@@ -280,7 +354,7 @@
 <!-- 6. PROFESSIONAL PROCESS ROADMAP (4-STEP WORKFLOW) -->
 <section class="py-20 bg-[#0c1c34] text-white relative overflow-hidden">
     <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_bottom_left,rgba(200,154,59,0.3),transparent_50%)]"></div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="max-w-3xl mx-auto text-center space-y-3 mb-16">
             <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#16325c] text-[#dfb256] text-xs font-extrabold tracking-wider uppercase border border-[#c89a3b]/40">
                 Rigorous Execution
@@ -324,7 +398,7 @@
 
 <!-- 7. FREQUENTLY ASKED QUESTIONS (FAQ) -->
 <section class="py-20 bg-slate-50">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center space-y-3 mb-12">
             <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#fbf6ea] text-[#16325c] text-xs font-extrabold tracking-wider uppercase border border-[#f5e9c9]">
                 Knowledge Base
@@ -337,7 +411,7 @@
             </p>
         </div>
 
-        <div class="space-y-4">
+        <div class="max-w-4xl mx-auto space-y-4">
             <details class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs group cursor-pointer">
                 <summary class="font-extrabold text-sm sm:text-base text-[#16325c] flex items-center justify-between list-none">
                     <span>{{ app()->getLocale() === 'sw' ? 'Upimaji wa ardhi unachukua muda gani na unahitaji nyaraka gani?' : 'How long does a cadastral survey take and what documents are required?' }}</span>
@@ -374,7 +448,7 @@
 
 <!-- 8. FINAL HIGH-IMPACT CORPORATE CTA -->
 <section class="py-16 bg-[#16325c] text-white text-center relative overflow-hidden">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6">
+    <div class="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6">
         <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-white">
             {{ __('app.final_cta_title') }}
         </h2>

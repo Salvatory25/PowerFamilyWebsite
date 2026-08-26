@@ -69,6 +69,48 @@
     border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
+.luxury-glass-dark {
+    background: rgba(12, 28, 52, 0.80);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(200, 154, 59, 0.25);
+}
+
+.cadastral-grid {
+    background-image: 
+        linear-gradient(to right, rgba(200, 154, 59, 0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(200, 154, 59, 0.08) 1px, transparent 1px);
+    background-size: 3rem 3rem;
+}
+
+@keyframes floatSlow {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes floatSlowAlt {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(8px); }
+}
+
+@keyframes beaconRadar {
+    0% { transform: scale(0.95); opacity: 0.8; }
+    50% { transform: scale(1.4); opacity: 0; }
+    100% { transform: scale(0.95); opacity: 0; }
+}
+
+.animate-float-slow {
+    animation: floatSlow 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+    animation: floatSlowAlt 7s ease-in-out infinite 1.5s;
+}
+
+.animate-radar {
+    animation: beaconRadar 2.5s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+}
+
 .luxury-card-hover {
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -93,3 +135,4 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #94a3b8;
 }
+

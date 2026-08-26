@@ -11,6 +11,7 @@ class Enquiry extends Model
     use HasFactory;
 
     protected $fillable = [
+        'tracking_reference',
         'plot_id',
         'project_id',
         'service_type',

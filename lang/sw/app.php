@@ -4,12 +4,12 @@ return [
     // Header & Navigation
     'brand_tagline' => 'Suluhisho la Kitaalamu la Upimaji, Urasimishaji na Viwanja',
     'nav_home' => 'Mwanzo',
-    'nav_about' => 'Kuhusu RELAND',
+    'nav_about' => 'Kuhusu Sisi',
     'nav_services' => 'Huduma Zetu',
     'nav_projects' => 'Miradi Yetu',
-    'nav_plots' => 'Viwanja Vinavyopatikana',
+    'nav_plots' => 'Viwanja',
     'nav_locations' => 'Maeneo ya Arusha',
-    'nav_insights' => 'Makala & Elimu ya Ardhi',
+    'nav_insights' => 'Blog & Makala',
     'nav_contact' => 'Mawasiliano',
     'nav_admin' => 'Mfumo wa Utawala',
     'whatsapp_us' => 'Wasiliana WhatsApp',
@@ -20,7 +20,7 @@ return [
     'view_all_plots' => 'Tazama Viwanja Vyote',
 
     // Corporate Hero Section
-    'hero_badge' => 'Wapimaji & Wataalamu Waliosajiliwa wa Ardhi &bull; Arusha, Tanzania',
+    'hero_badge' => 'Wapimaji & Wataalamu Waliosajiliwa wa Ardhi • Arusha, Tanzania',
     'hero_title' => 'Suluhisho la Kitaalamu la Upimaji na Urasimishaji wa Ardhi',
     'hero_subtitle' => 'Huduma za kuaminika za upimaji, urasimishaji na viwanja zilizoundwa kusaidia wananchi, wafanyabiashara na wamiliki wa ardhi kusimamia mali zao kwa uhakika na amani.',
     'hero_cta_primary' => 'Tazama Huduma Zetu',
@@ -134,5 +134,5 @@ return [
     'arusha_zones' => 'Kanda za Arusha',
     'contact_us' => 'Ofisi na Mawasiliano',
     'rights_reserved' => 'Haki zote zimehifadhiwa.',
-    'disclaimer' => 'Suluhisho la Kitaalamu la Upimaji na Urasimishaji wa Ardhi &bull; Arusha, Tanzania.',
+    'disclaimer' => 'Suluhisho la Kitaalamu la Upimaji na Urasimishaji wa Ardhi • Arusha, Tanzania.',
 ];

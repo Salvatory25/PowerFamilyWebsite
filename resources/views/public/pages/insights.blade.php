@@ -4,92 +4,76 @@
     $isSw = app()->getLocale() === 'sw';
 @endphp
 
-@section('title', ($isSw ? 'Makala & Mwongozo wa Elimu ya Ardhi' : 'Land Insights & Advisory Articles') . ' | RELAND')
-@section('meta_description', $isSw ? 'Pata elimu ya kisheria na kiufundi kuhusu upimaji wa ardhi, urasimishaji wa makazi, hati miliki na uwekezaji salama Tanzania.' : 'Authoritative guides on land surveying, formalization, title deeds due diligence, and secure property investment in Tanzania.')
+@section('title', ($isSw ? 'Makala & Elimu ya Ardhi' : 'Land Knowledge Center') . ' | RELAND CONSULT LTD')
+@section('meta_description', $isSw ? 'Jifunze kuhusu upimaji ardhi, hati miliki, na jinsi ya kununua viwanja salama.' : 'Learn about land surveying, title deeds, and safe plot purchasing in Tanzania.')
 
 @section('content')
-
 <!-- Header Banner -->
-<div class="bg-[#0c1c34] text-white py-16 lg:py-20 border-b border-[#c89a3b]/20 relative overflow-hidden">
+<div class="bg-[#0c1c34] text-white py-16 lg:py-24 border-b border-[#c89a3b]/20 relative overflow-hidden">
     <div class="absolute inset-0 z-0 opacity-15 bg-[radial-gradient(circle_at_top_right,rgba(200,154,59,0.25),transparent_50%)]"></div>
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-4">
         <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#c89a3b]/15 text-[#dfb256] text-xs font-extrabold tracking-wider uppercase border border-[#c89a3b]/30">
-            Land Advisory & Knowledge
+            {{ $isSw ? 'Kituo cha Maarifa' : 'Knowledge Center' }}
         </span>
-        <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-            {{ $isSw ? 'Makala & Elimu ya Ardhi' : 'Land Insights & Advisory' }}
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight">
+            {{ $isSw ? 'Blog: Makala & Elimu ya Ardhi' : 'Blog & Land Insights' }}
         </h1>
-        <p class="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto">
-            {{ $isSw ? 'Miongozo ya kitaalamu ya kisheria na kiufundi ili kukuwezesha kumiliki na kuendeleza ardhi yako kwa amani na usalama.' : 'Expert legal and technical guides designed to help property owners, developers, and diaspora navigate land ownership with confidence.' }}
+        <p class="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto font-medium">
+            {{ $isSw ? 'Gundua miongozo, ushauri, na taarifa muhimu zinazokusaidia kufanya maamuzi sahihi kuhusu umiliki na uwekezaji wa ardhi Tanzania.' : 'Discover expert guides, advice, and essential information to help you make informed decisions about land ownership and investment in Tanzania.' }}
         </p>
     </div>
 </div>
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Article 1 -->
-        <article class="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-xs hover:shadow-xl transition flex flex-col justify-between group">
-            <div class="p-6 sm:p-8 space-y-4">
-                <span class="px-2.5 py-1 rounded-lg bg-[#fbf6ea] text-[#16325c] text-[10px] font-extrabold uppercase border border-[#f5e9c9]">
-                    {{ $isSw ? 'Upimaji wa Ardhi' : 'Cadastral Surveying' }}
-                </span>
-                <h2 class="text-lg font-extrabold text-[#16325c] group-hover:text-[#c89a3b] transition leading-snug">
-                    {{ $isSw ? 'Kwanini ni Hatari Kujenga au Kununua Eneo Kabla ya Kupima Beacons Rasmi?' : 'Why Building or Purchasing Without Cadastral Beacons Verification Puts Your Investment at Risk' }}
-                </h2>
-                <p class="text-xs text-slate-600 leading-relaxed">
-                    {{ $isSw ? 'Kujenga kwa kukadiria mipaka kunasababisha uvunjaji wa kuta, kesi za kisheria na majirani na hasara ya mamilioni ya fedha. Jifunze jinsi upimaji wa RTK GPS unavyolinda uwekezaji wako.' : 'Boundary encroachment and missing corner beacons are leading causes of property demolition and litigation. Learn how geodetic surveys protect property boundaries.' }}
-                </p>
-            </div>
-            <div class="p-6 pt-0 border-t border-slate-100 flex items-center justify-between mt-4">
-                <span class="text-[11px] text-slate-400 font-medium">5 Min Read</span>
-                <a href="{{ route('services.show', 'land-surveying') }}" class="text-xs font-bold text-[#16325c] hover:text-[#c89a3b] transition">
-                    {{ $isSw ? 'Soma Huduma Husika' : 'Related Service' }} &rarr;
+<div class="bg-slate-50 py-16 lg:py-24">
+    <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            @forelse($articles as $article)
+                <a href="{{ route('pages.article', $article->slug) }}" class="group bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-2xl hover:border-[#c89a3b]/30 transition duration-300 flex flex-col h-full">
+                    <div class="aspect-[16/10] bg-slate-200 relative overflow-hidden">
+                        @if($article->image_url)
+                            <img src="{{ $article->image_url }}" alt="{{ $article->title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                        @else
+                            <div class="w-full h-full bg-[#16325c] flex items-center justify-center">
+                                <svg class="w-12 h-12 text-[#16325c]/30" fill="currentColor" viewBox="0 0 24 24"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            </div>
+                        @endif
+                        <div class="absolute top-4 left-4">
+                            <span class="px-3 py-1 bg-white/90 backdrop-blur text-[#16325c] text-xs font-bold rounded-lg shadow-sm">
+                                {{ $article->published_at ? $article->published_at->format('M d, Y') : 'Recent' }}
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6 sm:p-8 flex flex-col flex-1">
+                        <h2 class="text-xl font-bold text-slate-800 mb-3 group-hover:text-[#c89a3b] transition line-clamp-2">
+                            {{ $article->title }}
+                        </h2>
+                        <p class="text-sm text-slate-500 mb-6 flex-1 line-clamp-3 leading-relaxed">
+                            {{ $article->excerpt }}
+                        </p>
+                        
+                        <div class="pt-4 border-t border-slate-100 flex items-center text-[#16325c] font-bold text-sm group-hover:text-[#c89a3b] transition mt-auto">
+                            <span>{{ $isSw ? 'Soma Zaidi' : 'Read Article' }}</span>
+                            <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </div>
+                    </div>
                 </a>
-            </div>
-        </article>
+            @empty
+                <div class="col-span-full py-20 text-center">
+                    <div class="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-400">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-700">{{ $isSw ? 'Hakuna Makala Zilizopatikana' : 'No Articles Found' }}</h3>
+                    <p class="text-slate-500 mt-2">{{ $isSw ? 'Tafadhali rudi tena baadae kwa makala mpya.' : 'Please check back later for new insights.' }}</p>
+                </div>
+            @endforelse
+        </div>
 
-        <!-- Article 2 -->
-        <article class="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-xs hover:shadow-xl transition flex flex-col justify-between group">
-            <div class="p-6 sm:p-8 space-y-4">
-                <span class="px-2.5 py-1 rounded-lg bg-[#fbf6ea] text-[#16325c] text-[10px] font-extrabold uppercase border border-[#f5e9c9]">
-                    {{ $isSw ? 'Urasimishaji' : 'Formalization' }}
-                </span>
-                <h2 class="text-lg font-extrabold text-[#16325c] group-hover:text-[#c89a3b] transition leading-snug">
-                    {{ $isSw ? 'Mchakato Kamili wa Kurasimisha Makazi Yasiyopangwa Tanzania' : 'Complete Step-by-Step Guide to Settlement Formalization (Urasimishaji) in Tanzania' }}
-                </h2>
-                <p class="text-xs text-slate-600 leading-relaxed">
-                    {{ $isSw ? 'Kuanzia utambuzi wa mtaa, uchoraji wa ramani ya Mipango Mji, kupitishwa na Baraza la Madiwani hadi kupokea Hati Miliki ya miaka 99.' : 'Understanding the multi-stage roadmap from community boundary mobilization and layout schemes to official Commissioner approvals and title deed issuance.' }}
-                </p>
-            </div>
-            <div class="p-6 pt-0 border-t border-slate-100 flex items-center justify-between mt-4">
-                <span class="text-[11px] text-slate-400 font-medium">7 Min Read</span>
-                <a href="{{ route('services.show', 'land-formalization') }}" class="text-xs font-bold text-[#16325c] hover:text-[#c89a3b] transition">
-                    {{ $isSw ? 'Soma Huduma Husika' : 'Related Service' }} &rarr;
-                </a>
-            </div>
-        </article>
+        <div class="mt-12">
+            {{ $articles->links() }}
+        </div>
 
-        <!-- Article 3 -->
-        <article class="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-xs hover:shadow-xl transition flex flex-col justify-between group">
-            <div class="p-6 sm:p-8 space-y-4">
-                <span class="px-2.5 py-1 rounded-lg bg-[#fbf6ea] text-[#16325c] text-[10px] font-extrabold uppercase border border-[#f5e9c9]">
-                    {{ $isSw ? 'Ushauri wa Kisheria' : 'Legal Due Diligence' }}
-                </span>
-                <h2 class="text-lg font-extrabold text-[#16325c] group-hover:text-[#c89a3b] transition leading-snug">
-                    {{ $isSw ? 'Mambo 5 ya Kukagua Wizara ya Ardhi Kabla ya Kulipia Kiwanja Arusha' : '5 Essential Registry Checks at the Ministry of Lands Before Paying for a Plot in Arusha' }}
-                </h2>
-                <p class="text-xs text-slate-600 leading-relaxed">
-                    {{ $isSw ? 'Jinsi ya kufanya Official Search, kukagua ramani ya upimaji (Deed Plan), uhakiki wa mikataba ya mauziano na kuzuia utapeli wa kuuziwa kiwanja hewa.' : 'How to conduct official encumbrance searches, verify town planning zoning, examine deed plans, and ensure you are buying directly from the legitimate owner.' }}
-                </p>
-            </div>
-            <div class="p-6 pt-0 border-t border-slate-100 flex items-center justify-between mt-4">
-                <span class="text-[11px] text-slate-400 font-medium">6 Min Read</span>
-                <a href="{{ route('services.show', 'land-consultation') }}" class="text-xs font-bold text-[#16325c] hover:text-[#c89a3b] transition">
-                    {{ $isSw ? 'Soma Huduma Husika' : 'Related Service' }} &rarr;
-                </a>
-            </div>
-        </article>
     </div>
 </div>
-
 @endsection

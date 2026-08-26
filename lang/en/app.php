@@ -4,10 +4,10 @@ return [
     // Header & Navigation
     'brand_tagline' => 'Professional Land Surveying, Formalization & Plot Solutions',
     'nav_home' => 'Home',
-    'nav_about' => 'About RELAND',
+    'nav_about' => 'About Us',
     'nav_services' => 'Services',
     'nav_projects' => 'Projects',
-    'nav_plots' => 'Available Plots',
+    'nav_plots' => 'Plots',
     'nav_locations' => 'Locations',
     'nav_insights' => 'Blog & Insights',
     'nav_contact' => 'Contact',
@@ -20,7 +20,7 @@ return [
     'view_all_plots' => 'View Available Plots',
 
     // Corporate Hero Section
-    'hero_badge' => 'Certified Land Surveyors & Planners &bull; Arusha, Tanzania',
+    'hero_badge' => 'Certified Land Surveyors & Planners • Arusha, Tanzania',
     'hero_title' => 'Professional Land Surveying & Formalization Solutions',
     'hero_subtitle' => 'Reliable land surveying, formalization and plot solutions designed to help individuals, businesses and property owners manage their land with confidence.',
     'hero_cta_primary' => 'Explore Our Services',
@@ -134,5 +134,5 @@ return [
     'arusha_zones' => 'Arusha Focus Areas',
     'contact_us' => 'Office & Contact',
     'rights_reserved' => 'All rights reserved.',
-    'disclaimer' => 'Professional Land Surveying & Formalization Solutions &bull; Arusha, Tanzania.',
+    'disclaimer' => 'Professional Land Surveying & Formalization Solutions • Arusha, Tanzania.',
 ];

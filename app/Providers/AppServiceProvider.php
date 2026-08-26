@@ -34,9 +34,15 @@ class AppServiceProvider extends ServiceProvider
                 $contactPhone = Setting::get('contact_phone', '+255 742 448 965');
                 $contactEmail = Setting::get('contact_email', 'info@reland.co.tz');
                 $officeAddress = Setting::get('office_address', 'Floor 3, TFA Complex, Sokoine Road, Arusha, Tanzania');
-                $locationBadge = Setting::get('top_bar_location_badge', 'Arusha, Tanzania');
+                $locationBadge = Setting::get('top_bar_location_badge', null);
+                $brandSubtext = Setting::get('brand_subtext', 'Land Services • Arusha');
+                $coverageRegions = Setting::get('coverage_regions', 'Arusha City • Meru • Monduli • Northern Zone');
                 $locale = app()->getLocale();
-                $topTagline = Setting::get('top_bar_tagline_' . $locale, Setting::get('top_bar_tagline', '"Ardhi Yako Mtaji Wako" — Mipango Mji | Upimaji | Hati Miliki'));
+                
+                $heroBadge = Setting::get('hero_badge_' . $locale, Setting::get('hero_badge', null));
+                $topTagline = Setting::get('top_bar_tagline_' . $locale, Setting::get('top_bar_tagline', null));
+                $heroTitle = Setting::get('hero_title_' . $locale, null);
+                $heroSubtitle = Setting::get('hero_subtitle_' . $locale, null);
 
                 $view->with([
                     'siteWhatsapp' => $whatsappNumber,
@@ -45,7 +51,12 @@ class AppServiceProvider extends ServiceProvider
                     'siteEmail' => $contactEmail,
                     'siteAddress' => $officeAddress,
                     'siteLocationBadge' => $locationBadge,
+                    'siteBrandSubtext' => $brandSubtext,
+                    'siteCoverageRegions' => $coverageRegions,
+                    'siteHeroBadge' => $heroBadge,
                     'siteTagline' => $topTagline,
+                    'siteHeroTitle' => $heroTitle,
+                    'siteHeroSubtitle' => $heroSubtitle,
                 ]);
             }
         });
