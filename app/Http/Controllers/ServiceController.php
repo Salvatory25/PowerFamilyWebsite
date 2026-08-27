@@ -347,8 +347,15 @@ class ServiceController extends Controller
     public function index(): View
     {
         $services = self::getServicesList();
-        $featuredProjects = Project::published()->featured()->latest()->take(3)->get();
-        $featuredPlots = Plot::with(['plotType', 'location', 'images'])->published()->featured()->latest()->take(3)->get();
+        $featuredProjects = collect();
+        $featuredPlots = collect();
+
+        try {
+            $featuredProjects = Project::published()->featured()->latest()->take(3)->get();
+            $featuredPlots = Plot::with(['plotType', 'location', 'images'])->published()->featured()->latest()->take(3)->get();
+        } catch (\Throwable $e) {
+            // DB offline fallback
+        }
 
         return view('public.pages.services', compact('services', 'featuredProjects', 'featuredPlots'));
     }
@@ -374,8 +381,15 @@ class ServiceController extends Controller
         }
 
         // Fetch related projects and plots
-        $relatedProjects = Project::published()->latest()->take(3)->get();
-        $relatedPlots = Plot::with(['plotType', 'location', 'images'])->published()->latest()->take(3)->get();
+        $relatedProjects = collect();
+        $relatedPlots = collect();
+
+        try {
+            $relatedProjects = Project::published()->latest()->take(3)->get();
+            $relatedPlots = Plot::with(['plotType', 'location', 'images'])->published()->latest()->take(3)->get();
+        } catch (\Throwable $e) {
+            // DB offline fallback
+        }
 
         return view('public.services.show', compact('selectedService', 'relatedProjects', 'relatedPlots', 'services'));
     }
