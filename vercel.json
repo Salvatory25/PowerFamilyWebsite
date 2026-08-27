@@ -37,8 +37,10 @@
         }
     ],
     "env": {
+        "APP_NAME": "RELAND CONSULT",
         "APP_ENV": "production",
-        "APP_DEBUG": "false",
+        "APP_KEY": "base64:nct3gd8wJb+Z5D9fgTpB3aNlvKNAFR7PwMJoOP36zPY=",
+        "APP_DEBUG": "true",
         "CACHE_STORE": "array",
         "SESSION_DRIVER": "cookie",
         "QUEUE_CONNECTION": "sync",

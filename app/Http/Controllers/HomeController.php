@@ -17,43 +17,54 @@ class HomeController extends Controller
         // 6 Core Land Services
         $services = ServiceController::getServicesList();
 
-        // Featured Land Projects (Surveying, Formalization, Subdivisions)
-        $featuredProjects = Project::with(['images'])
-            ->published()
-            ->featured()
-            ->latest('completion_date')
-            ->take(4)
-            ->get();
+        $featuredProjects = collect();
+        $featuredPlots = collect();
+        $latestPlots = collect();
+        $popularLocations = collect();
+        $plotTypes = collect();
+        $locations = collect();
 
-        // Verified Plots for Sale
-        $featuredPlots = Plot::with(['plotType', 'location', 'images'])
-            ->published()
-            ->featured()
-            ->latest()
-            ->take(6)
-            ->get();
+        try {
+            // Featured Land Projects (Surveying, Formalization, Subdivisions)
+            $featuredProjects = Project::with(['images'])
+                ->published()
+                ->featured()
+                ->latest('completion_date')
+                ->take(4)
+                ->get();
 
-        $latestPlots = Plot::with(['plotType', 'location', 'images'])
-            ->published()
-            ->latest()
-            ->take(6)
-            ->get();
+            // Verified Plots for Sale
+            $featuredPlots = Plot::with(['plotType', 'location', 'images'])
+                ->published()
+                ->featured()
+                ->latest()
+                ->take(6)
+                ->get();
 
-        $popularLocations = Location::withCount(['plots' => function ($q) {
-            $q->where('is_published', true);
-        }])
-            ->orderBy('display_order')
-            ->take(6)
-            ->get();
+            $latestPlots = Plot::with(['plotType', 'location', 'images'])
+                ->published()
+                ->latest()
+                ->take(6)
+                ->get();
 
-        $plotTypes = PlotType::where('is_active', true)
-            ->withCount(['plots' => function ($q) {
+            $popularLocations = Location::withCount(['plots' => function ($q) {
                 $q->where('is_published', true);
             }])
-            ->orderBy('display_order')
-            ->get();
+                ->orderBy('display_order')
+                ->take(6)
+                ->get();
 
-        $locations = Location::orderBy('area_name')->get();
+            $plotTypes = PlotType::where('is_active', true)
+                ->withCount(['plots' => function ($q) {
+                    $q->where('is_published', true);
+                }])
+                ->orderBy('display_order')
+                ->get();
+
+            $locations = Location::orderBy('area_name')->get();
+        } catch (\Throwable $e) {
+            // DB is offline or not configured yet on Vercel
+        }
 
         // High-level company statistics
         $stats = [
