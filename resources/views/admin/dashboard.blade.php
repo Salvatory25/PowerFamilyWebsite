@@ -23,29 +23,35 @@
     </div>
 
     <!-- Stats Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        <div class="p-6 rounded-2xl bg-[#0c1c34] border border-[#16325c] space-y-2">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        <div class="p-5 rounded-2xl bg-[#0c1c34] border border-[#16325c] space-y-1.5">
             <div class="text-slate-400 text-xs font-semibold uppercase tracking-wider">Land Projects</div>
-            <div class="text-3xl font-black text-white">{{ $stats['total_projects'] }}</div>
-            <div class="text-[11px] text-[#dfb256] font-medium">{{ $stats['completed_projects'] }} Completed &bull; Case Studies</div>
+            <div class="text-2xl font-black text-white">{{ $stats['total_projects'] }}</div>
+            <div class="text-[11px] text-[#dfb256] font-medium">{{ $stats['completed_projects'] }} Completed</div>
         </div>
 
-        <div class="p-6 rounded-2xl bg-[#0c1c34] border border-[#16325c] space-y-2">
+        <div class="p-5 rounded-2xl bg-[#0c1c34] border border-[#16325c] space-y-1.5">
             <div class="text-slate-400 text-xs font-semibold uppercase tracking-wider">Total Plots</div>
-            <div class="text-3xl font-black text-white">{{ $stats['total_plots'] }}</div>
-            <div class="text-[11px] text-[#dfb256] font-medium">{{ $stats['available_plots'] }} Available for sale</div>
+            <div class="text-2xl font-black text-white">{{ $stats['total_plots'] }}</div>
+            <div class="text-[11px] text-[#dfb256] font-medium">{{ $stats['available_plots'] }} Available</div>
         </div>
 
-        <div class="p-6 rounded-2xl bg-[#0c1c34] border border-[#16325c] space-y-2">
+        <div class="p-5 rounded-2xl bg-[#0c1c34] border border-[#16325c] space-y-1.5">
             <div class="text-slate-400 text-xs font-semibold uppercase tracking-wider">Reserved / Sold</div>
-            <div class="text-3xl font-black text-amber-400">{{ $stats['reserved_plots'] + $stats['sold_plots'] }}</div>
-            <div class="text-[11px] text-slate-400 font-medium">{{ $stats['reserved_plots'] }} Reserved &bull; {{ $stats['sold_plots'] }} Sold</div>
+            <div class="text-2xl font-black text-amber-400">{{ $stats['reserved_plots'] + $stats['sold_plots'] }}</div>
+            <div class="text-[11px] text-slate-400 font-medium">{{ $stats['reserved_plots'] }} Res &bull; {{ $stats['sold_plots'] }} Sold</div>
         </div>
 
-        <div class="p-6 rounded-2xl bg-[#0c1c34] border border-[#16325c] space-y-2">
-            <div class="text-slate-400 text-xs font-semibold uppercase tracking-wider">Client Inquiries & CRM</div>
-            <div class="text-3xl font-black text-white">{{ $stats['total_enquiries'] }}</div>
-            <div class="text-[11px] text-[#dfb256] font-medium">{{ $stats['new_enquiries'] }} New pending response</div>
+        <div class="p-5 rounded-2xl bg-[#0c1c34] border border-[#16325c] space-y-1.5">
+            <div class="text-slate-400 text-xs font-semibold uppercase tracking-wider">Blog &amp; Articles</div>
+            <div class="text-2xl font-black text-[#dfb256]">{{ $stats['total_articles'] ?? 0 }}</div>
+            <a href="{{ route('admin.articles.index') }}" class="text-[11px] text-slate-300 hover:text-white underline block">Manage Articles &rarr;</a>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-[#0c1c34] border border-[#16325c] space-y-1.5">
+            <div class="text-slate-400 text-xs font-semibold uppercase tracking-wider">Client Leads CRM</div>
+            <div class="text-2xl font-black text-white">{{ $stats['total_enquiries'] }}</div>
+            <div class="text-[11px] text-emerald-400 font-medium">{{ $stats['new_enquiries'] }} New Pending</div>
         </div>
     </div>
 

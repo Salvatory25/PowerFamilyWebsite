@@ -16,6 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @stack('styles')
 </head>
 <body class="h-full bg-[#07101f] text-slate-100 font-sans antialiased">
 
@@ -76,6 +77,21 @@
                 <a href="{{ route('admin.plot-types.index') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold transition {{ request()->routeIs('admin.plot-types.*') ? 'bg-[#16325c] text-white shadow-md border-l-4 border-[#c89a3b]' : 'text-slate-400 hover:text-white hover:bg-[#16325c]/50' }}">
                     <svg class="w-5 h-5 {{ request()->routeIs('admin.plot-types.*') ? 'text-[#dfb256]' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
                     <span>Plot Types</span>
+                </a>
+
+                <div class="pt-4 pb-1 px-3 text-[11px] font-bold text-[#c89a3b] uppercase tracking-wider">
+                    Content &amp; Insights
+                </div>
+
+                <a href="{{ route('admin.articles.index') }}" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition {{ request()->routeIs('admin.articles.*') ? 'bg-[#16325c] text-white shadow-md border-l-4 border-[#c89a3b]' : 'text-slate-400 hover:text-white hover:bg-[#16325c]/50' }}">
+                    <div class="flex items-center gap-3">
+                        <svg class="w-5 h-5 {{ request()->routeIs('admin.articles.*') ? 'text-[#dfb256]' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+                        <span>Blog &amp; Articles</span>
+                    </div>
+                </a>
+
+                <a href="{{ route('admin.articles.create') }}" class="flex items-center gap-3 px-3.5 py-1.5 rounded-xl text-xs font-medium text-slate-400 hover:text-[#dfb256] pl-11 transition">
+                    <span>+ Andika Makala Mpya</span>
                 </a>
 
                 <div class="pt-4 pb-1 px-3 text-[11px] font-bold text-[#c89a3b] uppercase tracking-wider">
@@ -177,6 +193,7 @@
                     <a href="{{ route('admin.dashboard') }}" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-[#16325c]">Dashboard</a>
                     <a href="{{ route('admin.projects.index') }}" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-[#16325c]">Land Projects</a>
                     <a href="{{ route('admin.plots.index') }}" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-[#16325c]">Manage Plots</a>
+                    <a href="{{ route('admin.articles.index') }}" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-[#16325c]">Blog &amp; Articles</a>
                     <a href="{{ route('admin.locations.index') }}" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-[#16325c]">Locations</a>
                     <a href="{{ route('admin.plot-types.index') }}" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-[#16325c]">Plot Types</a>
                     <a href="{{ route('admin.enquiries.index') }}" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-[#16325c]">Leads & Inquiries</a>

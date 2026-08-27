@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Article;
 use App\Models\Enquiry;
 use App\Models\Location;
 use App\Models\Plot;
@@ -25,6 +26,7 @@ class DashboardController extends Controller
             'total_enquiries' => Enquiry::count(),
             'new_enquiries' => Enquiry::where('status', 'new')->count(),
             'total_locations' => Location::count(),
+            'total_articles' => Article::count(),
         ];
 
         $recentProjects = Project::latest()
@@ -41,6 +43,10 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
 
-        return view('admin.dashboard', compact('stats', 'recentProjects', 'recentPlots', 'recentEnquiries'));
+        $recentArticles = Article::latest('published_at')
+            ->take(4)
+            ->get();
+
+        return view('admin.dashboard', compact('stats', 'recentProjects', 'recentPlots', 'recentEnquiries', 'recentArticles'));
     }
 }

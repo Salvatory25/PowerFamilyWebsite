@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\EnquiryController as AdminEnquiryController;
@@ -86,6 +87,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('plots/{plot}/toggle-featured', [AdminPlotController::class, 'toggleFeatured'])->name('plots.toggle-featured');
         Route::post('plots/{plot}/status', [AdminPlotController::class, 'updateStatus'])->name('plots.status');
         Route::delete('plots/images/{image}', [AdminPlotController::class, 'deleteImage'])->name('plots.images.destroy');
+
+        // Blog & Knowledge Articles Management
+        Route::resource('articles', AdminArticleController::class);
 
         // Locations Management
         Route::resource('locations', AdminLocationController::class);

@@ -29,7 +29,7 @@
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @forelse($articles as $article)
-                <a href="{{ route('pages.article', $article->slug) }}" class="group bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-2xl hover:border-[#c89a3b]/30 transition duration-300 flex flex-col h-full">
+                <a href="{{ route('pages.article', $article->slug) }}" data-tilt data-tilt-max="8" data-tilt-glare="true" class="group bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-xs hover:shadow-2xl hover:border-[#c89a3b]/40 transition duration-300 flex flex-col h-full preserve-3d">
                     <div class="aspect-[16/10] bg-slate-200 relative overflow-hidden">
                         @if($article->image_url)
                             <img src="{{ $article->image_url }}" alt="{{ $article->title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
@@ -38,14 +38,14 @@
                                 <svg class="w-12 h-12 text-[#16325c]/30" fill="currentColor" viewBox="0 0 24 24"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                             </div>
                         @endif
-                        <div class="absolute top-4 left-4">
+                        <div class="absolute top-4 left-4 translate-z-10">
                             <span class="px-3 py-1 bg-white/90 backdrop-blur text-[#16325c] text-xs font-bold rounded-lg shadow-sm">
                                 {{ $article->published_at ? $article->published_at->format('M d, Y') : 'Recent' }}
                             </span>
                         </div>
                     </div>
                     
-                    <div class="p-6 sm:p-8 flex flex-col flex-1">
+                    <div class="p-6 sm:p-8 flex flex-col flex-1 translate-z-10">
                         <h2 class="text-xl font-bold text-slate-800 mb-3 group-hover:text-[#c89a3b] transition line-clamp-2">
                             {{ $article->title }}
                         </h2>
