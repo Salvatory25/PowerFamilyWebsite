@@ -8,7 +8,6 @@ $storagePaths = [
     '/tmp/storage/framework/sessions',
     '/tmp/storage/logs',
     '/tmp/storage/app/public',
-    '/tmp/bootstrap/cache',
 ];
 
 foreach ($storagePaths as $path) {
@@ -21,14 +20,12 @@ foreach ($storagePaths as $path) {
 putenv('VERCEL=1');
 putenv('APP_STORAGE=/tmp/storage');
 putenv('VIEW_COMPILED_PATH=/tmp/storage/framework/views');
-putenv('APP_PACKAGES_CACHE=/tmp/bootstrap/cache/packages.php');
-putenv('APP_SERVICES_CACHE=/tmp/bootstrap/cache/services.php');
-putenv('APP_CONFIG_CACHE=/tmp/bootstrap/cache/config.php');
-putenv('APP_ROUTES_CACHE=/tmp/bootstrap/cache/routes-v7.php');
-putenv('APP_EVENTS_CACHE=/tmp/bootstrap/cache/events.php');
-putenv('LOG_CHANNEL=stderr');
-putenv('SESSION_DRIVER=cookie');
 putenv('CACHE_STORE=array');
+putenv('CACHE_DRIVER=array');
+putenv('SESSION_DRIVER=file');
+putenv('QUEUE_CONNECTION=sync');
+putenv('LOG_CHANNEL=stderr');
+putenv('DB_CONNECTION=sqlite');
 
 // 3. Handle request
 require __DIR__ . '/../public/index.php';

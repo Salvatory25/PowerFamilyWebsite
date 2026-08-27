@@ -37,14 +37,19 @@
         }
     ],
     "env": {
-        "APP_NAME": "RELAND CONSULT",
+        "APP_NAME": "RELAND",
         "APP_ENV": "production",
         "APP_KEY": "base64:nct3gd8wJb+Z5D9fgTpB3aNlvKNAFR7PwMJoOP36zPY=",
         "APP_DEBUG": "true",
+        "APP_URL": "https://reland-website.vercel.app",
+        "APP_STORAGE": "/tmp/storage",
+        "VIEW_COMPILED_PATH": "/tmp/storage/framework/views",
         "CACHE_STORE": "array",
-        "SESSION_DRIVER": "cookie",
+        "CACHE_DRIVER": "array",
+        "SESSION_DRIVER": "file",
+        "SESSION_LIFETIME": "120",
         "QUEUE_CONNECTION": "sync",
-        "LOG_CHANNEL": "stderr",
-        "VIEW_COMPILED_PATH": "/tmp/storage/framework/views"
+        "DB_CONNECTION": "sqlite",
+        "LOG_CHANNEL": "stderr"
     }
 }
