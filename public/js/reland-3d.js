@@ -840,12 +840,28 @@
                 this.isDragging = false;
             };
 
+            dom.style.touchAction = 'none';
+
+            const onTouchMove = (e) => {
+                if (!this.isDragging || !e.touches || !e.touches[0]) return;
+                const clientX = e.touches[0].clientX;
+                const clientY = e.touches[0].clientY;
+
+                const deltaX = clientX - this.prevMousePos.x;
+                const deltaY = clientY - this.prevMousePos.y;
+
+                this.targetRotation.y += deltaX * 0.008;
+                this.targetRotation.x = Math.max(0.15, Math.min(0.85, this.targetRotation.x + deltaY * 0.008));
+
+                this.prevMousePos = { x: clientX, y: clientY };
+            };
+
             dom.addEventListener('mousedown', onPointerDown);
             window.addEventListener('mousemove', onPointerMove);
             window.addEventListener('mouseup', onPointerUp);
 
             dom.addEventListener('touchstart', onPointerDown, { passive: true });
-            window.addEventListener('touchmove', onPointerMove, { passive: true });
+            dom.addEventListener('touchmove', onTouchMove, { passive: true });
             window.addEventListener('touchend', onPointerUp);
 
             dom.addEventListener('wheel', (e) => {

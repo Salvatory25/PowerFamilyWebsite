@@ -304,29 +304,29 @@
                     </div>
 
                     <!-- 3D Viewport Controls HUD Overlay (Top Right) -->
-                    <div class="absolute top-4 right-4 flex items-center gap-1.5 z-20 flex-wrap">
-                        <button id="btn-3d-rotate" class="px-2.5 py-1.5 rounded-xl bg-[#c89a3b] text-[#0c1c34] text-xs font-bold shadow-md hover:opacity-90 transition flex items-center gap-1" title="Toggle Auto-Rotation">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                    <div class="absolute top-2 right-2 sm:top-4 sm:right-4 flex items-center gap-1 sm:gap-1.5 z-20 flex-wrap justify-end max-w-[95%]">
+                        <button id="btn-3d-rotate" class="px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-lg sm:rounded-xl bg-[#c89a3b] text-[#0c1c34] text-[10px] sm:text-xs font-bold shadow-md hover:opacity-90 transition flex items-center gap-1" title="Toggle Auto-Rotation">
+                            <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
                             <span>360&deg;</span>
                         </button>
-                        <button id="btn-3d-drone" class="px-2.5 py-1.5 rounded-xl bg-[#c89a3b] text-[#0c1c34] text-xs font-bold shadow-md hover:opacity-90 transition flex items-center gap-1" title="Toggle Survey Drone & LiDAR Scanner">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
-                            <span>LiDAR Drone</span>
+                        <button id="btn-3d-drone" class="px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-lg sm:rounded-xl bg-[#c89a3b] text-[#0c1c34] text-[10px] sm:text-xs font-bold shadow-md hover:opacity-90 transition flex items-center gap-1" title="Toggle Survey Drone & LiDAR Scanner">
+                            <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+                            <span>Drone</span>
                         </button>
-                        <button id="btn-3d-beacons" class="px-2.5 py-1.5 rounded-xl bg-[#c89a3b] text-[#0c1c34] text-xs font-bold shadow-md hover:opacity-90 transition flex items-center gap-1" title="Toggle Cadastral Beacons">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
-                            <span>GPS Beacons</span>
+                        <button id="btn-3d-beacons" class="px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-lg sm:rounded-xl bg-[#c89a3b] text-[#0c1c34] text-[10px] sm:text-xs font-bold shadow-md hover:opacity-90 transition flex items-center gap-1" title="Toggle Cadastral Beacons">
+                            <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
+                            <span>Beacons</span>
                         </button>
-                        <button id="btn-3d-grid" class="px-2.5 py-1.5 rounded-xl bg-[#c89a3b] text-[#0c1c34] text-xs font-bold shadow-md hover:opacity-90 transition flex items-center gap-1" title="Toggle Cadastral Grid">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                        <button id="btn-3d-grid" class="px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-lg sm:rounded-xl bg-[#c89a3b] text-[#0c1c34] text-[10px] sm:text-xs font-bold shadow-md hover:opacity-90 transition flex items-center gap-1" title="Toggle Cadastral Grid">
+                            <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                             <span>Grid</span>
                         </button>
-                        <button id="btn-3d-simulate" class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-400 text-[#0c1c34] text-xs font-black shadow-md hover:opacity-90 transition flex items-center gap-1" title="Simulate Survey Process">
-                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/></svg>
+                        <button id="btn-3d-simulate" class="px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg sm:rounded-xl bg-gradient-to-r from-emerald-500 to-teal-400 text-[#0c1c34] text-[10px] sm:text-xs font-black shadow-md hover:opacity-90 transition flex items-center gap-1" title="Simulate Survey Process">
+                            <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/></svg>
                             <span>Simulate</span>
                         </button>
-                        <button id="btn-3d-reset" class="p-1.5 rounded-xl bg-slate-800/80 text-slate-300 hover:text-white border border-slate-700 text-xs font-bold transition" title="Reset View">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/></svg>
+                        <button id="btn-3d-reset" class="p-1 sm:p-1.5 rounded-lg sm:rounded-xl bg-slate-800/80 text-slate-300 hover:text-white border border-slate-700 text-[10px] sm:text-xs font-bold transition" title="Reset View">
+                            <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/></svg>
                         </button>
                     </div>
 
