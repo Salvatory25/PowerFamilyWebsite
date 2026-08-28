@@ -25,6 +25,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if (app()->environment('production') || isset($_SERVER['HTTP_X_FORWARDED_PROTO']) || isset($_SERVER['VERCEL']) || getenv('VERCEL')) {
+            \Illuminate\Support\Facades\URL::forceScheme('https');
+        }
+
         Paginator::useTailwind();
 
         // Share common settings and categories with all views safely
