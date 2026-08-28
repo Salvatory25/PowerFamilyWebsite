@@ -16,19 +16,51 @@ foreach ($storagePaths as $path) {
     }
 }
 
-// 2. Set runtime environment variables
-putenv('VERCEL=1');
-if (!getenv('APP_KEY')) {
-    putenv('APP_KEY=base64:G4dJQTj748dhrF9Gd98BLK8oZWJEmVC+RHJ/wAZLjMw=');
-}
-putenv('APP_STORAGE=/tmp/storage');
-putenv('VIEW_COMPILED_PATH=/tmp/storage/framework/views');
-putenv('CACHE_STORE=array');
-putenv('CACHE_DRIVER=array');
-putenv('SESSION_DRIVER=file');
-putenv('QUEUE_CONNECTION=sync');
-putenv('LOG_CHANNEL=stderr');
-putenv('DB_CONNECTION=sqlite');
+// 2. Prepare writable SQLite Database file in /tmp
+$dbSource = __DIR__ . '/../database/database.sqlite';
+$dbTarget = '/tmp/database.sqlite';
 
-// 3. Handle request
-require __DIR__ . '/../public/index.php';
+if (!file_exists($dbTarget) || filesize($dbTarget) === 0) {
+    if (file_exists($dbSource) && filesize($dbSource) > 0) {
+        @copy($dbSource, $dbTarget);
+    } else {
+        @touch($dbTarget);
+    }
+}
+
+// 3. Set runtime environment variables across putenv, $_ENV, and $_SERVER
+$appKey = getenv('APP_KEY') ?: 'base64:G4dJQTj748dhrF9Gd98BLK8oZWJEmVC+RHJ/wAZLjMw=';
+
+$runtimeEnvs = [
+    'VERCEL' => '1',
+    'APP_ENV' => getenv('APP_ENV') ?: 'production',
+    'APP_KEY' => $appKey,
+    'APP_DEBUG' => getenv('APP_DEBUG') ?: 'true',
+    'APP_STORAGE' => '/tmp/storage',
+    'VIEW_COMPILED_PATH' => '/tmp/storage/framework/views',
+    'CACHE_STORE' => 'array',
+    'CACHE_DRIVER' => 'array',
+    'SESSION_DRIVER' => 'file',
+    'QUEUE_CONNECTION' => 'sync',
+    'LOG_CHANNEL' => 'stderr',
+    'DB_CONNECTION' => 'sqlite',
+    'DB_DATABASE' => $dbTarget,
+];
+
+foreach ($runtimeEnvs as $key => $val) {
+    putenv("$key=$val");
+    $_ENV[$key] = $val;
+    $_SERVER[$key] = $val;
+}
+
+// 4. Handle request with exception logging
+try {
+    require __DIR__ . '/../public/index.php';
+} catch (\Throwable $e) {
+    http_response_code(500);
+    error_log('Vercel Serverless Exception: ' . $e->getMessage() . "\n" . $e->getTraceAsString());
+    echo '<h1>Reland Serverless Diagnostic</h1>';
+    echo '<p><strong>Message:</strong> ' . htmlspecialchars($e->getMessage()) . '</p>';
+    echo '<p><strong>File:</strong> ' . htmlspecialchars($e->getFile()) . ':' . $e->getLine() . '</p>';
+    echo '<pre>' . htmlspecialchars($e->getTraceAsString()) . '</pre>';
+}
