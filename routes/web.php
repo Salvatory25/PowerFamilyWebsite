@@ -4,23 +4,26 @@ use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\EnquiryController as AdminEnquiryController;
+use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
+use App\Http\Controllers\Admin\HouseController as AdminHouseController;
 use App\Http\Controllers\Admin\LocationController as AdminLocationController;
 use App\Http\Controllers\Admin\PlotController as AdminPlotController;
 use App\Http\Controllers\Admin\PlotTypeController as AdminPlotTypeController;
-use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\Admin\SettingController as AdminSettingController;
+use App\Http\Controllers\Admin\VehicleController as AdminVehicleController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HouseController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PlotController;
-use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\VehicleController;
 use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| Public Routes
+| Public Routes — POWER FAMILY INVESTMENT
 |--------------------------------------------------------------------------
 */
 
@@ -30,30 +33,44 @@ Route::get('/lang/{locale}', [LocaleController::class, 'switch'])->name('lang.sw
 // Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Corporate Land Services
-Route::get('/services', [ServiceController::class, 'index'])->name('pages.services');
-Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('services.show');
+// Plots Catalogue (/viwanja)
+Route::get('/viwanja', [PlotController::class, 'index'])->name('plots.index');
+Route::get('/viwanja/{slug}', [PlotController::class, 'show'])->name('plots.show');
+Route::get('/plots', [PlotController::class, 'index']);
+Route::get('/plots/{slug}', [PlotController::class, 'show']);
 
-// Land Projects Portfolio
-Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
-Route::get('/projects/{slug}', [ProjectController::class, 'show'])->name('projects.show');
+// Houses Catalogue (/nyumba)
+Route::get('/nyumba', [HouseController::class, 'index'])->name('houses.index');
+Route::get('/nyumba/{slug}', [HouseController::class, 'show'])->name('houses.show');
 
-// Available Plots Marketplace
-Route::get('/plots', [PlotController::class, 'index'])->name('plots.index');
-Route::get('/plots/{slug}', [PlotController::class, 'show'])->name('plots.show');
+// Vehicles Catalogue (/magari)
+Route::get('/magari', [VehicleController::class, 'index'])->name('vehicles.index');
+Route::get('/magari/{slug}', [VehicleController::class, 'show'])->name('vehicles.show');
 
-// Locations Directory
-Route::get('/locations', [LocationController::class, 'index'])->name('locations.index');
-Route::get('/locations/{slug}', [LocationController::class, 'show'])->name('locations.show');
+// Locations Directory (/maeneo)
+Route::get('/maeneo', [LocationController::class, 'index'])->name('locations.index');
+Route::get('/maeneo/{slug}', [LocationController::class, 'show'])->name('locations.show');
+Route::get('/locations', [LocationController::class, 'index']);
+Route::get('/locations/{slug}', [LocationController::class, 'show']);
 
-// Institutional & Content Pages
-Route::get('/about', [PageController::class, 'about'])->name('pages.about');
-Route::get('/contact', [PageController::class, 'contact'])->name('pages.contact');
-Route::get('/track', [PageController::class, 'trackStatus'])->name('pages.track');
-Route::post('/track', [PageController::class, 'checkStatus'])->name('track.check');
-Route::get('/insights', [PageController::class, 'insights'])->name('pages.insights');
-Route::get('/insights/{slug}', [PageController::class, 'showArticle'])->name('pages.article');
-Route::get('/blog', [PageController::class, 'insights'])->name('pages.blog'); // Alias
+// Photo & Project Gallery (/gallery)
+Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
+
+// Investment Education & Blog (/blog)
+Route::get('/blog', [PageController::class, 'insights'])->name('pages.blog');
+Route::get('/blog/{slug}', [PageController::class, 'showArticle'])->name('pages.article');
+Route::get('/insights', [PageController::class, 'insights']);
+Route::get('/insights/{slug}', [PageController::class, 'showArticle']);
+
+// Institutional Pages
+Route::get('/kuhusu-sisi', [PageController::class, 'about'])->name('pages.about');
+Route::get('/about', [PageController::class, 'about']);
+Route::get('/mawasiliano', [PageController::class, 'contact'])->name('pages.contact');
+Route::get('/contact', [PageController::class, 'contact']);
+Route::get('/privacy-policy', [PageController::class, 'privacy'])->name('pages.privacy');
+Route::get('/terms', [PageController::class, 'terms'])->name('pages.terms');
+
+// Lead & Inquiry Submission
 Route::post('/enquiry', [PageController::class, 'submitEnquiry'])->name('enquiry.submit');
 
 /*
@@ -62,7 +79,7 @@ Route::post('/enquiry', [PageController::class, 'submitEnquiry'])->name('enquiry
 |--------------------------------------------------------------------------
 */
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::redirect('/', '/admin/login');
+    Route::redirect('/', '/admin/dashboard');
     Route::get('/login', [AdminAuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AdminAuthController::class, 'login'])->name('login.submit');
     Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
@@ -75,12 +92,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
-        // Projects Management
-        Route::resource('projects', AdminProjectController::class);
-        Route::post('projects/{project}/toggle-publish', [AdminProjectController::class, 'togglePublish'])->name('projects.toggle-publish');
-        Route::post('projects/{project}/toggle-featured', [AdminProjectController::class, 'toggleFeatured'])->name('projects.toggle-featured');
-        Route::delete('projects/images/{image}', [AdminProjectController::class, 'deleteImage'])->name('projects.images.destroy');
-
         // Plots Management
         Route::resource('plots', AdminPlotController::class);
         Route::post('plots/{plot}/toggle-publish', [AdminPlotController::class, 'togglePublish'])->name('plots.toggle-publish');
@@ -88,8 +99,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('plots/{plot}/status', [AdminPlotController::class, 'updateStatus'])->name('plots.status');
         Route::delete('plots/images/{image}', [AdminPlotController::class, 'deleteImage'])->name('plots.images.destroy');
 
-        // Blog & Knowledge Articles Management
-        Route::resource('articles', AdminArticleController::class);
+        // Houses Management
+        Route::resource('houses', AdminHouseController::class);
+        Route::delete('houses/images/{image}', [AdminHouseController::class, 'deleteImage'])->name('houses.images.destroy');
+
+        // Vehicles Management
+        Route::resource('vehicles', AdminVehicleController::class);
+        Route::delete('vehicles/images/{image}', [AdminVehicleController::class, 'deleteImage'])->name('vehicles.images.destroy');
 
         // Locations Management
         Route::resource('locations', AdminLocationController::class);
@@ -97,10 +113,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Plot Types Management
         Route::resource('plot-types', AdminPlotTypeController::class);
 
-        // Enquiries CRM
+        // Blog Articles Management
+        Route::resource('articles', AdminArticleController::class);
+
+        // Gallery Management
+        Route::resource('gallery', AdminGalleryController::class)->only(['index', 'create', 'store', 'destroy']);
+
+        // Inquiries CRM
         Route::resource('enquiries', AdminEnquiryController::class)->only(['index', 'show', 'update', 'destroy']);
 
-        // Website Settings
+        // Company & Website Settings
         Route::get('/settings', [AdminSettingController::class, 'index'])->name('settings.index');
         Route::post('/settings', [AdminSettingController::class, 'update'])->name('settings.update');
     });

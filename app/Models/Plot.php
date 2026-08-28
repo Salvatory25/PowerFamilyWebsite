@@ -98,11 +98,14 @@ class Plot extends Model
 
     public function getFormattedPriceAttribute(): string
     {
-        return $this->currency . ' ' . number_format($this->price, 0);
+        return 'TSh ' . number_format($this->price, 0);
     }
 
     public function getFormattedSizeAttribute(): string
     {
+        if ($this->dimension_details) {
+            return $this->dimension_details;
+        }
         $val = rtrim(rtrim(number_format($this->plot_size, 2), '0'), '.');
         return "{$val} {$this->size_unit}";
     }
@@ -130,7 +133,7 @@ class Plot extends Model
             $this->street_address,
             $this->location?->area_name,
             $this->location?->district,
-            $this->location?->region ?? 'Arusha'
+            $this->location?->region ?? 'Tanzania'
         ]);
 
         return implode(', ', $parts);
@@ -139,40 +142,44 @@ class Plot extends Model
     public function getStatusBadgeClassesAttribute(): string
     {
         return match ($this->listing_status) {
-            'available' => 'bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20',
-            'reserved' => 'bg-amber-50 text-amber-700 ring-1 ring-amber-600/20',
-            'sold' => 'bg-rose-50 text-rose-700 ring-1 ring-rose-600/20',
-            default => 'bg-slate-50 text-slate-700 ring-1 ring-slate-600/20',
+            'available' => 'bg-emerald-500 text-white',
+            'reserved' => 'bg-amber-500 text-white',
+            'sold' => 'bg-rose-500 text-white',
+            default => 'bg-slate-500 text-white',
         };
     }
 
     public function getStatusLabelAttribute(): string
     {
         $locale = app()->getLocale();
-        if ($locale === 'sw') {
+        if ($locale === 'en') {
             return match ($this->listing_status) {
-                'available' => 'Inapatikana',
-                'reserved' => 'Imetengwa (Reserved)',
-                'sold' => 'Imeuzwa',
+                'available' => 'Available',
+                'reserved' => 'Reserved',
+                'sold' => 'Sold',
                 default => ucfirst($this->listing_status),
             };
         }
 
         return match ($this->listing_status) {
-            'available' => 'Available',
-            'reserved' => 'Reserved',
-            'sold' => 'Sold',
+            'available' => 'Inapatikana',
+            'reserved' => 'Imeshikiliwa',
+            'sold' => 'Imeuzwa',
             default => ucfirst($this->listing_status),
         };
     }
 
     public function getWhatsappInquiryUrlAttribute(): string
     {
-        $whatsappNumber = Setting::get('whatsapp_number', '255742448965');
-        // Strip non-digits
+        $whatsappNumber = Setting::get('whatsapp_number', '255700000000');
         $cleanedNumber = preg_replace('/[^0-9]/', '', $whatsappNumber);
 
-        $text = "Hello RELAND, I am interested in Plot [{$this->plot_reference}] - \"{$this->title}\" in {$this->full_location} priced at {$this->formatted_price}. Please share more details and arrange a site visit.";
+        $locale = app()->getLocale();
+        if ($locale === 'en') {
+            $text = "Hello Power Family Investment, I am interested in Plot [{$this->plot_reference}] - \"{$this->title}\" located in {$this->full_location} priced at {$this->formatted_price}. Please provide more details.";
+        } else {
+            $text = "Habari Power Family Investment, nimevutiwa na Kiwanja [{$this->plot_reference}] - \"{$this->title}\" kilichopo {$this->full_location} chenye bei ya {$this->formatted_price}. Naomba maelezo zaidi.";
+        }
         
         return "https://wa.me/{$cleanedNumber}?text=" . rawurlencode($text);
     }
@@ -185,7 +192,7 @@ class Plot extends Model
                 $model->slug = Str::slug($model->title . '-' . Str::random(5));
             }
             if (empty($model->plot_reference)) {
-                $model->plot_reference = 'REL-ARU-' . strtoupper(Str::random(5));
+                $model->plot_reference = 'PFI-PLT-' . strtoupper(Str::random(5));
             }
         });
     }

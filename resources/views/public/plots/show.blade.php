@@ -1,387 +1,265 @@
 @extends('layouts.app')
 
-@section('title', $plot->title . ' | RELAND Arusha Plots')
-@section('meta_description', Str::limit($plot->short_description ?? $plot->description, 160))
-@section('whatsapp_message', "Hello RELAND Arusha, I am inquiring about Plot Ref: {$plot->plot_reference} - {$plot->title} in " . ($plot->location?->area_name ?? 'Arusha') . ".")
+@section('title', $plot->title . ' — Power Family Investment')
 
 @section('content')
+
+@php
+    $whatsappNumber = \App\Models\Setting::get('whatsapp_number', '255700000000');
+    $cleanWhatsapp = preg_replace('/[^0-9]/', '', $whatsappNumber);
+    $phone = \App\Models\Setting::get('company_phone', '+255 700 000 000');
+@endphp
+
 <!-- Breadcrumbs Bar -->
-<div class="bg-white border-b border-slate-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-        <nav class="flex items-center gap-2 text-xs text-slate-500 overflow-x-auto">
-            <a href="{{ route('home') }}" class="hover:text-emerald-700 whitespace-nowrap">{{ __('app.nav_home') }}</a>
-            <span>/</span>
-            <a href="{{ route('plots.index') }}" class="hover:text-emerald-700 whitespace-nowrap">{{ __('app.nav_plots') }}</a>
-            <span>/</span>
-            <a href="{{ route('locations.show', $plot->location?->slug ?? '') }}" class="hover:text-emerald-700 whitespace-nowrap">{{ $plot->location?->area_name }}</a>
-            <span>/</span>
-            <span class="text-slate-900 font-semibold truncate max-w-xs">{{ $plot->plot_reference }}</span>
-        </nav>
+<div class="bg-white border-b border-gray-100 py-3.5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-xs font-semibold text-gray-500 flex items-center space-x-2">
+        <a href="{{ route('home') }}" class="hover:text-[#4A0E4E]">Mwanzo</a>
+        <span>/</span>
+        <a href="{{ route('plots.index') }}" class="hover:text-[#4A0E4E]">Viwanja</a>
+        <span>/</span>
+        <span class="text-gray-900 truncate max-w-xs sm:max-w-md">{{ $plot->title }}</span>
     </div>
 </div>
 
-<!-- Main Details Layout -->
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-    <!-- Top Title & Price Header -->
-    <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-6 pb-8 border-b border-slate-200">
-        <div class="space-y-3">
-            <div class="flex flex-wrap items-center gap-2.5">
-                <!-- Status Badge -->
-                <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold {{ $plot->status_badge_classes }}">
-                    <span class="w-2 h-2 rounded-full {{ $plot->listing_status === 'available' ? 'bg-emerald-500 animate-pulse' : ($plot->listing_status === 'reserved' ? 'bg-amber-500' : 'bg-rose-500') }}"></span>
-                    {{ $plot->status_label }}
-                </span>
-
-                <!-- Type Badge -->
-                <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-100 text-slate-800 text-xs font-bold">
-                    {{ $plot->plotType?->name }}
-                </span>
-
-                <!-- Reference Badge -->
-                <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-900 text-white font-mono text-xs font-semibold">
-                    REF: {{ $plot->plot_reference }}
-                </span>
-
-                @if($plot->is_featured)
-                    <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold">
-                        ★ {{ __('app.featured') }}
+<div class="py-10 bg-neutral-50" x-data="{ activeImage: '{{ $plot->featured_image_url }}', lightboxOpen: false }">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Top Title & Price Header -->
+        <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-100 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div class="space-y-2">
+                <div class="flex items-center space-x-3">
+                    <span class="px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider shadow-sm {{ $plot->status_badge_classes }}">
+                        {{ $plot->status_label }}
                     </span>
-                @endif
-            </div>
-
-            <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
-                {{ $plot->title }}
-            </h1>
-
-            <p class="flex items-center gap-2 text-sm font-medium text-emerald-800">
-                <svg class="w-4 h-4 text-emerald-700 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
-                <span>{{ $plot->full_location }}</span>
-            </p>
-        </div>
-
-        <!-- Price Card -->
-        <div class="bg-emerald-950 text-white p-5 rounded-2xl shrink-0 flex flex-col justify-center min-w-[260px] shadow-lg shadow-emerald-950/20 border border-emerald-800">
-            <span class="text-xs font-semibold uppercase tracking-wider text-emerald-300">Listing Price</span>
-            <div class="text-2xl sm:text-3xl font-black text-white mt-1">
-                {{ $plot->formatted_price }}
-            </div>
-            <div class="mt-2 flex items-center justify-between text-xs text-emerald-200 border-t border-emerald-900/80 pt-2">
-                <span>{{ $plot->price_negotiable ? __('app.negotiable') : __('app.fixed_price') }}</span>
-                <span class="font-bold">{{ $plot->formatted_size }}</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- 2-Column Content -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 mt-8">
-        <!-- Left 2 Cols: Gallery & Plot Specs -->
-        <div class="lg:col-span-2 space-y-10">
-            <!-- Photo Gallery with Tab Switcher -->
-            <div class="bg-white rounded-3xl border border-slate-200 overflow-hidden p-3 shadow-xs">
-                <!-- Main Active Image -->
-                <div class="relative h-80 sm:h-[450px] w-full rounded-2xl overflow-hidden bg-slate-900">
-                    <img id="main-plot-image" 
-                         src="{{ $plot->featured_image_url }}" 
-                         alt="{{ $plot->title }}" 
-                         class="w-full h-full object-cover">
+                    <span class="px-3 py-1 rounded-md text-xs font-bold bg-[#FAF5FB] text-[#4A0E4E] border border-[#F3E8F6]">
+                        Ref: {{ $plot->plot_reference }}
+                    </span>
                 </div>
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-[#320635]">
+                    {{ $plot->title }}
+                </h1>
+                <div class="flex items-center text-xs sm:text-sm font-semibold text-gray-600 space-x-2">
+                    <svg class="w-4 h-4 text-[#4A0E4E]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    <span>{{ $plot->full_location }}</span>
+                </div>
+            </div>
 
-                <!-- Thumbnails Gallery -->
-                @if($plot->images->count() > 0)
-                    <div class="grid grid-cols-4 sm:grid-cols-6 gap-2 mt-3">
-                        <!-- Featured image thumb -->
-                        <button type="button" 
-                                onclick="document.getElementById('main-plot-image').src='{{ $plot->featured_image_url }}'" 
-                                class="h-16 rounded-xl overflow-hidden border-2 border-emerald-600 focus:outline-hidden hover:opacity-90 transition">
-                            <img src="{{ $plot->featured_image_url }}" class="w-full h-full object-cover" alt="Main Thumb">
-                        </button>
+            <div class="md:text-right border-t md:border-t-0 pt-4 md:pt-0">
+                <span class="text-xs uppercase tracking-wider font-semibold text-gray-400 block">Bei ya Mauzo</span>
+                <span class="text-3xl sm:text-4xl font-extrabold text-[#4A0E4E] block mt-1">
+                    {{ $plot->formatted_price }}
+                </span>
+                <span class="text-xs text-gray-500 font-medium">Inalipika kwa Makubaliano</span>
+            </div>
+        </div>
 
-                        @foreach($plot->images as $img)
-                            <button type="button" 
-                                    onclick="document.getElementById('main-plot-image').src='{{ $img->url }}'" 
-                                    class="h-16 rounded-xl overflow-hidden border-2 border-transparent hover:border-emerald-600 focus:border-emerald-600 focus:outline-hidden hover:opacity-90 transition">
-                                <img src="{{ $img->url }}" class="w-full h-full object-cover" alt="Thumb">
+        <!-- Main Content Layout (Left Details + Right Sticky Contact) -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Left 2 Cols: Gallery & Information -->
+            <div class="lg:col-span-2 space-y-8">
+                
+                <!-- Image Gallery -->
+                <div class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100 space-y-4">
+                    <!-- Main Big Image -->
+                    <div class="relative aspect-[16/10] rounded-xl overflow-hidden bg-gray-100 cursor-pointer" @click="lightboxOpen = true">
+                        <img :src="activeImage" alt="{{ $plot->title }}" class="w-full h-full object-cover">
+                        <div class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md text-white text-xs px-3 py-1.5 rounded-lg flex items-center space-x-1 font-semibold">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+                            <span>Bonyeza Kukuza Picha</span>
+                        </div>
+                    </div>
+
+                    <!-- Thumbnails -->
+                    @if($plot->images->count() > 0)
+                        <div class="flex items-center space-x-3 overflow-x-auto pb-2">
+                            <button 
+                                type="button"
+                                @click="activeImage = '{{ $plot->featured_image_url }}'"
+                                class="w-20 h-16 rounded-lg overflow-hidden border-2 shrink-0 transition"
+                                :class="activeImage === '{{ $plot->featured_image_url }}' ? 'border-[#4A0E4E] ring-2 ring-[#4A0E4E]/30' : 'border-transparent opacity-70 hover:opacity-100'"
+                            >
+                                <img src="{{ $plot->featured_image_url }}" class="w-full h-full object-cover">
                             </button>
-                        @endforeach
+                            @foreach($plot->images as $img)
+                                <button 
+                                    type="button"
+                                    @click="activeImage = '{{ $img->url }}'"
+                                    class="w-20 h-16 rounded-lg overflow-hidden border-2 shrink-0 transition"
+                                    :class="activeImage === '{{ $img->url }}' ? 'border-[#4A0E4E] ring-2 ring-[#4A0E4E]/30' : 'border-transparent opacity-70 hover:opacity-100'"
+                                >
+                                    <img src="{{ $img->url }}" class="w-full h-full object-cover">
+                                </button>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+
+                <!-- Key Attributes Bar -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <div class="p-4 rounded-xl bg-[#FAF5FB] border border-[#F3E8F6]">
+                        <span class="text-[11px] font-semibold text-gray-500 uppercase block">Ukubwa</span>
+                        <span class="text-base font-extrabold text-[#4A0E4E] mt-0.5 block">{{ $plot->formatted_size }}</span>
                     </div>
-                @endif
+                    <div class="p-4 rounded-xl bg-[#FAF5FB] border border-[#F3E8F6]">
+                        <span class="text-[11px] font-semibold text-gray-500 uppercase block">Matumizi</span>
+                        <span class="text-base font-extrabold text-[#4A0E4E] mt-0.5 block">{{ $plot->plotType?->name_sw ?? 'Makazi' }}</span>
+                    </div>
+                    <div class="p-4 rounded-xl bg-[#FAF5FB] border border-[#F3E8F6]">
+                        <span class="text-[11px] font-semibold text-gray-500 uppercase block">Hali ya Nyaraka</span>
+                        <span class="text-base font-extrabold text-[#4A0E4E] mt-0.5 block">{{ $plot->ownership_title_type ?? 'Kimepimwa' }}</span>
+                    </div>
+                    <div class="p-4 rounded-xl bg-[#FAF5FB] border border-[#F3E8F6]">
+                        <span class="text-[11px] font-semibold text-gray-500 uppercase block">Upatikanaji</span>
+                        <span class="text-base font-extrabold text-emerald-600 mt-0.5 block">{{ $plot->status_label }}</span>
+                    </div>
+                </div>
+
+                <!-- Detailed Description -->
+                <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-100 space-y-4">
+                    <h2 class="text-xl font-bold text-[#320635] border-b border-gray-100 pb-3">
+                        Maelezo ya Kina ya Kiwanja
+                    </h2>
+                    <div class="prose max-w-none text-gray-700 text-sm sm:text-base leading-relaxed">
+                        {!! nl2br(e($plot->description)) !!}
+                    </div>
+                </div>
+
+                <!-- Features & Amenities Checklist -->
+                <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-100 space-y-4">
+                    <h2 class="text-xl font-bold text-[#320635] border-b border-gray-100 pb-3">
+                        Sifa Kuu za Eneo
+                    </h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                        <div class="flex items-center space-x-2 text-gray-700">
+                            <svg class="w-5 h-5 {{ $plot->has_electricity ? 'text-emerald-500' : 'text-gray-300' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                            <span>Huduma ya Umeme: <strong>{{ $plot->has_electricity ? 'Ipo Karibu / Tayari' : 'Inakuja' }}</strong></span>
+                        </div>
+                        <div class="flex items-center space-x-2 text-gray-700">
+                            <svg class="w-5 h-5 {{ $plot->has_water ? 'text-emerald-500' : 'text-gray-300' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+                            <span>Huduma ya Maji: <strong>{{ $plot->has_water ? 'Ipo / Inafika' : 'Mradi unakaribia' }}</strong></span>
+                        </div>
+                        <div class="flex items-center space-x-2 text-gray-700">
+                            <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            <span>Barabara: <strong>{{ $plot->road_accessibility ?? 'Inafikika vizuri kwa gari' }}</strong></span>
+                        </div>
+                        <div class="flex items-center space-x-2 text-gray-700">
+                            <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            <span>Hali ya Ardhi: <strong>{{ $plot->topography ?? 'Tambarare' }}</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Map / Location Coordinates Area -->
+                <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-100 space-y-4">
+                    <h2 class="text-xl font-bold text-[#320635] border-b border-gray-100 pb-3">
+                        Ramani & Eneo Lililopo
+                    </h2>
+                    <div class="aspect-[16/9] rounded-xl overflow-hidden bg-gray-200 relative border border-gray-200">
+                        @if($plot->google_maps_embed_url)
+                            <iframe src="{{ $plot->google_maps_embed_url }}" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        @elseif($plot->latitude && $plot->longitude)
+                            <iframe src="https://maps.google.com/maps?q={{ $plot->latitude }},{{ $plot->longitude }}&hl=sw&z=14&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        @else
+                            <!-- Placeholder Map Visualizer -->
+                            <div class="w-full h-full bg-[#FAF5FB] flex flex-col items-center justify-center p-6 text-center">
+                                <svg class="w-12 h-12 text-[#4A0E4E] mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                <h4 class="font-bold text-gray-900">{{ $plot->full_location }}</h4>
+                                <p class="text-xs text-gray-500 max-w-sm mt-1">Kwa ajili ya kufika site moja kwa moja, wasiliana nasi kupanga ratiba ya ukaguzi.</p>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+
             </div>
 
-            <!-- Ownership & Documentation Highlight Box -->
-            <div class="p-6 rounded-2xl bg-[#fbf6ea] border border-[#f5e9c9] flex items-start gap-4">
-                <div class="w-12 h-12 rounded-xl bg-[#16325c] text-[#dfb256] flex items-center justify-center shrink-0 shadow-sm">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-                </div>
-                <div>
-                    <span class="text-xs font-bold uppercase tracking-wider text-[#c89a3b]">Verified Documentation Status</span>
-                    <h3 class="text-lg font-bold text-[#16325c] mt-0.5">{{ $plot->ownership_title_type }}</h3>
-                    <p class="text-xs text-slate-600 mt-1 leading-relaxed">
-                        This plot has undergone preliminary cadastral due diligence. Physical beacons have been identified and land records cross-referenced against the Arusha land registry.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Key Specifications Grid -->
-            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs">
-                <h2 class="text-lg font-extrabold text-[#16325c] mb-6 pb-3 border-b border-slate-100 flex items-center gap-2">
-                    <svg class="w-5 h-5 text-[#c89a3b]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
-                    <span>{{ __('app.property_specifications') }}</span>
-                </h2>
-
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 text-sm">
-                    <div>
-                        <span class="text-xs text-slate-400 font-medium block">{{ __('app.ref_no') }}</span>
-                        <span class="font-bold text-[#16325c] font-mono text-sm">{{ $plot->plot_reference }}</span>
-                    </div>
-
-                    <div>
-                        <span class="text-xs text-slate-400 font-medium block">Total Area Size</span>
-                        <span class="font-bold text-slate-800 text-sm">{{ $plot->formatted_size }}</span>
-                    </div>
-
-                    <div>
-                        <span class="text-xs text-slate-400 font-medium block">Dimensions</span>
-                        <span class="font-bold text-slate-800 text-sm">{{ $plot->dimension_details ?? 'As surveyed' }}</span>
-                    </div>
-
-                    <div>
-                        <span class="text-xs text-slate-400 font-medium block">Plot Zoning / Type</span>
-                        <span class="font-bold text-[#16325c] text-sm">{{ $plot->plotType?->name }}</span>
-                    </div>
-
-                    <div>
-                        <span class="text-xs text-slate-400 font-medium block">Topography / Terrain</span>
-                        <span class="font-bold text-slate-800 text-sm">{{ $plot->topography ?? 'Flat / Level Ground' }}</span>
-                    </div>
-
-                    <div>
-                        <span class="text-xs text-slate-400 font-medium block">Road Access</span>
-                        <span class="font-bold text-slate-800 text-sm">{{ $plot->road_accessibility ?? 'Murram / Paved' }}</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Infrastructure & Utilities Checklist -->
-            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs">
-                <h2 class="text-lg font-extrabold text-slate-900 mb-6 pb-3 border-b border-slate-100 flex items-center gap-2">
-                    <svg class="w-5 h-5 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                    <span>{{ __('app.infrastructure_utilities') }}</span>
-                </h2>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <!-- Electricity -->
-                    <div class="flex items-center gap-3 p-3.5 rounded-xl border {{ $plot->has_electricity ? 'bg-emerald-50/60 border-emerald-200 text-emerald-900' : 'bg-slate-50 border-slate-200 text-slate-400' }}">
-                        <div class="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm {{ $plot->has_electricity ? 'bg-emerald-600 text-white' : 'bg-slate-200 text-slate-500' }}">
-                            {{ $plot->has_electricity ? '✓' : '✕' }}
-                        </div>
-                        <div>
-                            <span class="font-bold text-xs block text-slate-900">{{ __('app.electricity_status') }}</span>
-                            <span class="text-[11px] {{ $plot->has_electricity ? 'text-emerald-700' : 'text-slate-500' }}">
-                                {{ $plot->has_electricity ? 'Available / On-Site' : 'Off-grid / Nearby' }}
-                            </span>
-                        </div>
-                    </div>
-
-                    <!-- Water -->
-                    <div class="flex items-center gap-3 p-3.5 rounded-xl border {{ $plot->has_water ? 'bg-emerald-50/60 border-emerald-200 text-emerald-900' : 'bg-slate-50 border-slate-200 text-slate-400' }}">
-                        <div class="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm {{ $plot->has_water ? 'bg-emerald-600 text-white' : 'bg-slate-200 text-slate-500' }}">
-                            {{ $plot->has_water ? '✓' : '✕' }}
-                        </div>
-                        <div>
-                            <span class="font-bold text-xs block text-slate-900">{{ __('app.water_status') }}</span>
-                            <span class="text-[11px] {{ $plot->has_water ? 'text-emerald-700' : 'text-slate-500' }}">
-                                {{ $plot->has_water ? 'AUWSA Piped Water Connected' : 'Well / Borehole required' }}
-                            </span>
-                        </div>
-                    </div>
-
-                    <!-- Internet -->
-                    <div class="flex items-center gap-3 p-3.5 rounded-xl border {{ $plot->has_internet ? 'bg-emerald-50/60 border-emerald-200 text-emerald-900' : 'bg-slate-50 border-slate-200 text-slate-400' }}">
-                        <div class="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm {{ $plot->has_internet ? 'bg-emerald-600 text-white' : 'bg-slate-200 text-slate-500' }}">
-                            {{ $plot->has_internet ? '✓' : '✕' }}
-                        </div>
-                        <div>
-                            <span class="font-bold text-xs block text-slate-900">{{ __('app.internet_status') }}</span>
-                            <span class="text-[11px] {{ $plot->has_internet ? 'text-emerald-700' : 'text-slate-500' }}">
-                                {{ $plot->has_internet ? 'Fiber & 4G/5G Coverage' : 'Standard 3G/4G coverage' }}
-                            </span>
-                        </div>
-                    </div>
-
-                    <!-- Fencing -->
-                    <div class="flex items-center gap-3 p-3.5 rounded-xl border {{ $plot->has_fence ? 'bg-emerald-50/60 border-emerald-200 text-emerald-900' : 'bg-slate-50 border-slate-200 text-slate-400' }}">
-                        <div class="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm {{ $plot->has_fence ? 'bg-emerald-600 text-white' : 'bg-slate-200 text-slate-500' }}">
-                            {{ $plot->has_fence ? '✓' : '✕' }}
-                        </div>
-                        <div>
-                            <span class="font-bold text-xs block text-slate-900">{{ __('app.fencing_status') }}</span>
-                            <span class="text-[11px] {{ $plot->has_fence ? 'text-emerald-700' : 'text-slate-500' }}">
-                                {{ $plot->has_fence ? 'Fenced / Walled Perimeter' : 'Open / Beacon Markers' }}
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Full Description -->
-            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs">
-                <h2 class="text-lg font-extrabold text-slate-900 mb-4 pb-3 border-b border-slate-100 flex items-center gap-2">
-                    <svg class="w-5 h-5 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"/></svg>
-                    <span>{{ __('app.plot_overview') }}</span>
-                </h2>
-
-                <div class="prose prose-slate max-w-none text-slate-700 text-sm leading-relaxed whitespace-pre-line">
-                    {{ $plot->description }}
-                </div>
-
-                @if($plot->nearby_landmarks)
-                    <div class="mt-6 pt-6 border-t border-slate-100">
-                        <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1.5">{{ __('app.nearby_amenities') }}</span>
-                        <p class="text-sm font-semibold text-slate-800">
-                            {{ $plot->nearby_landmarks }}
+            <!-- Right 1 Col: Sticky Desktop Contact Box -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-2xl p-6 shadow-xl border border-gray-100 sticky top-28 space-y-6">
+                    
+                    <div class="bg-pfi-gradient text-white p-5 rounded-xl space-y-2">
+                        <span class="text-xs font-semibold text-[#DFB743] uppercase tracking-wider">Mawasiliano ya Moja kwa Moja</span>
+                        <h3 class="text-lg font-bold text-white">Unahitaji Kiwanja Hiki?</h3>
+                        <p class="text-xs text-gray-200 leading-relaxed">
+                            Wasiliana na msimamizi wetu kupitia WhatsApp au simu ili kupata taarifa zote na kupanga ratiba ya kutembelea.
                         </p>
                     </div>
-                @endif
-            </div>
 
-            <!-- Location Map & Coordinates -->
-            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs">
-                <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
-                    <h2 class="text-lg font-extrabold text-slate-900 flex items-center gap-2">
-                        <svg class="w-5 h-5 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
-                        <span>{{ __('app.location_map') }}</span>
-                    </h2>
+                    <!-- Direct Actions -->
+                    <div class="space-y-3">
+                        <a 
+                            href="{{ $plot->whatsapp_inquiry_url }}" 
+                            target="_blank" 
+                            class="w-full bg-[#25D366] text-white py-3.5 px-4 rounded-xl font-bold text-sm shadow-md hover:brightness-110 active:scale-95 transition flex items-center justify-center space-x-2"
+                        >
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.53 1.777.78 2.796.78 3.181 0 5.767-2.586 5.768-5.766 0-3.18-2.587-5.766-5.768-5.766zm9.969 5.766c0 5.518-4.482 10-10 10-1.748 0-3.385-.45-4.819-1.238l-7.181 1.884 1.918-7.009c-.878-1.493-1.385-3.23-1.385-5.084 0-5.518 4.482-10 10-10s10 4.482 10 10z"/></svg>
+                            <span>💬 WASILIANA WHATSAPP</span>
+                        </a>
 
-                    @if($plot->latitude && $plot->longitude)
-                        <span class="font-mono text-xs text-slate-500 font-medium">
-                            {{ $plot->latitude }}, {{ $plot->longitude }}
-                        </span>
-                    @endif
-                </div>
-
-                <div class="rounded-xl overflow-hidden h-72 w-full bg-slate-100 border border-slate-200">
-                    @if($plot->google_maps_embed_url)
-                        <iframe src="{{ $plot->google_maps_embed_url }}" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                    @elseif($plot->latitude && $plot->longitude)
-                        <iframe src="https://maps.google.com/maps?q={{ $plot->latitude }},{{ $plot->longitude }}&z=15&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                    @else
-                        <div class="h-full flex items-center justify-center text-slate-400 text-xs">
-                            Map coordinates available during scheduled site visit.
-                        </div>
-                    @endif
-                </div>
-            </div>
-        </div>
-
-        <!-- Right Col: Sticky WhatsApp & Enquiry Action Card -->
-        <div class="lg:col-span-1">
-            <div class="sticky top-28 space-y-6">
-                <!-- Direct WhatsApp CTA Box -->
-                <div class="bg-gradient-to-br from-[#16325c] to-[#0c1c34] text-white rounded-3xl p-6 shadow-xl border border-[#c89a3b]/40">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-full bg-[#c89a3b]/20 text-[#dfb256] flex items-center justify-center ring-1 ring-[#c89a3b]/40">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.073-2.115-.515-1.748-.722-2.887-2.493-2.975-2.609-.088-.116-.708-.941-.708-1.792s.445-1.272.603-1.446c.159-.175.346-.219.462-.219.116 0 .232.001.332.006.106.005.249-.04.39.299.144.348.491 1.199.535 1.287.044.088.073.19.014.307-.058.117-.088.19-.174.292-.088.102-.185.228-.264.306-.088.087-.18.182-.078.357.102.175.454.748.974 1.211.67.595 1.235.779 1.41.867.175.088.277.073.38-.044.102-.117.438-.511.554-.686.117-.175.234-.146.394-.088.16.058 1.02.481 1.195.568.175.088.292.131.335.204.044.073.044.423-.1.828z"/></svg>
-                        </div>
-                        <div>
-                            <span class="text-xs font-bold uppercase tracking-wider text-[#dfb256]">Instant Inquiry</span>
-                            <h3 class="font-extrabold text-white text-base leading-snug">Chat with Land Desk</h3>
-                        </div>
+                        <a 
+                            href="tel:{{ $phone }}" 
+                            class="w-full bg-[#FAF5FB] hover:bg-[#F3E8F6] text-[#4A0E4E] border border-[#4A0E4E]/30 py-3.5 px-4 rounded-xl font-bold text-sm transition flex items-center justify-center space-x-2"
+                        >
+                            <svg class="w-5 h-5 text-[#4A0E4E]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                            <span>📞 PIGA SIMU</span>
+                        </a>
                     </div>
 
-                    <p class="text-xs text-slate-300 leading-relaxed mb-5">
-                        Get instant GPS coordinates, copy of survey plans, and schedule a field site visit for this plot.
-                    </p>
+                    <!-- Direct Inquiry Form -->
+                    <div class="border-t border-gray-100 pt-6 space-y-4">
+                        <h4 class="font-bold text-sm text-gray-900">Au Tuma Ombi Hapa:</h4>
+                        <form action="{{ route('enquiry.submit') }}" method="POST" class="space-y-3">
+                            @csrf
+                            <input type="hidden" name="plot_id" value="{{ $plot->id }}">
+                            <input type="hidden" name="category" value="kiwanja">
+                            
+                            <div>
+                                <input type="text" name="name" required placeholder="Jina Lako *" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 text-xs focus:ring-2 focus:ring-[#4A0E4E] focus:outline-none">
+                            </div>
+                            <div>
+                                <input type="tel" name="phone" required placeholder="Namba ya Simu *" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 text-xs focus:ring-2 focus:ring-[#4A0E4E] focus:outline-none">
+                            </div>
+                            <div>
+                                <input type="email" name="email" placeholder="Barua Pepe (Email)" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 text-xs focus:ring-2 focus:ring-[#4A0E4E] focus:outline-none">
+                            </div>
+                            <div>
+                                <textarea name="message" rows="3" required class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 text-xs focus:ring-2 focus:ring-[#4A0E4E] focus:outline-none resize-none">Habari, ninahitaji taarifa zaidi na kupanga ratiba ya kuona kiwanja hiki [{{ $plot->plot_reference }} - {{ $plot->title }}].</textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-pfi-gradient text-white py-3 rounded-xl font-bold text-xs shadow hover:brightness-110 transition">
+                                TUMA OMBI SASA
+                            </button>
+                        </form>
+                    </div>
 
-                    <!-- Pre-filled WhatsApp Button -->
-                    <a href="{{ $plot->whatsapp_inquiry_url }}" target="_blank" rel="noopener" class="w-full py-3.5 px-4 rounded-xl bg-[#c89a3b] hover:bg-[#dfb256] text-[#0c1c34] font-extrabold text-sm shadow-lg shadow-[#c89a3b]/20 transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
-                        <svg class="w-5 h-5 text-[#0c1c34]" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.073-2.115-.515-1.748-.722-2.887-2.493-2.975-2.609-.088-.116-.708-.941-.708-1.792s.445-1.272.603-1.446c.159-.175.346-.219.462-.219.116 0 .232.001.332.006.106.005.249-.04.39.299.144.348.491 1.199.535 1.287.044.088.073.19.014.307-.058.117-.088.19-.174.292-.088.102-.185.228-.264.306-.088.087-.18.182-.078.357.102.175.454.748.974 1.211.67.595 1.235.779 1.41.867.175.088.277.073.38-.044.102-.117.438-.511.554-.686.117-.175.234-.146.394-.088.16.058 1.02.481 1.195.568.175.088.292.131.335.204.044.073.044.423-.1.828z"/></svg>
-                        <span>{{ __('app.enquire_about_plot') }}</span>
-                    </a>
-
-                    <!-- Direct Call Button -->
-                    <a href="tel:{{ $sitePhone ?? '+255742448965' }}" class="mt-3 w-full py-2.5 px-4 rounded-xl bg-[#0c1c34]/80 hover:bg-[#0c1c34] text-white font-semibold text-xs border border-[#c89a3b]/40 transition flex items-center justify-center gap-2">
-                        <svg class="w-4 h-4 text-[#dfb256]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                        <span>Call {{ $sitePhone ?? '+255 742 448 965' }}</span>
-                    </a>
-                </div>
-
-                <!-- Written Enquiry Form -->
-                <div class="bg-white rounded-3xl border border-slate-200 p-6 shadow-xs">
-                    <h3 class="font-extrabold text-base text-slate-900 mb-4 pb-2 border-b border-slate-100">
-                        {{ __('app.schedule_visit') }}
-                    </h3>
-
-                    <form action="{{ route('enquiry.submit') }}" method="POST" class="space-y-4">
-                        @csrf
-                        <input type="hidden" name="plot_id" value="{{ $plot->id }}">
-
-                        <div>
-                            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">
-                                {{ __('app.form_full_name') }} *
-                            </label>
-                            <input type="text" name="name" required placeholder="e.g. John Lyimo" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-xs text-slate-800 focus:ring-2 focus:ring-emerald-600">
-                        </div>
-
-                        <div>
-                            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">
-                                {{ __('app.form_phone') }} *
-                            </label>
-                            <input type="text" name="phone" required placeholder="e.g. +255 742 000 000" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-xs text-slate-800 focus:ring-2 focus:ring-emerald-600">
-                        </div>
-
-                        <div>
-                            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">
-                                {{ __('app.form_email') }}
-                            </label>
-                            <input type="email" name="email" placeholder="e.g. john@example.com" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-xs text-slate-800 focus:ring-2 focus:ring-emerald-600">
-                        </div>
-
-                        <div>
-                            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">
-                                {{ __('app.form_preferred_contact') }}
-                            </label>
-                            <select name="preferred_contact_method" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-xs text-slate-800 focus:ring-2 focus:ring-emerald-600">
-                                <option value="whatsapp">WhatsApp</option>
-                                <option value="phone">Direct Phone Call</option>
-                                <option value="email">Email</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">
-                                {{ __('app.form_message') }} *
-                            </label>
-                            <textarea name="message" rows="3" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-xs text-slate-800 focus:ring-2 focus:ring-emerald-600">Hello, I would like to schedule a site inspection for Plot REF: {{ $plot->plot_reference }} in {{ $plot->location?->area_name }}.</textarea>
-                        </div>
-
-                        <button type="submit" class="w-full py-3 rounded-xl bg-slate-900 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider transition shadow-sm">
-                            {{ __('app.form_submit') }}
-                        </button>
-                    </form>
                 </div>
             </div>
+
         </div>
+
     </div>
 
-    <!-- Related Plots in Arusha -->
-    @if($relatedPlots->count() > 0)
-        <div class="mt-20 pt-12 border-t border-slate-200">
-            <div class="flex items-center justify-between mb-8">
-                <div>
-                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-700">Similar Opportunities</span>
-                    <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight">{{ __('app.related_plots') }}</h2>
-                </div>
-                <a href="{{ route('plots.index') }}" class="text-xs font-bold text-emerald-700 hover:text-emerald-800">
-                    View All Plots →
-                </a>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                @foreach($relatedPlots as $relPlot)
-                    <x-plot-card :plot="$relPlot" />
-                @endforeach
-            </div>
-        </div>
-    @endif
+    <!-- Fullscreen Lightbox Modal -->
+    <div x-show="lightboxOpen" x-transition class="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4">
+        <button @click="lightboxOpen = false" class="absolute top-6 right-6 text-white text-3xl font-bold hover:text-[#DFB743] transition">✕</button>
+        <img :src="activeImage" class="max-w-full max-h-[90vh] object-contain rounded-xl">
+    </div>
 </div>
+
+<!-- Mobile Sticky Bottom Conversion Bar -->
+<div class="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-gray-200 p-3 flex items-center space-x-3 shadow-2xl">
+    <a 
+        href="{{ $plot->whatsapp_inquiry_url }}" 
+        target="_blank" 
+        class="flex-1 bg-[#25D366] text-white py-3 rounded-xl font-bold text-xs flex items-center justify-center space-x-1 shadow"
+    >
+        <span>💬 WHATSAPP</span>
+    </a>
+    <a 
+        href="tel:{{ $phone }}" 
+        class="flex-1 bg-pfi-gradient text-white py-3 rounded-xl font-bold text-xs flex items-center justify-center space-x-1 shadow"
+    >
+        <span>📞 PIGA SIMU</span>
+    </a>
+</div>
+
 @endsection

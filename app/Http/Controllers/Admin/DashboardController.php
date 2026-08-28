@@ -5,48 +5,48 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Enquiry;
+use App\Models\GalleryItem;
+use App\Models\House;
 use App\Models\Location;
 use App\Models\Plot;
-use App\Models\PlotType;
-use App\Models\Project;
-use Illuminate\View\View;
+use App\Models\Vehicle;
 
 class DashboardController extends Controller
 {
-    public function index(): View
+    public function index()
     {
         $stats = [
-            'total_projects' => Project::count(),
-            'completed_projects' => Project::where('project_status', 'completed')->count(),
             'total_plots' => Plot::count(),
             'available_plots' => Plot::where('listing_status', 'available')->count(),
-            'reserved_plots' => Plot::where('listing_status', 'reserved')->count(),
             'sold_plots' => Plot::where('listing_status', 'sold')->count(),
-            'featured_plots' => Plot::where('is_featured', true)->count(),
-            'total_enquiries' => Enquiry::count(),
-            'new_enquiries' => Enquiry::where('status', 'new')->count(),
+
+            'total_houses' => House::count(),
+            'available_houses' => House::where('listing_status', 'available')->count(),
+            'sold_houses' => House::where('listing_status', 'sold')->count(),
+
+            'total_vehicles' => Vehicle::count(),
+            'available_vehicles' => Vehicle::where('listing_status', 'available')->count(),
+            'sold_vehicles' => Vehicle::where('listing_status', 'sold')->count(),
+
             'total_locations' => Location::count(),
             'total_articles' => Article::count(),
+            'total_gallery' => GalleryItem::count(),
+
+            'total_enquiries' => Enquiry::count(),
+            'new_enquiries' => Enquiry::where('status', 'new')->count(),
         ];
 
-        $recentProjects = Project::latest()
-            ->take(4)
-            ->get();
+        $recentEnquiries = Enquiry::latest()->take(6)->get();
+        $recentPlots = Plot::with('location')->latest()->take(5)->get();
+        $recentHouses = House::with('location')->latest()->take(5)->get();
+        $recentVehicles = Vehicle::latest()->take(5)->get();
 
-        $recentPlots = Plot::with(['plotType', 'location'])
-            ->latest()
-            ->take(4)
-            ->get();
-
-        $recentEnquiries = Enquiry::with(['plot', 'project'])
-            ->latest()
-            ->take(5)
-            ->get();
-
-        $recentArticles = Article::latest('published_at')
-            ->take(4)
-            ->get();
-
-        return view('admin.dashboard', compact('stats', 'recentProjects', 'recentPlots', 'recentEnquiries', 'recentArticles'));
+        return view('admin.dashboard', compact(
+            'stats',
+            'recentEnquiries',
+            'recentPlots',
+            'recentHouses',
+            'recentVehicles'
+        ));
     }
 }

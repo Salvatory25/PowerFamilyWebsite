@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\Enquiry;
+use App\Models\House;
 use App\Models\Plot;
-use App\Models\Project;
-use App\Http\Controllers\ServiceController;
+use App\Models\Vehicle;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -14,70 +15,35 @@ class PageController extends Controller
 {
     public function about(): View
     {
-        $services = ServiceController::getServicesList();
-        $projectsCount = 120;
-        $plotsCount = 450;
-
-        try {
-            $projectsCount = Project::published()->count();
-            $plotsCount = Plot::published()->count();
-        } catch (\Throwable $e) {
-            // DB offline fallback
-        }
-
-        return view('public.pages.about', compact('services', 'projectsCount', 'plotsCount'));
+        return view('public.pages.about');
     }
 
     public function contact(): View
     {
-        $services = ServiceController::getServicesList();
-        return view('public.pages.contact', compact('services'));
+        return view('public.pages.contact');
+    }
+
+    public function privacy(): View
+    {
+        return view('public.pages.privacy');
+    }
+
+    public function terms(): View
+    {
+        return view('public.pages.terms');
     }
 
     public function insights(): View
     {
-        $articles = collect();
-
-        try {
-            $articles = \App\Models\Article::latest('published_at')->paginate(9);
-        } catch (\Throwable $e) {
-            // DB offline fallback
-        }
-
+        $articles = Article::where('is_published', true)->latest('published_at')->paginate(9);
         return view('public.pages.insights', compact('articles'));
     }
 
     public function showArticle($slug): View
     {
-        try {
-            $article = \App\Models\Article::where('slug', $slug)->firstOrFail();
-            return view('public.pages.article', compact('article'));
-        } catch (\Throwable $e) {
-            abort(404);
-        }
-    }
-
-    public function trackStatus(): View
-    {
-        return view('public.pages.track');
-    }
-
-    public function checkStatus(Request $request)
-    {
-        $validated = $request->validate([
-            'tracking_reference' => 'required|string|max:50',
-            'phone' => 'required|string|max:50',
-        ]);
-
-        $enquiry = Enquiry::where('tracking_reference', $validated['tracking_reference'])
-            ->where('phone', $validated['phone'])
-            ->first();
-
-        if (!$enquiry) {
-            return back()->with('error', 'Hakuna taarifa zilizopatikana. Tafadhali hakiki namba yako ya kumbukumbu na namba ya simu. / No record found. Please verify your tracking reference and phone number.');
-        }
-
-        return view('public.pages.track', compact('enquiry'));
+        $article = Article::where('slug', $slug)->firstOrFail();
+        $recentArticles = Article::where('id', '!=', $article->id)->where('is_published', true)->take(3)->get();
+        return view('public.pages.article', compact('article', 'recentArticles'));
     }
 
     public function submitEnquiry(Request $request): RedirectResponse
@@ -86,28 +52,34 @@ class PageController extends Controller
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:50',
             'email' => 'nullable|email|max:255',
+            'category' => 'nullable|string|max:50',
             'plot_id' => 'nullable|exists:plots,id',
-            'project_id' => 'nullable|exists:projects,id',
-            'service_type' => 'nullable|string|max:255',
-            'preferred_contact_method' => 'required|in:whatsapp,phone,email',
+            'house_id' => 'nullable|exists:houses,id',
+            'vehicle_id' => 'nullable|exists:vehicles,id',
+            'preferred_contact_method' => 'nullable|string',
             'message' => 'required|string|max:3000',
         ]);
         
-        $trackingRef = 'REQ-' . strtoupper(substr(uniqid(), -6));
+        $trackingRef = 'PFI-' . strtoupper(substr(uniqid(), -6));
 
         Enquiry::create([
             'tracking_reference' => $trackingRef,
             'name' => $validated['name'],
             'phone' => $validated['phone'],
             'email' => $validated['email'] ?? null,
+            'category' => $validated['category'] ?? 'kiwanja',
             'plot_id' => $validated['plot_id'] ?? null,
-            'project_id' => $validated['project_id'] ?? null,
-            'service_type' => $validated['service_type'] ?? null,
-            'preferred_contact_method' => $validated['preferred_contact_method'],
+            'house_id' => $validated['house_id'] ?? null,
+            'vehicle_id' => $validated['vehicle_id'] ?? null,
+            'preferred_contact_method' => $validated['preferred_contact_method'] ?? 'whatsapp',
             'message' => $validated['message'],
             'status' => 'new',
         ]);
 
-        return redirect()->back()->with('success', __('app.form_success') . ' Namba yako ya kumbukumbu ni / Your tracking reference is: ' . $trackingRef);
+        $msg = app()->getLocale() === 'en'
+            ? "Thank you! Your inquiry has been received. Reference: {$trackingRef}. We will contact you shortly."
+            : "Asante! Ujumbe wako umepokelewa kikamilifu. Namba ya Kumbukumbu: {$trackingRef}. Tutawasiliana nawe hivi punde.";
+
+        return redirect()->back()->with('success', $msg);
     }
 }

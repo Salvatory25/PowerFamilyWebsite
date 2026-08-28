@@ -38,9 +38,30 @@ class Location extends Model
         return $this->hasMany(Plot::class)->where('is_published', true)->where('listing_status', 'available');
     }
 
+    public function houses(): HasMany
+    {
+        return $this->hasMany(House::class);
+    }
+
+    public function availableHouses(): HasMany
+    {
+        return $this->hasMany(House::class)->where('is_published', true)->where('listing_status', 'available');
+    }
+
     public function getDisplayNameAttribute(): string
     {
         return "{$this->area_name}, {$this->district}";
+    }
+
+    public function getImageUrlAttribute(): string
+    {
+        if ($this->featured_image) {
+            if (str_starts_with($this->featured_image, 'http')) {
+                return $this->featured_image;
+            }
+            return asset('storage/' . $this->featured_image);
+        }
+        return 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80';
     }
 
     protected static function boot()
