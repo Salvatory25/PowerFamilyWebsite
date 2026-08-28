@@ -217,49 +217,6 @@
                 </a>
             </div>
         </div>
-    </header>">
-            <a href="{{ route('home') }}" class="block px-3 py-2 rounded-lg text-sm font-semibold {{ request()->routeIs('home') ? 'bg-[#fbf6ea] text-[#16325c]' : 'text-slate-700 hover:bg-slate-50' }}">
-                {{ __('app.nav_home') }}
-            </a>
-            <a href="{{ route('pages.about') }}" class="block px-3 py-2 rounded-lg text-sm font-semibold {{ request()->routeIs('pages.about') ? 'bg-[#fbf6ea] text-[#16325c]' : 'text-slate-700 hover:bg-slate-50' }}">
-                {{ __('app.nav_about') }}
-            </a>
-            <div class="py-1">
-                <a href="{{ route('pages.services') }}" class="block px-3 py-2 rounded-lg text-sm font-bold text-[#16325c] bg-slate-50">
-                    {{ __('app.nav_services') }}
-                </a>
-                <div class="pl-4 space-y-1 mt-1 border-l-2 border-[#c89a3b]/40 ml-3">
-                    <a href="{{ route('services.show', 'land-surveying') }}" class="block px-2 py-1.5 text-xs text-slate-600 hover:text-[#16325c]">{{ app()->getLocale() === 'sw' ? '1. Upimaji wa Ardhi' : '1. Land Surveying' }}</a>
-                    <a href="{{ route('services.show', 'land-formalization') }}" class="block px-2 py-1.5 text-xs text-slate-600 hover:text-[#16325c]">{{ app()->getLocale() === 'sw' ? '2. Urasimishaji' : '2. Land Formalization' }}</a>
-                    <a href="{{ route('services.show', 'plot-subdivision') }}" class="block px-2 py-1.5 text-xs text-slate-600 hover:text-[#16325c]">{{ app()->getLocale() === 'sw' ? '3. Ugawaji wa Viwanja' : '3. Plot Subdivision' }}</a>
-                    <a href="{{ route('services.show', 'boundary-demarcation') }}" class="block px-2 py-1.5 text-xs text-slate-600 hover:text-[#16325c]">{{ app()->getLocale() === 'sw' ? '4. Uhakiki wa Mipaka' : '4. Boundary Demarcation' }}</a>
-                    <a href="{{ route('services.show', 'land-consultation') }}" class="block px-2 py-1.5 text-xs text-slate-600 hover:text-[#16325c]">{{ app()->getLocale() === 'sw' ? '5. Ushauri wa Ardhi' : '5. Land Consultation' }}</a>
-                    <a href="{{ route('services.show', 'plot-sales') }}" class="block px-2 py-1.5 text-xs text-slate-600 hover:text-[#16325c]">{{ app()->getLocale() === 'sw' ? '6. Uuzaji wa Viwanja' : '6. Plot Sales' }}</a>
-                </div>
-            </div>
-            <a href="{{ route('projects.index') }}" class="block px-3 py-2 rounded-lg text-sm font-semibold {{ request()->routeIs('projects.*') ? 'bg-[#fbf6ea] text-[#16325c]' : 'text-slate-700 hover:bg-slate-50' }}">
-                {{ __('app.nav_projects') }}
-            </a>
-            <a href="{{ route('plots.index') }}" class="block px-3 py-2 rounded-lg text-sm font-semibold {{ request()->routeIs('plots.*') ? 'bg-[#fbf6ea] text-[#16325c]' : 'text-slate-700 hover:bg-slate-50' }}">
-                {{ __('app.nav_plots') }}
-            </a>
-            <a href="{{ route('locations.index') }}" class="block px-3 py-2 rounded-lg text-sm font-semibold {{ request()->routeIs('locations.*') ? 'bg-[#fbf6ea] text-[#16325c]' : 'text-slate-700 hover:bg-slate-50' }}">
-                {{ __('app.nav_locations') }}
-            </a>
-            <a href="{{ route('pages.insights') }}" class="block px-3 py-2 rounded-lg text-sm font-semibold {{ request()->routeIs('pages.insights') ? 'bg-[#fbf6ea] text-[#16325c]' : 'text-slate-700 hover:bg-slate-50' }}">
-                {{ __('app.nav_insights') }}
-            </a>
-            <a href="{{ route('pages.contact') }}" class="block px-3 py-2 rounded-lg text-sm font-semibold {{ request()->routeIs('pages.contact') ? 'bg-[#fbf6ea] text-[#16325c]' : 'text-slate-700 hover:bg-slate-50' }}">
-                {{ __('app.nav_contact') }}
-            </a>
-
-            <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
-                <a href="https://wa.me/{{ $siteWhatsappClean ?? '255742448965' }}?text={{ rawurlencode($headerWaMsg) }}" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-[#16325c] text-white font-bold text-xs">
-                    <svg class="w-4 h-4 text-[#dfb256]" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.073-2.115-.515-1.748-.722-2.887-2.493-2.975-2.609-.088-.116-.708-.941-.708-1.792s.445-1.272.603-1.446c.159-.175.346-.219.462-.219.116 0 .232.001.332.006.106.005.249-.04.39.299.144.348.491 1.199.535 1.287.044.088.073.19.014.307-.058.117-.088.19-.174.292-.088.102-.185.228-.264.306-.088.087-.18.182-.078.357.102.175.454.748.974 1.211.67.595 1.235.779 1.41.867.175.088.277.073.38-.044.102-.117.438-.511.554-.686.117-.175.234-.146.394-.088.16.058 1.02.481 1.195.568.175.088.292.131.335.204.044.073.044.423-.1.828z"/></svg>
-                    <span>{{ __('app.talk_to_us') }}</span>
-                </a>
-            </div>
-        </div>
     </header>
 
     <!-- Flash Alert Messages -->
