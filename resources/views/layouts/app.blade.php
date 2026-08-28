@@ -34,29 +34,34 @@
 </head>
 <body class="flex flex-col min-h-screen bg-slate-50 text-slate-900 font-sans antialiased selection:bg-[#c89a3b] selection:text-[#0c1c34]">
 
-    <!-- Main Navigation Header (Clean, Premium, Integrated) -->
+    <!-- Main Navigation Header (Fully Responsive Mobile & Desktop) -->
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
-        <div class="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20 gap-4">
+        <div class="w-full max-w-[1720px] mx-auto px-3 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-18 sm:h-20 gap-2 sm:gap-4">
                 
-                <!-- Brand Logo & Integrated Slogan -->
-                <a href="{{ route('home') }}" class="flex items-center gap-3 shrink-0 group">
-                    <img src="{{ asset('images/logo.png') }}" alt="RELAND Logo" class="h-10 sm:h-11 w-auto object-contain drop-shadow-xs group-hover:scale-105 transition transform">
-                    <div class="flex flex-col">
-                        <div class="flex items-center gap-2">
-                            <span class="font-extrabold text-xl sm:text-2xl tracking-tight text-[#16325c] leading-none">RE<span class="text-[#c89a3b]">LAND</span></span>
-                            <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full bg-[#c89a3b]/15 text-[#c89a3b] text-[10px] font-extrabold tracking-wide border border-[#c89a3b]/30">
-                                Arusha, Tanzania
+                <!-- Brand Logo & Responsive Slogan -->
+                <a href="{{ route('home') }}" class="flex items-center gap-2.5 sm:gap-3 shrink-0 group min-w-0">
+                    <img src="{{ asset('images/logo.png') }}" alt="RELAND Logo" class="h-9 sm:h-11 w-auto object-contain drop-shadow-xs group-hover:scale-105 transition transform shrink-0">
+                    <div class="flex flex-col min-w-0">
+                        <div class="flex items-center gap-1.5 sm:gap-2">
+                            <span class="font-extrabold text-lg sm:text-2xl tracking-tight text-[#16325c] leading-none">RE<span class="text-[#c89a3b]">LAND</span></span>
+                            <span class="inline-flex items-center px-1.5 sm:px-2 py-0.5 rounded-full bg-[#c89a3b]/15 text-[#c89a3b] text-[9px] sm:text-[10px] font-extrabold tracking-wide border border-[#c89a3b]/30 whitespace-nowrap">
+                                Arusha, TZ
                             </span>
                         </div>
-                        <span class="text-[9px] sm:text-[10px] font-bold text-slate-500 mt-0.5 tracking-tight whitespace-nowrap">
+                        <!-- Desktop Slogan -->
+                        <span class="hidden md:block text-[9px] sm:text-[10px] font-bold text-slate-500 mt-0.5 tracking-tight whitespace-nowrap">
                             "Ardhi Yako Mtaji Wako" &bull; Upimaji &bull; Mipango Miji &bull; Hati Miliki
+                        </span>
+                        <!-- Mobile Slogan -->
+                        <span class="block md:hidden text-[9px] font-semibold text-slate-500 truncate max-w-[150px] xs:max-w-[200px]">
+                            Upimaji &bull; Hati Miliki
                         </span>
                     </div>
                 </a>
 
-                <!-- Desktop Navigation Links -->
-                <nav class="hidden xl:flex items-center gap-1 xl:gap-2 2xl:gap-3 text-[13px] font-semibold text-slate-700">
+                <!-- Desktop Navigation Links (Visible on LG & above) -->
+                <nav class="hidden lg:flex items-center gap-1 xl:gap-2.5 2xl:gap-3 text-xs xl:text-sm font-semibold text-slate-700">
                     <a href="{{ route('home') }}" class="px-2.5 py-1.5 rounded-lg whitespace-nowrap transition-colors hover:text-[#16325c] hover:bg-slate-100/60 {{ request()->routeIs('home') ? 'text-[#16325c] font-bold bg-[#fbf6ea]' : '' }}">
                         {{ __('app.nav_home') }}
                     </a>
@@ -65,7 +70,7 @@
                         {{ __('app.nav_about') }}
                     </a>
 
-                    <!-- Services Mega/Dropdown Link -->
+                    <!-- Services Dropdown Link -->
                     <div class="relative group py-1.5">
                         <a href="{{ route('pages.services') }}" class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg whitespace-nowrap transition-colors hover:text-[#16325c] hover:bg-slate-100/60 {{ request()->routeIs('pages.services') || request()->routeIs('services.*') ? 'text-[#16325c] font-bold bg-[#fbf6ea]' : '' }}">
                             <span>{{ __('app.nav_services') }}</span>
@@ -125,13 +130,14 @@
                     </a>
                 </nav>
 
-                <!-- Header Actions (Direct Phone + Language Switcher + CTA) -->
-                <div class="hidden lg:flex items-center gap-3 shrink-0">
+                <!-- Desktop Header Actions (Direct Phone + Language Switcher + CTA) -->
+                <div class="hidden lg:flex items-center gap-2 xl:gap-3 shrink-0">
                     
                     <!-- Direct Phone Link -->
-                    <a href="tel:{{ $sitePhone ?? '+255742448965' }}" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold text-[#16325c] hover:bg-slate-100 border border-slate-200 transition">
+                    <a href="tel:{{ $sitePhone ?? '+255742448965' }}" class="inline-flex items-center gap-1.5 px-2.5 xl:px-3 py-2 rounded-xl text-xs font-bold text-[#16325c] hover:bg-slate-100 border border-slate-200 transition">
                         <svg class="w-3.5 h-3.5 text-[#c89a3b]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                        <span>{{ $sitePhone ?? '+255 742 448 965' }}</span>
+                        <span class="hidden xl:inline">{{ $sitePhone ?? '+255 742 448 965' }}</span>
+                        <span class="inline xl:hidden font-mono text-[11px]">+255 742...</span>
                     </a>
 
                     <!-- Language Switcher in Header -->
@@ -144,74 +150,108 @@
                     @php
                         $headerWaMsg = 'Hello RELAND Arusha, I would like to consult on land surveying and formalization services.';
                     @endphp
-                    <a href="https://wa.me/{{ $siteWhatsappClean ?? '255742448965' }}?text={{ rawurlencode($headerWaMsg) }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-3.5 xl:px-4 py-2.5 rounded-xl bg-[#16325c] hover:bg-[#0c1c34] text-white text-xs font-bold shadow-md shadow-[#16325c]/20 hover:shadow-lg transition transform hover:-translate-y-0.5 border border-[#c89a3b]/40 whitespace-nowrap">
+                    <a href="https://wa.me/{{ $siteWhatsappClean ?? '255742448965' }}?text={{ rawurlencode($headerWaMsg) }}" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 xl:gap-2 px-3 xl:px-4 py-2.5 rounded-xl bg-[#16325c] hover:bg-[#0c1c34] text-white text-xs font-bold shadow-md shadow-[#16325c]/20 hover:shadow-lg transition transform hover:-translate-y-0.5 border border-[#c89a3b]/40 whitespace-nowrap">
                         <svg class="w-4 h-4 text-[#dfb256]" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.073-2.115-.515-1.748-.722-2.887-2.493-2.975-2.609-.088-.116-.708-.941-.708-1.792s.445-1.272.603-1.446c.159-.175.346-.219.462-.219.116 0 .232.001.332.006.106.005.249-.04.39.299.144.348.491 1.199.535 1.287.044.088.073.19.014.307-.058.117-.088.19-.174.292-.088.102-.185.228-.264.306-.088.087-.18.182-.078.357.102.175.454.748.974 1.211.67.595 1.235.779 1.41.867.175.088.277.073.38-.044.102-.117.438-.511.554-.686.117-.175.234-.146.394-.088.16.058 1.02.481 1.195.568.175.088.292.131.335.204.044.073.044.423-.1.828z"/></svg>
                         <span>{{ __('app.talk_to_us') }}</span>
                     </a>
                 </div>
 
-                <!-- Mobile Right Action (Language Switcher + Mobile Menu Button) -->
-                <div class="flex items-center gap-2 lg:hidden">
-                    <div class="flex items-center gap-1 font-medium bg-slate-100 px-2 py-1 rounded-lg border border-slate-200 text-xs">
+                <!-- Mobile Header Right Actions (Language Switcher + Mobile Menu Button) -->
+                <div class="flex items-center gap-1.5 sm:gap-2 lg:hidden shrink-0">
+                    <!-- Mobile Direct Phone Tap Icon -->
+                    <a href="tel:{{ $sitePhone ?? '+255742448965' }}" class="p-2 rounded-xl text-[#16325c] bg-slate-100 hover:bg-[#c89a3b]/20 border border-slate-200 transition" aria-label="Call Us">
+                        <svg class="w-4 h-4 text-[#c89a3b]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                    </a>
+
+                    <!-- Mobile Language Switcher -->
+                    <div class="flex items-center gap-0.5 font-medium bg-slate-100 px-1.5 py-1 rounded-lg border border-slate-200 text-[11px]">
                         <a href="{{ route('lang.switch', 'en') }}" class="px-1.5 py-0.5 rounded font-bold {{ app()->getLocale() === 'en' ? 'bg-[#c89a3b] text-[#0c1c34]' : 'text-slate-500' }}">EN</a>
                         <span class="text-slate-300">|</span>
                         <a href="{{ route('lang.switch', 'sw') }}" class="px-1.5 py-0.5 rounded font-bold {{ app()->getLocale() === 'sw' ? 'bg-[#c89a3b] text-[#0c1c34]' : 'text-slate-500' }}">SW</a>
                     </div>
 
-                    <button type="button" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="p-2.5 rounded-xl text-slate-700 hover:text-[#16325c] hover:bg-slate-100 focus:outline-hidden" aria-label="Toggle navigation">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    <!-- Hamburger Button -->
+                    <button type="button" 
+                            onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" 
+                            class="p-2 rounded-xl text-slate-700 hover:text-[#16325c] bg-slate-100 hover:bg-slate-200/80 border border-slate-200 focus:outline-hidden transition" 
+                            aria-label="Toggle navigation">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Mobile Drawer Menu -->
-        <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-6 space-y-1 shadow-lg max-h-[85vh] overflow-y-auto">
-            <div class="pb-2 mb-2 border-b border-slate-100 flex items-center justify-between">
-                <a href="tel:{{ $sitePhone ?? '+255742448965' }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-[#16325c]">
-                    <svg class="w-3.5 h-3.5 text-[#c89a3b]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+        <!-- Mobile Drawer Menu (Slide-out Dropdown) -->
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-200 bg-white/98 backdrop-blur-lg px-4 pt-3 pb-6 space-y-1 shadow-2xl max-h-[85vh] overflow-y-auto animate-fadeIn">
+            <!-- Mobile Quick Header Info -->
+            <div class="pb-3 mb-2 border-b border-slate-100 flex items-center justify-between">
+                <a href="tel:{{ $sitePhone ?? '+255742448965' }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-[#16325c] hover:text-[#c89a3b] transition">
+                    <svg class="w-4 h-4 text-[#c89a3b]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                     <span>{{ $sitePhone ?? '+255 742 448 965' }}</span>
                 </a>
-                <span class="text-[10px] font-bold text-[#c89a3b] uppercase">Arusha, TZ</span>
+                <span class="text-[10px] font-extrabold text-[#c89a3b] uppercase tracking-wide bg-[#c89a3b]/10 px-2 py-0.5 rounded-md">Arusha, Tanzania</span>
             </div>
 
-            <a href="{{ route('home') }}" class="block px-3 py-2 rounded-lg text-sm font-semibold {{ request()->routeIs('home') ? 'bg-[#fbf6ea] text-[#16325c]' : 'text-slate-700 hover:bg-slate-50' }}">
-                {{ __('app.nav_home') }}
+            <!-- Navigation Links -->
+            <a href="{{ route('home') }}" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-bold {{ request()->routeIs('home') ? 'bg-[#fbf6ea] text-[#16325c]' : 'text-slate-700 hover:bg-slate-50' }}">
+                <span>{{ __('app.nav_home') }}</span>
+                @if(request()->routeIs('home')) <span class="w-1.5 h-1.5 rounded-full bg-[#c89a3b]"></span> @endif
             </a>
-            <a href="{{ route('pages.about') }}" class="block px-3 py-2 rounded-lg text-sm font-semibold {{ request()->routeIs('pages.about') ? 'bg-[#fbf6ea] text-[#16325c]' : 'text-slate-700 hover:bg-slate-50' }}">
-                {{ __('app.nav_about') }}
+            <a href="{{ route('pages.about') }}" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold {{ request()->routeIs('pages.about') ? 'bg-[#fbf6ea] text-[#16325c] font-bold' : 'text-slate-700 hover:bg-slate-50' }}">
+                <span>{{ __('app.nav_about') }}</span>
+                @if(request()->routeIs('pages.about')) <span class="w-1.5 h-1.5 rounded-full bg-[#c89a3b]"></span> @endif
             </a>
+            
+            <!-- Services Section in Mobile Menu -->
             <div class="py-1">
-                <a href="{{ route('pages.services') }}" class="block px-3 py-2 rounded-lg text-sm font-bold text-[#16325c] bg-slate-50">
-                    {{ __('app.nav_services') }}
+                <a href="{{ route('pages.services') }}" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-bold text-[#16325c] bg-slate-50/80 border border-slate-100">
+                    <span>{{ __('app.nav_services') }}</span>
+                    <svg class="w-4 h-4 text-[#c89a3b]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                 </a>
-                <div class="pl-4 space-y-1 mt-1 border-l-2 border-[#c89a3b]/40 ml-3">
-                    <a href="{{ route('services.show', 'land-surveying') }}" class="block px-2 py-1.5 text-xs text-slate-600 hover:text-[#16325c]">{{ app()->getLocale() === 'sw' ? '1. Upimaji wa Ardhi' : '1. Land Surveying' }}</a>
-                    <a href="{{ route('services.show', 'land-formalization') }}" class="block px-2 py-1.5 text-xs text-slate-600 hover:text-[#16325c]">{{ app()->getLocale() === 'sw' ? '2. Urasimishaji' : '2. Land Formalization' }}</a>
-                    <a href="{{ route('services.show', 'plot-subdivision') }}" class="block px-2 py-1.5 text-xs text-slate-600 hover:text-[#16325c]">{{ app()->getLocale() === 'sw' ? '3. Ugawaji wa Viwanja' : '3. Plot Subdivision' }}</a>
-                    <a href="{{ route('services.show', 'boundary-demarcation') }}" class="block px-2 py-1.5 text-xs text-slate-600 hover:text-[#16325c]">{{ app()->getLocale() === 'sw' ? '4. Uhakiki wa Mipaka' : '4. Boundary Demarcation' }}</a>
-                    <a href="{{ route('services.show', 'land-consultation') }}" class="block px-2 py-1.5 text-xs text-slate-600 hover:text-[#16325c]">{{ app()->getLocale() === 'sw' ? '5. Ushauri wa Ardhi' : '5. Land Consultation' }}</a>
-                    <a href="{{ route('services.show', 'plot-sales') }}" class="block px-2 py-1.5 text-xs text-slate-600 hover:text-[#16325c]">{{ app()->getLocale() === 'sw' ? '6. Uuzaji wa Viwanja' : '6. Plot Sales' }}</a>
+                <div class="pl-3 space-y-1 mt-1.5 border-l-2 border-[#c89a3b]/40 ml-3">
+                    <a href="{{ route('services.show', 'land-surveying') }}" class="block px-2.5 py-1.5 text-xs text-slate-600 hover:text-[#16325c] hover:bg-slate-50 rounded-lg">{{ app()->getLocale() === 'sw' ? '1. Upimaji wa Ardhi' : '1. Land Surveying' }}</a>
+                    <a href="{{ route('services.show', 'land-formalization') }}" class="block px-2.5 py-1.5 text-xs text-slate-600 hover:text-[#16325c] hover:bg-slate-50 rounded-lg">{{ app()->getLocale() === 'sw' ? '2. Urasimishaji' : '2. Land Formalization' }}</a>
+                    <a href="{{ route('services.show', 'plot-subdivision') }}" class="block px-2.5 py-1.5 text-xs text-slate-600 hover:text-[#16325c] hover:bg-slate-50 rounded-lg">{{ app()->getLocale() === 'sw' ? '3. Ugawaji wa Viwanja' : '3. Plot Subdivision' }}</a>
+                    <a href="{{ route('services.show', 'boundary-demarcation') }}" class="block px-2.5 py-1.5 text-xs text-slate-600 hover:text-[#16325c] hover:bg-slate-50 rounded-lg">{{ app()->getLocale() === 'sw' ? '4. Uhakiki wa Mipaka' : '4. Boundary Demarcation' }}</a>
+                    <a href="{{ route('services.show', 'land-consultation') }}" class="block px-2.5 py-1.5 text-xs text-slate-600 hover:text-[#16325c] hover:bg-slate-50 rounded-lg">{{ app()->getLocale() === 'sw' ? '5. Ushauri wa Ardhi' : '5. Land Consultation' }}</a>
+                    <a href="{{ route('services.show', 'plot-sales') }}" class="block px-2.5 py-1.5 text-xs text-slate-600 hover:text-[#16325c] hover:bg-slate-50 rounded-lg">{{ app()->getLocale() === 'sw' ? '6. Uuzaji wa Viwanja' : '6. Plot Sales' }}</a>
                 </div>
             </div>
-            <a href="{{ route('projects.index') }}" class="block px-3 py-2 rounded-lg text-sm font-semibold {{ request()->routeIs('projects.*') ? 'bg-[#fbf6ea] text-[#16325c]' : 'text-slate-700 hover:bg-slate-50' }}">
-                {{ __('app.nav_projects') }}
+
+            <a href="{{ route('projects.index') }}" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold {{ request()->routeIs('projects.*') ? 'bg-[#fbf6ea] text-[#16325c] font-bold' : 'text-slate-700 hover:bg-slate-50' }}">
+                <span>{{ __('app.nav_projects') }}</span>
+                @if(request()->routeIs('projects.*')) <span class="w-1.5 h-1.5 rounded-full bg-[#c89a3b]"></span> @endif
             </a>
-            <a href="{{ route('plots.index') }}" class="block px-3 py-2 rounded-lg text-sm font-semibold {{ request()->routeIs('plots.*') ? 'bg-[#fbf6ea] text-[#16325c]' : 'text-slate-700 hover:bg-slate-50' }}">
-                {{ __('app.nav_plots') }}
+            <a href="{{ route('plots.index') }}" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold {{ request()->routeIs('plots.*') ? 'bg-[#fbf6ea] text-[#16325c] font-bold' : 'text-slate-700 hover:bg-slate-50' }}">
+                <span>{{ __('app.nav_plots') }}</span>
+                @if(request()->routeIs('plots.*')) <span class="w-1.5 h-1.5 rounded-full bg-[#c89a3b]"></span> @endif
             </a>
-            <a href="{{ route('locations.index') }}" class="block px-3 py-2 rounded-lg text-sm font-semibold {{ request()->routeIs('locations.*') ? 'bg-[#fbf6ea] text-[#16325c]' : 'text-slate-700 hover:bg-slate-50' }}">
-                {{ __('app.nav_locations') }}
+            <a href="{{ route('locations.index') }}" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold {{ request()->routeIs('locations.*') ? 'bg-[#fbf6ea] text-[#16325c] font-bold' : 'text-slate-700 hover:bg-slate-50' }}">
+                <span>{{ __('app.nav_locations') }}</span>
+                @if(request()->routeIs('locations.*')) <span class="w-1.5 h-1.5 rounded-full bg-[#c89a3b]"></span> @endif
             </a>
-            <a href="{{ route('pages.insights') }}" class="block px-3 py-2 rounded-lg text-sm font-semibold {{ request()->routeIs('pages.insights') ? 'bg-[#fbf6ea] text-[#16325c]' : 'text-slate-700 hover:bg-slate-50' }}">
-                {{ __('app.nav_insights') }}
+            <a href="{{ route('pages.insights') }}" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold {{ request()->routeIs('pages.insights') ? 'bg-[#fbf6ea] text-[#16325c] font-bold' : 'text-slate-700 hover:bg-slate-50' }}">
+                <span>{{ __('app.nav_insights') }}</span>
+                @if(request()->routeIs('pages.insights')) <span class="w-1.5 h-1.5 rounded-full bg-[#c89a3b]"></span> @endif
             </a>
-            <a href="{{ route('pages.contact') }}" class="block px-3 py-2 rounded-lg text-sm font-semibold {{ request()->routeIs('pages.contact') ? 'bg-[#fbf6ea] text-[#16325c]' : 'text-slate-700 hover:bg-slate-50' }}">
-                {{ __('app.nav_contact') }}
+            <a href="{{ route('pages.track') }}" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold {{ request()->routeIs('pages.track') ? 'bg-[#fbf6ea] text-[#16325c] font-bold' : 'text-slate-700 hover:bg-slate-50' }}">
+                <span class="flex items-center gap-1.5">
+                    <svg class="w-4 h-4 text-[#c89a3b]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    Mchakato
+                </span>
+                @if(request()->routeIs('pages.track')) <span class="w-1.5 h-1.5 rounded-full bg-[#c89a3b]"></span> @endif
+            </a>
+            <a href="{{ route('pages.contact') }}" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold {{ request()->routeIs('pages.contact') ? 'bg-[#fbf6ea] text-[#16325c] font-bold' : 'text-slate-700 hover:bg-slate-50' }}">
+                <span>{{ __('app.nav_contact') }}</span>
+                @if(request()->routeIs('pages.contact')) <span class="w-1.5 h-1.5 rounded-full bg-[#c89a3b]"></span> @endif
             </a>
 
+            <!-- Mobile Drawer WhatsApp Action -->
             <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
-                <a href="https://wa.me/{{ $siteWhatsappClean ?? '255742448965' }}?text={{ rawurlencode($headerWaMsg) }}" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-[#16325c] text-white font-bold text-xs">
+                @php
+                    $drawerWaMsg = 'Hello RELAND Arusha, I would like to consult on land surveying and formalization services.';
+                @endphp
+                <a href="https://wa.me/{{ $siteWhatsappClean ?? '255742448965' }}?text={{ rawurlencode($drawerWaMsg) }}" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-[#16325c] hover:bg-[#0c1c34] text-white font-bold text-xs shadow-md shadow-[#16325c]/20 transition">
                     <svg class="w-4 h-4 text-[#dfb256]" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.073-2.115-.515-1.748-.722-2.887-2.493-2.975-2.609-.088-.116-.708-.941-.708-1.792s.445-1.272.603-1.446c.159-.175.346-.219.462-.219.116 0 .232.001.332.006.106.005.249-.04.39.299.144.348.491 1.199.535 1.287.044.088.073.19.014.307-.058.117-.088.19-.174.292-.088.102-.185.228-.264.306-.088.087-.18.182-.078.357.102.175.454.748.974 1.211.67.595 1.235.779 1.41.867.175.088.277.073.38-.044.102-.117.438-.511.554-.686.117-.175.234-.146.394-.088.16.058 1.02.481 1.195.568.175.088.292.131.335.204.044.073.044.423-.1.828z"/></svg>
                     <span>{{ __('app.talk_to_us') }}</span>
                 </a>
