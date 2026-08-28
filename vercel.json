@@ -39,7 +39,7 @@
     "env": {
         "APP_NAME": "RELAND",
         "APP_ENV": "production",
-        "APP_KEY": "base64:nct3gd8wJb+Z5D9fgTpB3aNlvKNAFR7PwMJoOP36zPY=",
+        "APP_KEY": "base64:G4dJQTj748dhrF9Gd98BLK8oZWJEmVC+RHJ/wAZLjMw=",
         "APP_DEBUG": "true",
         "APP_URL": "https://reland-website.vercel.app",
         "APP_STORAGE": "/tmp/storage",

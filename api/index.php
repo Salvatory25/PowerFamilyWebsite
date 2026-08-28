@@ -18,6 +18,9 @@ foreach ($storagePaths as $path) {
 
 // 2. Set runtime environment variables
 putenv('VERCEL=1');
+if (!getenv('APP_KEY')) {
+    putenv('APP_KEY=base64:G4dJQTj748dhrF9Gd98BLK8oZWJEmVC+RHJ/wAZLjMw=');
+}
 putenv('APP_STORAGE=/tmp/storage');
 putenv('VIEW_COMPILED_PATH=/tmp/storage/framework/views');
 putenv('CACHE_STORE=array');
