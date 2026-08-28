@@ -28,8 +28,8 @@
             "dest": "/public/favicon.ico"
         },
         {
-            "src": "/robots.txt",
-            "dest": "/public/robots.txt"
+            "src": "/(.*\\.(css|js|json|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|webp))",
+            "dest": "/public/$1"
         },
         {
             "src": "/(.*)",

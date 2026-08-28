@@ -29,14 +29,43 @@ if (!file_exists($dbTarget) || filesize($dbTarget) === 0) {
     }
 }
 
-// 3. Set runtime environment variables across putenv, $_ENV, and $_SERVER
+// 3. Fallback Static File Handler (Ensures CSS/JS/Assets always load)
+$uri = urldecode(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH));
+$publicFile = __DIR__ . '/../public' . $uri;
+
+if ($uri !== '/' && !empty($uri) && file_exists($publicFile) && !is_dir($publicFile)) {
+    $extension = strtolower(pathinfo($publicFile, PATHINFO_EXTENSION));
+    $mimeTypes = [
+        'css'   => 'text/css',
+        'js'    => 'application/javascript',
+        'json'  => 'application/json',
+        'png'   => 'image/png',
+        'jpg'   => 'image/jpeg',
+        'jpeg'  => 'image/jpeg',
+        'gif'   => 'image/gif',
+        'svg'   => 'image/svg+xml',
+        'ico'   => 'image/x-icon',
+        'woff'  => 'font/woff',
+        'woff2' => 'font/woff2',
+        'ttf'   => 'font/ttf',
+        'webp'  => 'image/webp',
+    ];
+    if (isset($mimeTypes[$extension])) {
+        header('Content-Type: ' . $mimeTypes[$extension]);
+    }
+    header('Cache-Control: public, max-age=31536000');
+    readfile($publicFile);
+    exit;
+}
+
+// 4. Set runtime environment variables across putenv, $_ENV, and $_SERVER
 $appKey = getenv('APP_KEY') ?: 'base64:G4dJQTj748dhrF9Gd98BLK8oZWJEmVC+RHJ/wAZLjMw=';
 
 $runtimeEnvs = [
     'VERCEL' => '1',
     'APP_ENV' => getenv('APP_ENV') ?: 'production',
     'APP_KEY' => $appKey,
-    'APP_DEBUG' => getenv('APP_DEBUG') ?: 'true',
+    'APP_DEBUG' => getenv('APP_DEBUG') ?: 'false',
     'APP_STORAGE' => '/tmp/storage',
     'APP_SERVICES_CACHE' => '/tmp/storage/bootstrap/services.php',
     'APP_PACKAGES_CACHE' => '/tmp/storage/bootstrap/packages.php',
@@ -59,7 +88,7 @@ foreach ($runtimeEnvs as $key => $val) {
     $_SERVER[$key] = $val;
 }
 
-// 4. Handle request with exception logging
+// 5. Handle request with exception logging
 try {
     require __DIR__ . '/../public/index.php';
 } catch (\Throwable $e) {
