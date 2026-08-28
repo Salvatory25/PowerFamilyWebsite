@@ -2,6 +2,7 @@
 
 // 1. Prepare writeable directories in /tmp for Vercel Serverless environment
 $storagePaths = [
+    '/tmp/storage/bootstrap',
     '/tmp/storage/framework/views',
     '/tmp/storage/framework/cache',
     '/tmp/storage/framework/cache/data',
@@ -37,6 +38,11 @@ $runtimeEnvs = [
     'APP_KEY' => $appKey,
     'APP_DEBUG' => getenv('APP_DEBUG') ?: 'true',
     'APP_STORAGE' => '/tmp/storage',
+    'APP_SERVICES_CACHE' => '/tmp/storage/bootstrap/services.php',
+    'APP_PACKAGES_CACHE' => '/tmp/storage/bootstrap/packages.php',
+    'APP_CONFIG_CACHE' => '/tmp/storage/bootstrap/config.php',
+    'APP_ROUTES_CACHE' => '/tmp/storage/bootstrap/routes.php',
+    'APP_EVENTS_CACHE' => '/tmp/storage/bootstrap/events.php',
     'VIEW_COMPILED_PATH' => '/tmp/storage/framework/views',
     'CACHE_STORE' => 'array',
     'CACHE_DRIVER' => 'array',
