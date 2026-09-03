@@ -15,7 +15,7 @@
 /node_modules
 # /public/build (Commented out to allow Vercel to receive the built assets)
 /public/hot
-/public/storage
+# /public/storage (Commented out to allow Vercel to receive images)
 /storage/*.key
 /storage/pail
 /vendor
