@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @php
     $isSw = app()->getLocale() === 'sw';
@@ -12,10 +12,10 @@
 @section('content')
 
 <!-- Hero Section -->
-<div class="relative bg-[#0c1c34] text-white py-16 lg:py-20 border-b border-[#c89a3b]/20 overflow-hidden">
+<div class="relative bg-[#280508] text-white py-16 lg:py-20 border-b border-[#D48B16]/20 overflow-hidden">
     <div class="absolute inset-0 z-0 opacity-20 pointer-events-none">
         <img src="{{ $project->image_url }}" alt="{{ $project->name }}" class="w-full h-full object-cover">
-        <div class="absolute inset-0 bg-gradient-to-t from-[#0c1c34] via-[#0c1c34]/85 to-[#0c1c34]/90"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#280508] via-[#280508]/85 to-[#280508]/90"></div>
     </div>
 
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -26,11 +26,11 @@
                 <span>/</span>
                 <a href="{{ route('projects.index') }}" class="hover:text-white transition">{{ __('app.nav_projects') }}</a>
                 <span>/</span>
-                <span class="text-[#dfb256] font-semibold truncate">{{ $project->name }}</span>
+                <span class="text-[#FAC955] font-semibold truncate">{{ $project->name }}</span>
             </div>
 
             <div class="flex flex-wrap items-center gap-2">
-                <span class="px-3 py-1 rounded-full bg-[#c89a3b]/20 text-[#dfb256] text-xs font-bold uppercase border border-[#c89a3b]/30">
+                <span class="px-3 py-1 rounded-full bg-[#D48B16]/20 text-[#FAC955] text-xs font-bold uppercase border border-[#D48B16]/30">
                     {{ $project->project_type }}
                 </span>
                 <span class="px-3 py-1 rounded-full bg-emerald-600/30 text-emerald-300 text-xs font-bold uppercase border border-emerald-500/40">
@@ -44,18 +44,18 @@
 
             <div class="pt-2 flex flex-wrap items-center gap-6 text-xs text-slate-300">
                 <div class="flex items-center gap-1.5">
-                    <svg class="w-4 h-4 text-[#dfb256]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
+                    <svg class="w-4 h-4 text-[#FAC955]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
                     <span>{{ $project->location_name }}</span>
                 </div>
                 @if($project->size_covered)
                     <div class="flex items-center gap-1.5">
-                        <svg class="w-4 h-4 text-[#dfb256]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+                        <svg class="w-4 h-4 text-[#FAC955]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
                         <span>{{ $project->size_covered }}</span>
                     </div>
                 @endif
                 @if($project->completion_date)
                     <div class="flex items-center gap-1.5">
-                        <svg class="w-4 h-4 text-[#dfb256]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                        <svg class="w-4 h-4 text-[#FAC955]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                         <span>{{ $project->completion_date->format('F Y') }}</span>
                     </div>
                 @endif
@@ -72,10 +72,10 @@
             <!-- Case Study Body -->
             <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-xs space-y-6">
                 <div>
-                    <span class="text-xs font-extrabold uppercase tracking-wider text-[#c89a3b] block mb-1">
+                    <span class="text-xs font-extrabold uppercase tracking-wider text-[#D48B16] block mb-1">
                         {{ $isSw ? 'Taarifa za Mradi' : 'Case Study & Execution Details' }}
                     </span>
-                    <h2 class="text-2xl font-extrabold text-[#16325c]">
+                    <h2 class="text-2xl font-extrabold text-[#750D15]">
                         {{ $isSw ? 'Maelezo ya Kina ya Utekelezaji' : 'Project Scope & Deliverables' }}
                     </h2>
                 </div>
@@ -103,7 +103,7 @@
             <!-- Project Gallery -->
             @if($project->images && $project->images->count() > 0)
                 <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-xs space-y-6">
-                    <h2 class="text-xl font-extrabold text-[#16325c]">
+                    <h2 class="text-xl font-extrabold text-[#750D15]">
                         {{ $isSw ? 'Picha za Eneo la Mradi' : 'Field Project Gallery' }}
                     </h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -121,7 +121,7 @@
         <div class="space-y-8">
             <!-- Project Metadata Summary Card -->
             <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-xs space-y-4">
-                <h3 class="font-extrabold text-sm text-[#16325c] uppercase tracking-wider border-b border-slate-100 pb-2">
+                <h3 class="font-extrabold text-sm text-[#750D15] uppercase tracking-wider border-b border-slate-100 pb-2">
                     {{ $isSw ? 'Muhtasari wa Mradi' : 'Project Specifications' }}
                 </h3>
 
@@ -160,8 +160,8 @@
             </div>
 
             <!-- Inquire About Similar Project Card -->
-            <div class="bg-[#16325c] text-white rounded-3xl p-6 sm:p-8 space-y-4 shadow-xl">
-                <span class="text-[10px] font-extrabold uppercase tracking-wider text-[#dfb256] block">Direct Consultation</span>
+            <div class="bg-[#750D15] text-white rounded-3xl p-6 sm:p-8 space-y-4 shadow-xl">
+                <span class="text-[10px] font-extrabold uppercase tracking-wider text-[#FAC955] block">Direct Consultation</span>
                 <h3 class="text-lg font-extrabold text-white">
                     {{ $isSw ? 'Je, una mradi kama huu?' : 'Have a Similar Land Project?' }}
                 </h3>
@@ -187,13 +187,13 @@
                         <textarea name="message" rows="2" required class="w-full bg-white/10 border border-white/20 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-400 focus:bg-white focus:text-slate-900 transition" placeholder="{{ $isSw ? 'Eleza eneo la ardhi yako...' : 'Briefly describe your land or project needs...' }}"></textarea>
                     </div>
 
-                    <button type="submit" class="w-full py-3 rounded-xl bg-[#c89a3b] hover:bg-[#b5882e] text-[#0c1c34] font-extrabold text-xs shadow-md transition transform hover:-translate-y-0.5">
+                    <button type="submit" class="w-full py-3 rounded-xl bg-[#D48B16] hover:bg-[#b5882e] text-[#280508] font-extrabold text-xs shadow-md transition transform hover:-translate-y-0.5">
                         {{ __('app.form_submit') }}
                     </button>
                 </form>
 
                 <div class="pt-2 text-center border-t border-white/10">
-                    <a href="https://wa.me/{{ $siteWhatsappClean ?? '255742448965' }}?text={{ rawurlencode($projWaText) }}" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-xs font-bold text-[#dfb256] hover:text-white transition">
+                    <a href="https://wa.me/{{ $siteWhatsappClean ?? '255742448965' }}?text={{ rawurlencode($projWaText) }}" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-xs font-bold text-[#FAC955] hover:text-white transition">
                         <span>WhatsApp Quick Chat</span> &rarr;
                     </a>
                 </div>

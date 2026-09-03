@@ -5,7 +5,7 @@ return [
     'tagline' => 'Wekeza Leo. Jenga Kesho.',
     
     // Navigation
-    'nav_home' => 'Mwanzo',
+    'nav_home' => 'Nyumbani',
     'nav_plots' => 'Viwanja',
     'nav_houses' => 'Nyumba',
     'nav_vehicles' => 'Magari',
@@ -13,15 +13,30 @@ return [
     'nav_gallery' => 'Matunzio',
     'nav_blog' => 'Elimu ya Uwekezaji',
     'nav_about' => 'Kuhusu Sisi',
-    'nav_contact' => 'Mawasiliano',
+    'nav_contact' => 'Wasiliana Nasi',
     'nav_cta' => 'Wasiliana Nasi',
     'nav_admin' => 'Admin Portal',
+    'nav_properties' => 'Majengo Na Viwanja',
+    'nav_res_plots' => 'Viwanja vya Makazi',
+    'nav_com_plots' => 'Viwanja vya Biashara',
+    'nav_avail_vehicles' => 'Magari Yanayopatikana',
+    'nav_feat_vehicles' => 'Magari Bora',
+    'nav_investment' => 'Uwekezaji',
+    'nav_inv_opp' => 'Fursa za Uwekezaji',
+    'nav_why_invest' => 'Kwa Nini Uwekeze Nasi?',
+    'nav_how_invest' => 'Jinsi ya Kuwekeza',
+    'nav_offers' => 'Ofa / Promo',
+    'top_tagline' => 'Mshirika wako wa kuaminika katika Uwekezaji na Mali',
+    'top_call' => 'Piga Simu',
+    'top_email' => 'Barua Pepe',
+    'contact_us_title' => 'Wasiliana na Power Family Investment',
+    'contact_us_subtitle' => 'Tuko hapa kukusaidia kupata kiwanja, nyumba au gari la ndoto yako. Tuandikie au tupigie simu leo.',
 
     // Hero
-    'hero_badge' => 'Uwekezaji wa Uhakika Tanzania',
-    'hero_title' => 'WEKEZA LEO. JENGA KESHO.',
-    'hero_subtitle' => 'Pata viwanja vya makazi na biashara, nyumba bora za kisasa na magari kutoka Power Family Investment kwa njia salama na ya kuaminika.',
-    'hero_cta_plots' => 'TAZAMA VIWANJA',
+    'hero_badge' => 'UWEKEZAJI UNAOTENGENEZA THAMANI',
+    'hero_title' => 'Jenga Kesho Yako Kwa Uwekezaji Sahihi.',
+    'hero_subtitle' => 'Pata viwanja, nyumba na fursa za uwekezaji zinazokupa nafasi ya kujenga maisha bora na kuongeza thamani ya mali yako.',
+    'hero_cta_plots' => 'ANGALIA MALI',
     'hero_cta_contact' => 'WASILIANA NASI',
 
     // Search Bar
@@ -65,17 +80,17 @@ return [
     'status_reserved' => 'Imeshikiliwa',
     'status_sold' => 'Imeuzwa',
 
-    // Why Choose Us
-    'why_title' => 'KWA NINI POWER FAMILY INVESTMENT?',
-    'why_subtitle' => 'Tunajenga msingi wa uaminifu na uwazi katika kila hatua ya safari yako ya uwekezaji.',
-    'why_trust_title' => 'UAMINIFU NA UWAZI',
-    'why_trust_desc' => 'Huduma za kitaalamu na mawasiliano ya wazi katika kila hatua bila usumbufu wala mashaka.',
-    'why_variety_title' => 'FURSA MBALIMBALI',
-    'why_variety_desc' => 'Viwanja vya makazi na biashara, nyumba na magari katika sehemu moja yenye urahisi.',
-    'why_support_title' => 'HUDUMA KWA WATEJA',
-    'why_support_desc' => 'Ushauri wa kitaalamu na usaidizi kuanzia ukaguzi wa eneo hadi kukamilisha umiliki.',
-    'why_confidence_title' => 'CHAGUA KWA UHAKIKA',
-    'why_confidence_desc' => 'Taarifa sahihi za maeneo, vipimo halisi, na utaratibu salama wa kisheria.',
+    // Why Choose Us (Investment)
+    'why_title' => 'WEKEZA KWA UHAKIKA. JENGA KWA MAONO.',
+    'why_subtitle' => 'Sababu kwa nini Power Family Investment ni chaguo sahihi kwa usalama na ukuaji wa mtaji wako.',
+    'why_trust_title' => 'Mali Zenye Thamani',
+    'why_trust_desc' => 'Tunateua maeneo yanayokua kwa kasi ili kuhakikisha ongezeko la thamani ya uwekezaji wako.',
+    'why_variety_title' => 'Huduma ya Kuaminika',
+    'why_variety_desc' => 'Timu yetu ya wataalamu inatoa ushauri wa kweli na uwazi katika kila hatua.',
+    'why_support_title' => 'Fursa za Uwekezaji',
+    'why_support_desc' => 'Tunakupa taarifa sahihi na uchambuzi wa soko kukuongoza kufanya maamuzi bora.',
+    'why_confidence_title' => 'Mchakato Rahisi',
+    'why_confidence_desc' => 'Kuanzia ukaguzi hadi hati za kisheria, mchakato wetu ni wa haraka na hauna usumbufu.',
 
     // Locations
     'locations_title' => 'MAENEO TUNAYOHUDUMIA',
@@ -102,10 +117,10 @@ return [
     'read_article' => 'Soma Zaidi',
 
     // CTA
-    'cta_title' => 'Uko Tayari Kuanza Safari Yako ya Uwekezaji?',
-    'cta_subtitle' => 'Timu yetu ya wataalamu iko tayari kukusaidia kupata kiwanja, nyumba au gari linalofaa bajeti na malengo yako.',
-    'cta_whatsapp' => 'WASILIANA WHATSAPP',
-    'cta_call' => 'PIGA SIMU SASA',
+    'cta_title' => 'Tayari Kuanza Uwekezaji Wako?',
+    'cta_subtitle' => 'Tunaweza kukusaidia kupata mali inayolingana na malengo na bajeti yako. Chukua hatua leo.',
+    'cta_whatsapp' => 'WASILIANA NASI',
+    'cta_call' => 'ANGALIA MALI',
 
     // Forms
     'form_name' => 'Jina Kamili',

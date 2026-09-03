@@ -43,21 +43,77 @@ class PowerFamilySeeder extends Seeder
             ]
         );
 
-        // 2. Settings
+        // 2. Settings (ACF-like Dynamic Website Content)
         $settings = [
+            // Brand & Topbar
             'company_name' => 'Power Family Investment',
             'tagline' => 'Wekeza Leo. Jenga Kesho.',
-            'site_title' => 'Power Family Investment — Viwanja, Nyumba na Magari Tanzania',
-            'meta_description' => 'Nunua viwanja vya makazi na biashara, nyumba za kisasa na magari yenye ubora Tanzania kupitia Power Family Investment.',
-            'company_phone' => '+255 700 000 000',
-            'whatsapp_number' => '255700000000',
+            'top_bar_location_badge' => 'Tanzania & East Africa',
+            'top_bar_tagline_sw' => 'Suluhisho la Uhakika la Viwanja, Nyumba za Kisasa na Magari',
+            'top_bar_tagline_en' => 'Reliable Solutions for Plots, Modern Houses & Quality Vehicles',
+
+            // Hero Section
+            'hero_headline_sw' => 'WEKEZA LEO. JENGA KESHO.',
+            'hero_headline_en' => 'INVEST TODAY. BUILD TOMORROW.',
+            'hero_subtitle_sw' => 'Gundua na miliki viwanja vilivyopimwa vyenye hati safi, nyumba za kisasa za familia na magari yenye ubora wa juu Tanzania nzima.',
+            'hero_subtitle_en' => 'Discover and own surveyed plots with verified title deeds, modern family houses and top quality vehicles across Tanzania.',
+            'hero_bg_image' => 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2400&q=85',
+            'hero_badge_sw' => 'Huduma ya Uhakika & Nyaraka Rasmi za Kisheria',
+            'hero_badge_en' => 'Trusted Property & Verified Legal Documentation',
+
+            // "What Are You Looking For?" 4 Pillars
+            'what_looking_title_sw' => 'What are you looking for?',
+            'what_looking_title_en' => 'What are you looking for?',
+            'what_looking_subtitle_sw' => 'Chagua huduma au fursa unayohitaji kuanza nayo leo kwa urahisi na uhakika.',
+            'what_looking_subtitle_en' => 'Choose your desired investment category and explore verified opportunities.',
+            'pillar_1_title_sw' => 'Viwanja vya Makazi',
+            'pillar_1_desc_sw' => 'Residential Plots',
+            'pillar_2_title_sw' => 'Viwanja vya Biashara',
+            'pillar_2_desc_sw' => 'Commercial Plots',
+            'pillar_3_title_sw' => 'Nyumba za Kisasa',
+            'pillar_3_desc_sw' => 'Modern Family Houses',
+            'pillar_4_title_sw' => 'Magari ya Uhakika',
+            'pillar_4_desc_sw' => 'Premium Vehicles',
+
+            // Trust & Why Choose Us Pillars
+            'why_us_badge' => '★ KWA NINI POWER FAMILY?',
+            'why_us_title' => 'Tunakupa Uhakika, Usalama na Mikataba Safi ya Kisheria.',
+            'why_us_description' => 'Tangu kuanzishwa kwetu, Power Family Investment imewasaidia mamia ya Watanzania ndani na nje ya nchi (Diaspora) kumiliki ardhi, nyumba na magari bila hofu yoyote ya migogoro au utapeli.',
+            'why_us_image' => 'https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=1200&q=80',
+            'why_metric_value' => '100%',
+            'why_metric_title' => 'Ulinzi wa Uwekezaji',
+            'why_metric_subtitle' => 'Mikataba rasmi na wanasheria',
+            'why_feat_1_title' => 'Viwanja Vilivyopimwa',
+            'why_feat_1_desc' => 'Vigingi vya kisasa vimewekwa na ramani zimesajiliwa.',
+            'why_feat_2_title' => 'Hati Miliki za Uhakika',
+            'why_feat_2_desc' => 'Taratibu zote za uhamisho wa umiliki zinasimamiwa.',
+            'why_feat_3_title' => 'Malipo kwa Awamu',
+            'why_feat_3_desc' => 'Mpango rahisi wa kulipa kidogo kidogo unaoendana na bajeti yako.',
+            'why_feat_4_title' => 'Huduma za Diaspora',
+            'why_feat_4_desc' => 'Ukaguzi wa video mubashara na mikataba salama ya kidijitali.',
+
+            // CTA Consultation Banner
+            'cta_banner_title' => 'Je, uko tayari kuanza safari yako ya umiliki leo?',
+            'cta_banner_subtitle' => 'Wasiliana na timu yetu ya wataalamu upate ushauri wa bure na kuratibu ziara ya bure ya kutembelea miradi yetu (Site Visit).',
+            'cta_banner_btn1_text' => 'Wasiliana Nasi Sasa →',
+            'cta_banner_btn2_text' => 'Piga Simu Moja kwa Moja',
+
+            // Contact & Social Media
+            'company_phone' => '+255 759 423 626',
+            'company_phone_2' => '+255 658 003 626',
+            'whatsapp_number' => '255759423626',
             'company_email' => 'info@powerfamilyinvestment.co.tz',
             'company_address' => 'Tanzania',
             'working_hours' => 'Jumatatu - Jumamosi: 2:00 Asubuhi - 11:30 Jioni',
-            'social_facebook' => 'https://facebook.com/powerfamilyinvestment',
-            'social_instagram' => 'https://instagram.com/powerfamilyinvestment',
-            'social_tiktok' => 'https://tiktok.com/@powerfamilyinvestment',
-            'social_youtube' => 'https://youtube.com/@powerfamilyinvestment',
+            'social_facebook' => 'https://facebook.com/power_family_investment',
+            'social_instagram' => 'https://www.instagram.com/power_family_investment/',
+            'social_tiktok' => 'https://tiktok.com/@power_family_investment',
+            'social_youtube' => 'https://youtube.com/@power_family_investment',
+
+            // SEO & Meta
+            'site_title' => 'Power Family Investment — Wauzaji wa Viwanja, Nyumba na Magari Tanzania',
+            'meta_description' => 'Tunakuunganisha na chaguo sahihi. Wauzaji wa Viwanja vilivyopimwa, Nyumba za kisasa na Magari yenye ubora Tanzania.',
+            'meta_keywords' => 'wauzaji viwanja, nyumba, magari, uwekezaji tanzania, power family investment, +255 759 423 626, +255 658 003 626',
         ];
 
         foreach ($settings as $key => $val) {
@@ -89,12 +145,12 @@ class PowerFamilySeeder extends Seeder
 
         // 4. Locations
         $loc1 = Location::updateOrCreate(
-            ['slug' => 'eneo-la-kwanza'],
+            ['slug' => 'kigamboni-dar-es-salaam'],
             [
-                'area_name' => 'Eneo la Kwanza',
-                'district' => 'Eneo la Kwanza',
-                'region' => 'Tanzania',
-                'description' => 'Eneo tulivu na zuri lenye ukuaji wa haraka na huduma zote za kijamii karibu.',
+                'area_name' => 'Kigamboni',
+                'district' => 'Kigamboni',
+                'region' => 'Dar es Salaam',
+                'description' => 'Eneo tulivu na zuri kando ya bahari lenye ukuaji wa haraka na huduma zote za kijamii karibu.',
                 'featured_image' => 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80',
                 'is_popular' => true,
                 'display_order' => 1,
@@ -102,12 +158,12 @@ class PowerFamilySeeder extends Seeder
         );
 
         $loc2 = Location::updateOrCreate(
-            ['slug' => 'eneo-la-pili'],
+            ['slug' => 'kerege-bagamoyo'],
             [
-                'area_name' => 'Eneo la Pili',
-                'district' => 'Eneo la Pili',
-                'region' => 'Tanzania',
-                'description' => 'Eneo la kimkakati kando ya barabara kuu, linafaa sana kwa uwekezaji wa kibiashara.',
+                'area_name' => 'Kerege',
+                'district' => 'Bagamoyo',
+                'region' => 'Pwani',
+                'description' => 'Eneo la kimkakati kando ya barabara kuu, linafaa sana kwa uwekezaji wa kibiashara na makazi.',
                 'featured_image' => 'https://images.unsplash.com/photo-1448630360428-65456885c650?auto=format&fit=crop&w=1200&q=80',
                 'is_popular' => true,
                 'display_order' => 2,
@@ -115,12 +171,12 @@ class PowerFamilySeeder extends Seeder
         );
 
         $loc3 = Location::updateOrCreate(
-            ['slug' => 'eneo-la-tatu'],
+            ['slug' => 'chamwino-dodoma'],
             [
-                'area_name' => 'Eneo la Tatu',
-                'district' => 'Eneo la Tatu',
-                'region' => 'Tanzania',
-                'description' => 'Mandhari ya kuvutia na mazingira safi ya asili kwa ajili ya ujenzi wa nyumba za kisasa.',
+                'area_name' => 'Chamwino',
+                'district' => 'Chamwino',
+                'region' => 'Dodoma',
+                'description' => 'Mji mkuu wa kiserikali wenye fursa kubwa ya kupanda kwa thamani ya ardhi kwa haraka.',
                 'featured_image' => 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80',
                 'is_popular' => true,
                 'display_order' => 3,
@@ -129,13 +185,13 @@ class PowerFamilySeeder extends Seeder
 
         // 5. Plots
         $plot1 = Plot::updateOrCreate(
-            ['slug' => 'kiwanja-cha-makazi-eneo-la-kwanza'],
+            ['plot_reference' => 'PFI-PLT-001'],
             [
-                'title' => 'Kiwanja cha Makazi — Eneo la Kwanza',
-                'plot_reference' => 'PFI-PLT-001',
+                'title' => 'Kiwanja cha Makazi — Kigamboni',
+                'slug' => 'kiwanja-cha-makazi-kigamboni',
                 'plot_type_id' => $typeResidential->id,
                 'location_id' => $loc1->id,
-                'street_address' => 'Eneo la Kwanza',
+                'street_address' => 'Kigamboni Mwasonga',
                 'listing_status' => 'available',
                 'price' => 8500000,
                 'currency' => 'TZS',
@@ -144,25 +200,27 @@ class PowerFamilySeeder extends Seeder
                 'dimension_details' => '30m × 30m',
                 'ownership_title_type' => 'Kimepimwa (Surveyed)',
                 'short_description' => 'Kiwanja kizuri cha makazi kilichopimwa vizuri chenye ufikiaji mzuri wa barabara.',
-                'description' => "Kiwanja kizuri sana cha makazi kilichopimwa vizuri kwa vigingi vya kisasa.\nKipo kwenye mazingira tulivu yenye ufikiaji mzuri wa barabara, umeme na maji karibu.\nNyaraka zote zipo tayari kwa ajili ya uhamisho wa umiliki.",
+                'description' => "Kiwanja kizuri sana cha makazi kilichopimwa vizuri kwa vigingi vya kisasa.\nKipo kwenye mazingira tulivu ya Kigamboni yenye ufikiaji mzuri wa barabara, umeme na maji karibu.\nNyaraka zote zipo tayari kwa ajili ya uhamisho wa umiliki.",
                 'has_electricity' => true,
                 'has_water' => true,
                 'road_accessibility' => 'Barabara nzuri inafika moja kwa moja',
                 'topography' => 'Tambarare',
-                'featured_image' => 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80',
+                'latitude' => -6.8667,
+                'longitude' => 39.3167,
+                'featured_image' => 'plots/plot1.jpg',
                 'is_featured' => true,
                 'is_published' => true,
             ]
         );
 
         $plot2 = Plot::updateOrCreate(
-            ['slug' => 'kiwanja-cha-biashara-eneo-la-pili'],
+            ['plot_reference' => 'PFI-PLT-002'],
             [
-                'title' => 'Kiwanja cha Biashara — Eneo la Pili',
-                'plot_reference' => 'PFI-PLT-002',
+                'title' => 'Kiwanja cha Biashara — Kerege',
+                'slug' => 'kiwanja-cha-biashara-kerege',
                 'plot_type_id' => $typeCommercial->id,
                 'location_id' => $loc2->id,
-                'street_address' => 'Eneo la Pili Barabara Kuu',
+                'street_address' => 'Kerege Barabara Kuu ya Bagamoyo',
                 'listing_status' => 'available',
                 'price' => 18000000,
                 'currency' => 'TZS',
@@ -171,25 +229,27 @@ class PowerFamilySeeder extends Seeder
                 'dimension_details' => '40m × 35m',
                 'ownership_title_type' => 'Hati Miliki Safi',
                 'short_description' => 'Kiwanja cha kimkakati kando ya barabara kuu, linafaa kwa maduka na fremu za biashara.',
-                'description' => "Kiwanja cha kimkakati chenye nafasi kubwa kando ya barabara kuu.\nLinafaa sana kwa ujenzi wa maduka ya biashara, fremu, gereji au kituo cha biashara.\nMzunguko mzuri wa watu na magari.",
+                'description' => "Kiwanja cha kimkakati chenye nafasi kubwa kando ya barabara kuu ya Bagamoyo.\nLinafaa sana kwa ujenzi wa maduka ya biashara, fremu, gereji au kituo cha biashara.\nMzunguko mzuri wa watu na magari.",
                 'has_electricity' => true,
                 'has_water' => true,
                 'road_accessibility' => 'Kando ya barabara kuu',
                 'topography' => 'Tambarare',
-                'featured_image' => 'https://images.unsplash.com/photo-1448630360428-65456885c650?auto=format&fit=crop&w=1200&q=80',
+                'latitude' => -6.4833,
+                'longitude' => 38.9000,
+                'featured_image' => 'plots/plot2.jpg',
                 'is_featured' => true,
                 'is_published' => true,
             ]
         );
 
         $plot3 = Plot::updateOrCreate(
-            ['slug' => 'kiwanja-cha-makazi-eneo-la-tatu'],
+            ['plot_reference' => 'PFI-PLT-003'],
             [
-                'title' => 'Kiwanja cha Makazi — Eneo la Tatu',
-                'plot_reference' => 'PFI-PLT-003',
+                'title' => 'Kiwanja cha Makazi — Chamwino, Dodoma',
+                'slug' => 'kiwanja-cha-makazi-chamwino-dodoma',
                 'plot_type_id' => $typeResidential->id,
                 'location_id' => $loc3->id,
-                'street_address' => 'Eneo la Tatu',
+                'street_address' => 'Chamwino Ikulu Ndogo',
                 'listing_status' => 'available',
                 'price' => 12000000,
                 'currency' => 'TZS',
@@ -198,12 +258,14 @@ class PowerFamilySeeder extends Seeder
                 'dimension_details' => '35m × 35m',
                 'ownership_title_type' => 'Kimepimwa',
                 'short_description' => 'Kiwanja kikubwa chenye mandhari nzuri na hewa safi kwa ajili ya makazi ya familia.',
-                'description' => "Kiwanja chenye nafasi kubwa na mandhari ya kuvutia sana.\nKinafaa kwa ujenzi wa nyumba ya kifahari yenye eneo kubwa la bustani na maegesho ya magari.",
+                'description' => "Kiwanja chenye nafasi kubwa na mandhari ya kuvutia sana hapa Chamwino Dodoma.\nKinafaa kwa ujenzi wa nyumba ya kifahari yenye eneo kubwa la bustani na maegesho ya magari.",
                 'has_electricity' => true,
                 'has_water' => true,
                 'road_accessibility' => 'Barabara inafika vizuri',
                 'topography' => 'Mwinuko mpole wenye mandhari nzuri',
-                'featured_image' => 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80',
+                'latitude' => -6.1833,
+                'longitude' => 35.8500,
+                'featured_image' => 'plots/plot1.jpg',
                 'is_featured' => true,
                 'is_published' => true,
             ]
@@ -225,7 +287,7 @@ class PowerFamilySeeder extends Seeder
                 'ownership_title_type' => 'Hati Miliki Kamili',
                 'description' => "Nyumba maridadi ya kisasa iliyojengwa kwa viwango vya juu.\nIna sebule kubwa ya wazi, jiko la kisasa lenye makabati, chumba kikuu chenye choo na bafu (Master Bedroom), uzio wa ukuta na geti salama.",
                 'features' => ['Vyumba 4 vya kulala (2 Master)', 'Sebule na Dinning kubwa', 'Jiko la kisasa lenye makabati', 'Uzio na geti salama', 'Maegesho ya magari 4', 'Tangi kubwa la maji'],
-                'featured_image' => 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
+                'featured_image' => 'houses/house1.jpg',
                 'is_featured' => true,
                 'is_published' => true,
             ]
@@ -246,7 +308,7 @@ class PowerFamilySeeder extends Seeder
                 'ownership_title_type' => 'Hati Miliki',
                 'description' => "Nyumba tulivu iliyopo katika mtaa mzuri wa makazi.\nIna bustani nzuri ya kijani, paving blocks za kisasa na mazingira salama kwa watoto.",
                 'features' => ['Vyumba 3 (1 Master)', 'Bustani ya kijani', 'Paving blocks', 'Maji ya uhakika na Kisima', 'LUKU yako peke yako'],
-                'featured_image' => 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80',
+                'featured_image' => 'houses/house1.jpg',
                 'is_featured' => true,
                 'is_published' => true,
             ]
@@ -270,7 +332,7 @@ class PowerFamilySeeder extends Seeder
                 'listing_status' => 'available',
                 'description' => "Gari lipo katika hali safi sana (Clean condition).\nHalijawahi kupata ajali yoyote, service imefanyika kwa wakati.\nLina sifa za 4WD, Sunroof, Viti vya ngozi na Push to Start.",
                 'features' => ['4WD / AWD', 'Sunroof', 'Leather Seats', 'Reverse Camera', 'Push to Start', '7 Seater'],
-                'featured_image' => 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1200&q=80',
+                'featured_image' => 'vehicles/veh1.jpg',
                 'is_featured' => true,
                 'is_published' => true,
             ]
@@ -293,7 +355,7 @@ class PowerFamilySeeder extends Seeder
                 'listing_status' => 'available',
                 'description' => "Gari la kifahari lenye matumizi mazuri ya mafuta.\nViti vya ngozi, screen ya kisasa, rim nzuri za alloy na mfumo bora wa sauti.",
                 'features' => ['Alloy Wheels', 'Leather Interior', 'Cruise Control', 'Touch Screen Display', 'Fog Lights'],
-                'featured_image' => 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1200&q=80',
+                'featured_image' => 'vehicles/veh2.jpg',
                 'is_featured' => true,
                 'is_published' => true,
             ]
@@ -331,7 +393,7 @@ class PowerFamilySeeder extends Seeder
             ['title' => 'Upimaji wa Viwanja Eneo la Kwanza'],
             [
                 'category' => 'viwanja',
-                'image_path' => 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80',
+                'image_path' => 'gallery/survey.jpg',
                 'description' => 'Upimaji na uwekaji wa vigingi vya viwanja.',
                 'display_order' => 1,
                 'is_active' => true,
@@ -342,7 +404,7 @@ class PowerFamilySeeder extends Seeder
             ['title' => 'Nyumba ya Kisasa ya Familia'],
             [
                 'category' => 'nyumba',
-                'image_path' => 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
+                'image_path' => 'gallery/house.jpg',
                 'description' => 'Muonekano wa mbele wa nyumba ya kisasa.',
                 'display_order' => 2,
                 'is_active' => true,
@@ -353,7 +415,7 @@ class PowerFamilySeeder extends Seeder
             ['title' => 'Magari Safi ya Kifahari'],
             [
                 'category' => 'magari',
-                'image_path' => 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1200&q=80',
+                'image_path' => 'gallery/cars.jpg',
                 'description' => 'Magari yenye ubora tayari kwa wateja.',
                 'display_order' => 3,
                 'is_active' => true,
@@ -364,7 +426,7 @@ class PowerFamilySeeder extends Seeder
             ['title' => 'Ziara ya Wateja Kwenye Mradi'],
             [
                 'category' => 'matukio',
-                'image_path' => 'https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=1200&q=80',
+                'image_path' => 'gallery/visit.jpg',
                 'description' => 'Wateja wakikagua viwanja kwa furaha na uhakika.',
                 'display_order' => 4,
                 'is_active' => true,

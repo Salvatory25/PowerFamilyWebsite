@@ -1,698 +1,601 @@
 @extends('layouts.app')
 
 @section('title', __('app.company_name') . ' — ' . __('app.tagline'))
+@section('meta_description', 'Power Family Investment — ' . __('app.hero_subtitle'))
 
 @section('content')
+@php
+    $waNum = preg_replace('/[^0-9]/', '', \App\Models\Setting::get('whatsapp_number', '255759423626'));
+    $phone = \App\Models\Setting::get('company_phone', '+255 759 423 626');
+    // We use a high quality premium image for the hero
+    $heroImg = asset('images/hero-premium.jpg');
+@endphp
 
-<!-- =========================================================================
-     1. HERO SECTION
-     ========================================================================= -->
-<section class="relative bg-[#220325] text-white min-h-[580px] lg:min-h-[660px] flex items-center overflow-hidden">
-    <!-- Hero Background Image with Rich Royal Purple / Gold Overlay -->
-    <div class="absolute inset-0 z-0">
-        <img 
-            src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2000&q=85" 
-            alt="Power Family Investment Land & Properties" 
-            class="w-full h-full object-cover object-center opacity-30 scale-105 transition-transform duration-1000"
-        >
-        <div class="absolute inset-0 bg-gradient-to-r from-[#220325] via-[#320635]/90 to-[#4A0E4E]/75"></div>
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(197,155,39,0.15),transparent_50%)]"></div>
-    </div>
+<style>
+/* ═══ PREMIUM TOKENS ══════════════════════════════════════════════════ */
+:root{
+  --c-maroon:#750D15; --c-maroon-dk:#1C0305; --c-maroon-lt:#961620;
+  --c-gold:#D48B16;   --c-gold-lt:#FAC955;   --c-gold-pale:#FEF9EC;
+  --c-navy:#0E1726;   --c-white:#FFFFFF;
+  --c-bg:#FAFAFA;     --c-gray:#6B7280;
+  --c-gray-lt:#E5E7EB; --c-border:#E2E8F0;
+  --c-text:#0F172A;   --c-text-mid:#475569;
+  --ff-head:'Outfit',system-ui,sans-serif;
+  --ff-body:'Inter',system-ui,sans-serif;
+  --shadow-sm:0 4px 6px rgba(0,0,0,0.02);
+  --shadow-md:0 10px 30px rgba(0,0,0,0.06);
+  --shadow-lg:0 24px 48px rgba(0,0,0,0.08);
+  --r-sm:12px; --r-md:16px; --r-lg:24px; --r-xl:32px; --r-pill:100px;
+}
 
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 w-full">
-        <div class="max-w-3xl space-y-6">
-            
-            <!-- Location & Credibility Badge -->
-            <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-[#C59B27]/40 text-[#DFB743] text-xs font-semibold uppercase tracking-wider">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span>📍 Tanzania &bull; {{ __('app.hero_badge') }}</span>
-            </div>
+/* ═══ TYPOGRAPHY ═══════════════════════════════════════════════════ */
+.prm-label{
+  font-family:var(--ff-body);font-size:12px;font-weight:800;letter-spacing:0.25em;
+  text-transform:uppercase;color:var(--c-gold);margin-bottom:16px;display:inline-block;
+}
+.prm-label::before{content:'';display:inline-block;width:32px;height:2px;background:var(--c-gold);margin-right:12px;vertical-align:middle;}
+.prm-h2{
+  font-family:var(--ff-head);font-size:clamp(36px,5vw,56px);font-weight:900;
+  color:var(--c-navy);line-height:1.1;letter-spacing:-0.02em;margin-bottom:24px;
+}
+.prm-h2 em{font-style:normal;color:var(--c-maroon);}
+.prm-h2--white{color:var(--c-white);}
+.prm-h2--white em{color:var(--c-gold-lt);}
+.prm-p{font-family:var(--ff-body);font-size:16px;color:var(--c-gray);line-height:1.8;max-width:600px;}
 
-            <!-- Headline -->
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
-                WEKEZA LEO. <br class="hidden sm:block">
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#F3E5AB] via-[#DFB743] to-[#C59B27]">
-                    JENGA KESHO.
-                </span>
-            </h1>
+/* ═══ BUTTONS ══════════════════════════════════════════════════════ */
+.btn-prm{
+  display:inline-flex;align-items:center;gap:12px;
+  background:var(--c-maroon);color:var(--c-white);
+  font-family:var(--ff-body);font-size:14px;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;
+  padding:18px 40px;border-radius:var(--r-pill);transition:all 0.4s cubic-bezier(0.16,1,0.3,1);
+  box-shadow:0 8px 24px rgba(117,13,21,0.2);position:relative;overflow:hidden;
+}
+.btn-prm:hover{transform:translateY(-4px);box-shadow:0 16px 32px rgba(117,13,21,0.3);background:var(--c-maroon-dk);}
+.btn-prm svg{transition:transform 0.4s;width:18px;height:18px;color:var(--c-gold-lt);}
+.btn-prm:hover svg{transform:translateX(6px);}
 
-            <!-- Supporting Text -->
-            <p class="text-lg sm:text-xl text-gray-200 font-normal leading-relaxed max-w-2xl">
-                {{ __('app.hero_subtitle') }}
-            </p>
+.btn-sec{
+  display:inline-flex;align-items:center;gap:12px;
+  background:rgba(255,255,255,0.1);backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,0.2);
+  color:var(--c-white);font-family:var(--ff-body);font-size:14px;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;
+  padding:18px 40px;border-radius:var(--r-pill);transition:all 0.4s;
+}
+.btn-sec:hover{background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.5);transform:translateY(-2px);}
 
-            <!-- Hero CTAs -->
-            <div class="flex flex-wrap items-center gap-4 pt-4">
-                <a 
-                    href="{{ route('plots.index') }}" 
-                    class="bg-gold-gradient text-[#220325] font-extrabold px-8 py-4 rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 transition transform duration-200 text-sm sm:text-base flex items-center space-x-2 border border-[#DFB743]"
-                >
-                    <span>{{ __('app.hero_cta_plots') }}</span>
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                </a>
+.btn-link{
+  display:inline-flex;align-items:center;gap:8px;font-family:var(--ff-body);font-size:14px;font-weight:800;
+  letter-spacing:0.05em;text-transform:uppercase;color:var(--c-maroon);transition:all 0.3s;
+}
+.btn-link:hover{gap:16px;color:var(--c-navy);}
 
-                <a 
-                    href="{{ route('pages.contact') }}" 
-                    class="bg-white/10 hover:bg-white/20 text-white font-bold px-8 py-4 rounded-xl border border-white/30 backdrop-blur-md hover:border-white transition text-sm sm:text-base"
-                >
-                    {{ __('app.hero_cta_contact') }}
-                </a>
-            </div>
+/* ═══ 1. CINEMATIC HERO ════════════════════════════════════════════ */
+.hero-prm{
+  position:relative;width:100%;height:100vh;min-height:700px;
+  display:flex;align-items:center;justify-content:center;
+  background-color:var(--c-navy);overflow:hidden;
+  /* Shift hero under the absolute floating header */
+  margin-top: -120px;
+}
+.hero-prm__bg{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  transform:scale(1.05);animation:heroZoom 20s infinite alternate linear;
+}
+@keyframes heroZoom { 0%{transform:scale(1);} 100%{transform:scale(1.1);} }
+.hero-prm__overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom, rgba(14,23,38,0.7) 0%, rgba(14,23,38,0.4) 40%, rgba(14,23,38,0.9) 100%);
+}
+.hero-prm__content{
+  position:relative;z-index:10;max-width:1000px;width:100%;padding:0 5vw;
+  text-align:center;display:flex;flex-direction:column;align-items:center;
+  /* Push content down to avoid the floating header */
+  margin-top: 100px;
+}
+.hero-prm__title{
+  font-family:var(--ff-head);font-size:clamp(48px, 6vw, 88px);
+  font-weight:900;line-height:1.05;letter-spacing:-0.03em;color:var(--c-white);
+  margin-bottom:24px;text-shadow:0 10px 30px rgba(0,0,0,0.5);
+}
+.hero-prm__sub{
+  font-family:var(--ff-body);font-size:clamp(16px, 2vw, 20px);
+  line-height:1.8;color:rgba(255,255,255,0.85);max-width:700px;margin:0 auto 48px;
+}
+.hero-prm__actions{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;}
 
-            <!-- Discovery Stats Ticker -->
-            <div class="pt-8 grid grid-cols-3 gap-4 max-w-lg border-t border-white/10">
-                <div>
-                    <span class="text-2xl sm:text-3xl font-extrabold text-white">{{ $counts['plots'] ?? 0 }}+</span>
-                    <p class="text-xs text-gray-300 font-medium mt-0.5">{{ __('app.search_plots') }}</p>
-                </div>
-                <div>
-                    <span class="text-2xl sm:text-3xl font-extrabold text-white">{{ $counts['houses'] ?? 0 }}+</span>
-                    <p class="text-xs text-gray-300 font-medium mt-0.5">{{ __('app.search_houses') }}</p>
-                </div>
-                <div>
-                    <span class="text-2xl sm:text-3xl font-extrabold text-white">{{ $counts['vehicles'] ?? 0 }}+</span>
-                    <p class="text-xs text-gray-300 font-medium mt-0.5">{{ __('app.search_vehicles') }}</p>
-                </div>
-            </div>
+/* ═══ 2. SEARCH & TRUST ════════════════════════════════════════════ */
+.search-bar-wrap{
+  position:relative;z-index:20;margin-top:-60px;padding:0 5vw;
+}
+.search-bar{
+  max-width:1200px;margin:0 auto;background:var(--c-white);
+  border-radius:var(--r-xl);box-shadow:var(--shadow-lg);padding:32px;
+  display:grid;grid-template-columns:1fr 1fr 1fr 1fr auto;gap:24px;align-items:end;
+}
+@media(max-width:1024px){.search-bar{grid-template-columns:1fr 1fr;}}
+@media(max-width:640px){.search-bar{grid-template-columns:1fr;}}
 
-        </div>
-    </div>
-</section>
+.search-field label{
+  display:block;font-family:var(--ff-body);font-size:11px;font-weight:800;
+  letter-spacing:0.1em;text-transform:uppercase;color:var(--c-gray);margin-bottom:12px;
+}
+.search-field select, .search-field input{
+  width:100%;background:var(--c-bg);border:1px solid var(--c-border);
+  border-radius:var(--r-sm);padding:16px 20px;font-family:var(--ff-body);
+  font-size:15px;font-weight:600;color:var(--c-navy);outline:none;
+  transition:border-color 0.3s;appearance:none;
+}
+.search-field select:focus, .search-field input:focus{border-color:var(--c-gold);}
+.btn-search{
+  height:54px;display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  background:var(--c-gold);color:var(--c-white);font-family:var(--ff-body);
+  font-size:14px;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;
+  padding:0 40px;border-radius:var(--r-sm);border:none;cursor:pointer;
+  box-shadow:0 8px 24px rgba(212,139,22,0.3);transition:all 0.3s;
+}
+.btn-search:hover{background:var(--c-navy);box-shadow:0 12px 30px rgba(14,23,38,0.2);}
 
-<!-- =========================================================================
-     2. HERO SEARCH / DISCOVERY COMPONENT
-     ========================================================================= -->
-<section class="relative z-20 -mt-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 sm:p-8">
-        <form action="{{ route('plots.index') }}" method="GET" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
-            
-            <!-- 1. Natafuta (Category) -->
-            <div>
-                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">
-                    {{ __('app.search_looking_for') }}
-                </label>
-                <select name="type_group" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm font-semibold text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#4A0E4E] transition" onchange="if(this.value==='houses') window.location='{{ route('houses.index') }}'; if(this.value==='vehicles') window.location='{{ route('vehicles.index') }}';">
-                    <option value="plots" selected>{{ __('app.search_plots') }}</option>
-                    <option value="houses">{{ __('app.search_houses') }}</option>
-                    <option value="vehicles">{{ __('app.search_vehicles') }}</option>
-                </select>
-            </div>
+/* Trust Strip */
+.trust-strip{
+  background:var(--c-white);padding:64px 5vw;
+  border-bottom:1px solid var(--c-border);
+}
+.trust-grid{
+  max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:40px;
+}
+@media(max-width:1024px){.trust-grid{grid-template-columns:repeat(2,1fr);gap:40px;}}
+@media(max-width:640px){.trust-grid{grid-template-columns:1fr;gap:32px;}}
+.trust-item{display:flex;align-items:flex-start;gap:20px;}
+.trust-icon{
+  width:56px;height:56px;border-radius:16px;background:var(--c-gold-pale);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.trust-icon svg{width:28px;height:28px;color:var(--c-gold);}
+.trust-text h3{font-family:var(--ff-head);font-size:18px;font-weight:800;color:var(--c-navy);margin-bottom:8px;}
+.trust-text p{font-family:var(--ff-body);font-size:14px;color:var(--c-gray);line-height:1.6;}
 
-            <!-- 2. Aina (Makazi / Biashara) -->
-            <div>
-                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">
-                    {{ __('app.search_type') }}
-                </label>
-                <select name="category" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm font-semibold text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#4A0E4E] transition">
-                    <option value="">{{ __('app.search_all_types') }}</option>
-                    <option value="residential">{{ __('app.search_residential') }}</option>
-                    <option value="commercial">{{ __('app.search_commercial') }}</option>
-                </select>
-            </div>
+/* ═══ 3. EDITORIAL CATEGORIES ══════════════════════════════════════ */
+.categories-sec{padding:120px 5vw;background:var(--c-bg);}
+.cat-hdr{max-width:1280px;margin:0 auto 64px;text-align:center;}
+.cat-grid{
+  max-width:1280px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
+}
+@media(max-width:1024px){.cat-grid{grid-template-columns:repeat(2,1fr);gap:24px;}}
+@media(max-width:640px){.cat-grid{grid-template-columns:1fr;}}
+.cat-card{
+  position:relative;border-radius:var(--r-xl);overflow:hidden;
+  aspect-ratio:3/4;display:flex;align-items:flex-end;padding:32px 24px;
+  background:#000;
+}
+.cat-card img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0.6;transition:transform 0.8s, opacity 0.8s;
+}
+.cat-card:hover img{transform:scale(1.1);opacity:0.4;}
+.cat-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(14,23,38,0.95) 0%, transparent 60%);z-index:1;
+}
+.cat-card__content{position:relative;z-index:2;width:100%;}
+.cat-card__title{font-family:var(--ff-head);font-size:24px;font-weight:800;color:var(--c-white);margin-bottom:8px;line-height:1.2;}
+.cat-card__desc{font-family:var(--ff-body);font-size:14px;color:rgba(255,255,255,0.7);margin-bottom:24px;line-height:1.6;}
+.cat-card__link{
+  display:inline-flex;align-items:center;gap:8px;font-family:var(--ff-body);
+  font-size:12px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--c-gold-lt);
+}
+.cat-card__link svg{transition:transform 0.3s;}
+.cat-card:hover .cat-card__link svg{transform:translateX(6px);}
 
-            <!-- 3. Eneo (Location) -->
-            <div>
-                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">
-                    {{ __('app.search_location') }}
-                </label>
-                <select name="location" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm font-semibold text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#4A0E4E] transition">
-                    <option value="">{{ __('app.search_all_locations') }}</option>
-                    @foreach($locations as $loc)
-                        <option value="{{ $loc->id }}">{{ $loc->area_name }}</option>
-                    @endforeach
-                </select>
-            </div>
+/* ═══ 4. FEATURED PROPERTIES ══════════════════════════════════════ */
+.featured-sec{padding:120px 5vw;background:var(--c-white);}
+.feat-hdr{max-width:1280px;margin:0 auto 64px;display:flex;justify-content:space-between;align-items:flex-end;}
+@media(max-width:768px){.feat-hdr{flex-direction:column;align-items:flex-start;gap:24px;}}
+.prop-grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;}
+@media(max-width:1024px){.prop-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:768px){.prop-grid{grid-template-columns:1fr;}}
 
-            <!-- 4. Bajeti (Budget) -->
-            <div>
-                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">
-                    {{ __('app.search_budget') }}
-                </label>
-                <input 
-                    type="number" 
-                    name="max_price" 
-                    placeholder="Kiwango cha juu..." 
-                    class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm font-semibold text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#4A0E4E] transition"
-                >
-            </div>
+.prop-card{
+  background:var(--c-white);border-radius:var(--r-xl);overflow:hidden;
+  border:1px solid var(--c-border);box-shadow:var(--shadow-sm);
+  transition:all 0.4s cubic-bezier(0.16,1,0.3,1);display:flex;flex-direction:column;
+}
+.prop-card:hover{transform:translateY(-12px);box-shadow:var(--shadow-lg);border-color:rgba(117,13,21,0.1);}
+.prop-card__img{position:relative;aspect-ratio:4/3;overflow:hidden;}
+.prop-card__img img{width:100%;height:100%;object-fit:cover;transition:transform 0.8s;}
+.prop-card:hover .prop-card__img img{transform:scale(1.08);}
+.prop-card__tag{
+  position:absolute;top:20px;left:20px;background:rgba(255,255,255,0.9);backdrop-filter:blur(4px);
+  padding:8px 16px;border-radius:var(--r-pill);font-family:var(--ff-body);font-size:11px;
+  font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--c-navy);
+}
+.prop-card__body{padding:32px;}
+.prop-card__price{font-family:var(--ff-head);font-size:24px;font-weight:900;color:var(--c-maroon);margin-bottom:12px;}
+.prop-card__title{font-family:var(--ff-head);font-size:20px;font-weight:800;color:var(--c-navy);margin-bottom:12px;line-height:1.3;}
+.prop-card__loc{display:flex;align-items:center;gap:8px;font-family:var(--ff-body);font-size:14px;color:var(--c-gray);margin-bottom:24px;}
+.prop-card__loc svg{color:var(--c-gold);width:18px;height:18px;}
+.prop-card__meta{
+  display:flex;gap:20px;padding-top:20px;border-top:1px solid var(--c-border);
+}
+.meta-item{display:flex;align-items:center;gap:8px;font-family:var(--ff-body);font-size:13px;font-weight:600;color:var(--c-text-mid);}
+.meta-item svg{color:var(--c-gold);width:16px;height:16px;}
 
-            <!-- 5. Submit Button -->
-            <div>
-                <button 
-                    type="submit" 
-                    class="w-full bg-pfi-gradient text-white font-bold py-3.5 px-6 rounded-xl shadow-lg hover:shadow-xl hover:brightness-110 active:scale-95 transition flex items-center justify-center space-x-2 text-sm border border-[#68176E]"
-                >
-                    <svg class="w-4 h-4 text-[#DFB743]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                    <span>{{ __('app.search_btn') }}</span>
-                </button>
-            </div>
+/* ═══ 5. INVESTMENT SECTION ═══════════════════════════════════════ */
+.invest-sec{
+  padding:120px 5vw;background:var(--c-navy);position:relative;overflow:hidden;
+}
+.invest-sec::before{
+  content:'';position:absolute;top:0;right:0;width:800px;height:100%;
+  background:radial-gradient(ellipse at right, rgba(117,13,21,0.4) 0%, transparent 70%);pointer-events:none;
+}
+.invest-grid{
+  max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:2;
+}
+@media(max-width:1024px){.invest-grid{grid-template-columns:1fr;gap:64px;}}
+.invest-vals{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+@media(max-width:640px){.invest-vals{grid-template-columns:1fr;}}
+.val-item{
+  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);
+  padding:32px;border-radius:var(--r-xl);transition:all 0.4s;
+}
+.val-item:hover{background:rgba(255,255,255,0.08);border-color:rgba(250,201,85,0.3);transform:translateY(-8px);}
+.val-icon{
+  width:48px;height:48px;border-radius:12px;background:rgba(250,201,85,0.1);
+  display:flex;align-items:center;justify-content:center;margin-bottom:24px;
+}
+.val-icon svg{width:24px;height:24px;color:var(--c-gold-lt);}
+.val-title{font-family:var(--ff-head);font-size:18px;font-weight:800;color:var(--c-white);margin-bottom:12px;}
+.val-desc{font-family:var(--ff-body);font-size:14px;color:rgba(255,255,255,0.6);line-height:1.7;}
 
-        </form>
-    </div>
-</section>
+/* ═══ 6. ABOUT SECTION ════════════════════════════════════════════ */
+.about-sec{padding:120px 5vw;background:var(--c-bg);}
+.about-grid{
+  max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr;gap:80px;align-items:center;
+}
+@media(max-width:1024px){.about-grid{grid-template-columns:1fr;gap:56px;}}
+.about-img{position:relative;border-radius:var(--r-xl);overflow:hidden;}
+.about-img img{width:100%;height:auto;border-radius:var(--r-xl);}
+.about-img::after{
+  content:'';position:absolute;inset:0;border:1px solid rgba(255,255,255,0.2);border-radius:var(--r-xl);
+}
+.about-stats{
+  position:absolute;bottom:-30px;right:40px;background:var(--c-white);
+  padding:32px 48px;border-radius:var(--r-xl);box-shadow:var(--shadow-lg);
+  display:flex;align-items:center;gap:24px;
+}
+.stat-big{font-family:var(--ff-head);font-size:48px;font-weight:900;color:var(--c-maroon);line-height:1;}
+.stat-lbl{font-family:var(--ff-body);font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--c-gray);max-width:100px;}
 
-<!-- =========================================================================
-     3. SERVICES / CATEGORIES SECTION (4 PILLARS)
-     ========================================================================= -->
-<section class="py-20 bg-neutral-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
-            <span class="text-xs font-extrabold text-[#C59B27] uppercase tracking-widest block">
-                {{ app()->getLocale() === 'sw' ? 'HUDUMA ZETU KUU' : 'OUR CORE SERVICES' }}
-            </span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-[#320635] tracking-tight">
-                {{ __('app.categories_title') }}
-            </h2>
-            <p class="text-gray-600 text-sm sm:text-base">
-                {{ __('app.categories_subtitle') }}
-            </p>
-        </div>
+/* ═══ 7. PREMIUM CTA ══════════════════════════════════════════════ */
+.cta-sec{
+  margin:0 5vw 120px;background:linear-gradient(135deg,var(--c-maroon-dk),var(--c-maroon));
+  border-radius:var(--r-xl);padding:100px 48px;text-align:center;position:relative;overflow:hidden;
+}
+@media(max-width:768px){.cta-sec{padding:80px 24px;margin:0 24px 80px;}}
+.cta-sec::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20.5V18H0v-2h20v-2.5L25 17l-5 3.5zM40 18v2H20v-2h20z' fill='%23FFFFFF' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+.cta-content{position:relative;z-index:2;max-width:800px;margin:0 auto;}
+.cta-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;margin-top:48px;}
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            
-            <!-- Card 1: Viwanja vya Makazi -->
-            <div class="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group card-hover-lift">
-                <div class="relative h-48 overflow-hidden bg-gray-100">
-                    <img 
-                        src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80" 
-                        alt="{{ __('app.cat_plots_res_title') }}" 
-                        class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
-                    >
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#220325]/80 via-transparent to-transparent"></div>
-                    <span class="absolute bottom-3 left-3 text-xs font-bold text-[#DFB743] uppercase tracking-wider bg-[#220325]/70 px-2.5 py-1 rounded-md backdrop-blur-sm">
-                        Makazi &bull; Homes
-                    </span>
-                </div>
-                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-                    <div>
-                        <h3 class="text-lg font-bold text-[#320635] group-hover:text-[#68176E] transition">
-                            {{ __('app.cat_plots_res_title') }}
-                        </h3>
-                        <p class="text-gray-600 text-xs mt-2 leading-relaxed">
-                            {{ __('app.cat_plots_res_desc') }}
-                        </p>
-                    </div>
-                    <a href="{{ route('plots.index', ['category' => 'residential']) }}" class="inline-flex items-center text-xs font-bold text-[#4A0E4E] hover:text-[#C59B27] transition group-hover:translate-x-1 duration-200">
-                        <span>{{ __('app.cat_plots_res_cta') }}</span>
-                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                    </a>
-                </div>
-            </div>
+/* ═══ GALLERY SCROLL ═════════════════════════════════════════════ */
+.gallery-sec{padding:0 0 120px 0;background:var(--c-bg);}
+.hz-gallery-scroll{
+  display:flex;gap:24px;overflow-x:auto;padding:0 5vw 32px;scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.hz-gallery-scroll::-webkit-scrollbar{display:none;}
+.hz-gallery-item{
+  flex-shrink:0;width:400px;height:300px;border-radius:var(--r-xl);overflow:hidden;
+  scroll-snap-align:start;position:relative;
+}
+@media(max-width:768px){.hz-gallery-item{width:300px;height:240px;}}
+.hz-gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.8s;}
+.hz-gallery-item:hover img{transform:scale(1.08);}
+</style>
 
-            <!-- Card 2: Viwanja vya Biashara -->
-            <div class="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group card-hover-lift">
-                <div class="relative h-48 overflow-hidden bg-gray-100">
-                    <img 
-                        src="https://images.unsplash.com/photo-1448630360428-65456885c650?auto=format&fit=crop&w=800&q=80" 
-                        alt="{{ __('app.cat_plots_com_title') }}" 
-                        class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
-                    >
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#220325]/80 via-transparent to-transparent"></div>
-                    <span class="absolute bottom-3 left-3 text-xs font-bold text-[#DFB743] uppercase tracking-wider bg-[#220325]/70 px-2.5 py-1 rounded-md backdrop-blur-sm">
-                        Biashara &bull; Commercial
-                    </span>
-                </div>
-                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-                    <div>
-                        <h3 class="text-lg font-bold text-[#320635] group-hover:text-[#68176E] transition">
-                            {{ __('app.cat_plots_com_title') }}
-                        </h3>
-                        <p class="text-gray-600 text-xs mt-2 leading-relaxed">
-                            {{ __('app.cat_plots_com_desc') }}
-                        </p>
-                    </div>
-                    <a href="{{ route('plots.index', ['category' => 'commercial']) }}" class="inline-flex items-center text-xs font-bold text-[#4A0E4E] hover:text-[#C59B27] transition group-hover:translate-x-1 duration-200">
-                        <span>{{ __('app.cat_plots_com_cta') }}</span>
-                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Card 3: Nyumba (Houses) -->
-            <div class="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group card-hover-lift">
-                <div class="relative h-48 overflow-hidden bg-gray-100">
-                    <img 
-                        src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" 
-                        alt="{{ __('app.cat_houses_title') }}" 
-                        class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
-                    >
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#220325]/80 via-transparent to-transparent"></div>
-                    <span class="absolute bottom-3 left-3 text-xs font-bold text-[#DFB743] uppercase tracking-wider bg-[#220325]/70 px-2.5 py-1 rounded-md backdrop-blur-sm">
-                        Nyumba &bull; Houses
-                    </span>
-                </div>
-                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-                    <div>
-                        <h3 class="text-lg font-bold text-[#320635] group-hover:text-[#68176E] transition">
-                            {{ __('app.cat_houses_title') }}
-                        </h3>
-                        <p class="text-gray-600 text-xs mt-2 leading-relaxed">
-                            {{ __('app.cat_houses_desc') }}
-                        </p>
-                    </div>
-                    <a href="{{ route('houses.index') }}" class="inline-flex items-center text-xs font-bold text-[#4A0E4E] hover:text-[#C59B27] transition group-hover:translate-x-1 duration-200">
-                        <span>{{ __('app.cat_houses_cta') }}</span>
-                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Card 4: Magari (Vehicles) -->
-            <div class="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group card-hover-lift">
-                <div class="relative h-48 overflow-hidden bg-gray-100">
-                    <img 
-                        src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80" 
-                        alt="{{ __('app.cat_vehicles_title') }}" 
-                        class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
-                    >
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#220325]/80 via-transparent to-transparent"></div>
-                    <span class="absolute bottom-3 left-3 text-xs font-bold text-[#DFB743] uppercase tracking-wider bg-[#220325]/70 px-2.5 py-1 rounded-md backdrop-blur-sm">
-                        Magari &bull; Vehicles
-                    </span>
-                </div>
-                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-                    <div>
-                        <h3 class="text-lg font-bold text-[#320635] group-hover:text-[#68176E] transition">
-                            {{ __('app.cat_vehicles_title') }}
-                        </h3>
-                        <p class="text-gray-600 text-xs mt-2 leading-relaxed">
-                            {{ __('app.cat_vehicles_desc') }}
-                        </p>
-                    </div>
-                    <a href="{{ route('vehicles.index') }}" class="inline-flex items-center text-xs font-bold text-[#4A0E4E] hover:text-[#C59B27] transition group-hover:translate-x-1 duration-200">
-                        <span>{{ __('app.cat_vehicles_cta') }}</span>
-                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                    </a>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-</section>
-
-<!-- =========================================================================
-     4. FEATURED OPPORTUNITIES (FURSA ZILIZOPO)
-     ========================================================================= -->
-<section class="py-20 bg-white border-t border-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-            <div class="space-y-2">
-                <span class="text-xs font-extrabold text-[#C59B27] uppercase tracking-widest block">
-                    {{ __('app.featured_title') }}
-                </span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-[#320635] tracking-tight">
-                    {{ app()->getLocale() === 'sw' ? 'Mali Zilizopo Sokoni Sasa' : 'Prime Listings On The Market' }}
-                </h2>
-            </div>
-            <a href="{{ route('plots.index') }}" class="mt-4 md:mt-0 inline-flex items-center space-x-2 text-sm font-bold text-[#4A0E4E] hover:text-[#C59B27] transition">
-                <span>{{ __('app.view_all_plots') }}</span>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+{{-- ═══════════════════════════════════════════════════════════
+     1. CINEMATIC HERO
+═══════════════════════════════════════════════════════════ --}}
+<section class="hero-prm">
+    <!-- Make sure hero image actually exists or use the default -->
+    <img src="{{ $heroImg }}" onerror="this.src='{{ asset('images/hero-split.jpg') }}'" alt="Premium Property" class="hero-prm__bg">
+    <div class="hero-prm__overlay"></div>
+    
+    <div class="hero-prm__content">
+        <span class="prm-label" style="color:var(--c-gold-lt)">{{ __('app.hero_badge') }}</span>
+        <h1 class="hero-prm__title">
+            {!! str_replace(['Sahihi', 'Smarter'], ['<em>Sahihi</em>', '<em>Smarter</em>'], __('app.hero_title')) !!}
+        </h1>
+        <p class="hero-prm__sub">
+            {{ __('app.hero_subtitle') }}
+        </p>
+        <div class="hero-prm__actions">
+            <a href="{{ route('plots.index') }}" class="btn-prm">
+                {{ __('app.hero_cta_plots') }}
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+            <a href="https://wa.me/{{ $waNum }}" target="_blank" class="btn-sec">
+                {{ __('app.hero_cta_contact') }}
             </a>
         </div>
-
-        <!-- Plots Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            @forelse($featuredPlots as $plot)
-                <div class="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group card-hover-lift">
-                    <div class="relative aspect-[16/10] overflow-hidden bg-gray-100">
-                        <img 
-                            src="{{ $plot->featured_image_url }}" 
-                            alt="{{ $plot->title }}" 
-                            class="w-full h-full object-cover group-hover:scale-105 transition duration-500" 
-                            loading="lazy"
-                        >
-                        <div class="absolute top-3 left-3 flex items-center space-x-2">
-                            <span class="px-2.5 py-1 rounded-md text-xs font-bold uppercase tracking-wider shadow-md {{ $plot->status_badge_classes }}">
-                                {{ $plot->status_label }}
-                            </span>
-                            @if($plot->is_featured)
-                                <span class="px-2.5 py-1 rounded-md text-xs font-bold uppercase tracking-wider bg-pfi-gradient text-[#DFB743] border border-[#C59B27]/40 shadow-md">
-                                    Featured
-                                </span>
-                            @endif
-                        </div>
-                        <div class="absolute bottom-3 left-3">
-                            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-[#220325]/85 backdrop-blur-md text-[#DFB743] border border-[#C59B27]/30">
-                                {{ $plot->plotType?->name_sw ?? 'Kiwanja' }}
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
-                        <div>
-                            <div class="flex items-center text-xs font-semibold text-gray-500 mb-1.5 space-x-1">
-                                <svg class="w-3.5 h-3.5 text-[#4A0E4E]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                                <span>{{ $plot->full_location }}</span>
-                            </div>
-                            <h3 class="text-base font-bold text-gray-900 line-clamp-1 group-hover:text-[#4A0E4E] transition">
-                                {{ $plot->title }}
-                            </h3>
-                            <div class="flex items-center justify-between text-xs text-gray-600 mt-3 pt-3 border-t border-gray-100">
-                                <span class="font-semibold">{{ $plot->formatted_size }}</span>
-                                <span class="text-emerald-600 font-semibold">{{ $plot->ownership_title_type ?? 'Kimepimwa' }}</span>
-                            </div>
-                        </div>
-
-                        <div class="pt-3 border-t border-gray-100 flex items-center justify-between">
-                            <div>
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-gray-400 block">{{ app()->getLocale() === 'sw' ? 'Bei ya Mauzo' : 'Price' }}</span>
-                                <span class="text-lg font-extrabold text-[#4A0E4E]">{{ $plot->formatted_price }}</span>
-                            </div>
-                            <a href="{{ route('plots.show', $plot->slug) }}" class="bg-[#FAF5FB] group-hover:bg-pfi-gradient text-[#4A0E4E] group-hover:text-white px-4 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-1 shadow-sm border border-[#F3E8F6] group-hover:border-transparent">
-                                <span>{{ __('app.view_details') }}</span>
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            @empty
-                <div class="col-span-3 text-center py-12 bg-gray-50 rounded-2xl border border-gray-200">
-                    <p class="text-gray-500 font-semibold">{{ __('app.empty_plots') }}</p>
-                </div>
-            @endforelse
-        </div>
-
     </div>
 </section>
 
-<!-- =========================================================================
-     5. WHY POWER FAMILY INVESTMENT (TRUST PILLARS)
-     ========================================================================= -->
-<section class="py-20 bg-[#220325] text-white relative overflow-hidden">
-    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#DFB743_1px,transparent_1px)] [background-size:20px_20px]"></div>
+{{-- ═══════════════════════════════════════════════════════════
+     2. SEARCH BAR & TRUST STRIP
+═══════════════════════════════════════════════════════════ --}}
+<div class="search-bar-wrap">
+    <form action="{{ route('plots.index') }}" method="GET" class="search-bar">
+        <div class="search-field">
+            <label>{{ __('app.search_looking_for') }}</label>
+            <select name="type">
+                <option value="">{{ __('app.search_all_types') }}</option>
+                <option value="residential">{{ __('app.search_residential') }}</option>
+                <option value="commercial">{{ __('app.search_commercial') }}</option>
+            </select>
+        </div>
+        <div class="search-field">
+            <label>{{ __('app.search_location') }}</label>
+            <select name="location">
+                <option value="">{{ __('app.search_all_locations') }}</option>
+                @foreach(\App\Models\Location::orderBy('area_name')->get() as $loc)
+                    <option value="{{ $loc->id }}">{{ $loc->display_name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="search-field">
+            <label>{{ __('app.search_budget') }} (MIN)</label>
+            <input type="number" name="min_price" placeholder="Mfano: 5,000,000">
+        </div>
+        <div class="search-field">
+            <label>{{ __('app.search_budget') }} (MAX)</label>
+            <input type="number" name="max_price" placeholder="Mfano: 50,000,000">
+        </div>
+        <button type="submit" class="btn-search">
+            {{ __('app.search_btn') }}
+        </button>
+    </form>
+</div>
 
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
-            <span class="text-xs font-extrabold text-[#DFB743] uppercase tracking-widest block">
-                {{ app()->getLocale() === 'sw' ? 'MSINGI WA UTENDAJI WETU' : 'OUR FOUNDATION' }}
-            </span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                {{ __('app.why_title') }}
+<section class="trust-strip">
+    <div class="trust-grid">
+        <div class="trust-item">
+            <div class="trust-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
+            <div class="trust-text">
+                <h3>{{ __('app.why_trust_title') }}</h3>
+                <p>{{ __('app.why_trust_desc') }}</p>
+            </div>
+        </div>
+        <div class="trust-item">
+            <div class="trust-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg></div>
+            <div class="trust-text">
+                <h3>{{ __('app.why_variety_title') }}</h3>
+                <p>{{ __('app.why_variety_desc') }}</p>
+            </div>
+        </div>
+        <div class="trust-item">
+            <div class="trust-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg></div>
+            <div class="trust-text">
+                <h3>{{ __('app.why_support_title') }}</h3>
+                <p>{{ __('app.why_support_desc') }}</p>
+            </div>
+        </div>
+        <div class="trust-item">
+            <div class="trust-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+            <div class="trust-text">
+                <h3>{{ __('app.why_confidence_title') }}</h3>
+                <p>{{ __('app.why_confidence_desc') }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- ═══════════════════════════════════════════════════════════
+     3. EDITORIAL CATEGORIES
+═══════════════════════════════════════════════════════════ --}}
+<section class="categories-sec">
+    <div class="cat-hdr">
+        <span class="prm-label">{{ __('app.categories_title') }}</span>
+        <h2 class="prm-h2">{{ __('app.categories_subtitle') }}</h2>
+    </div>
+    
+    <div class="cat-grid">
+        <!-- Res Plots -->
+        <div class="cat-card">
+            <img src="{{ asset('images/category-res.jpg') }}" onerror="this.src='https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80'" alt="Residential Plots">
+            <div class="cat-card__content">
+                <h3 class="cat-card__title">{{ __('app.cat_plots_res_title') }}</h3>
+                <p class="cat-card__desc">{{ __('app.cat_plots_res_desc') }}</p>
+                <a href="{{ route('plots.index', ['category' => 'residential']) }}" class="cat-card__link">
+                    {{ __('app.cat_plots_res_cta') }}
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                </a>
+            </div>
+        </div>
+        <!-- Com Plots -->
+        <div class="cat-card">
+            <img src="{{ asset('images/category-com.jpg') }}" onerror="this.src='https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80'" alt="Commercial Plots">
+            <div class="cat-card__content">
+                <h3 class="cat-card__title">{{ __('app.cat_plots_com_title') }}</h3>
+                <p class="cat-card__desc">{{ __('app.cat_plots_com_desc') }}</p>
+                <a href="{{ route('plots.index', ['category' => 'commercial']) }}" class="cat-card__link">
+                    {{ __('app.cat_plots_com_cta') }}
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                </a>
+            </div>
+        </div>
+        <!-- Houses -->
+        <div class="cat-card">
+            <img src="{{ asset('images/category-house.jpg') }}" onerror="this.src='https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80'" alt="Houses">
+            <div class="cat-card__content">
+                <h3 class="cat-card__title">{{ __('app.cat_houses_title') }}</h3>
+                <p class="cat-card__desc">{{ __('app.cat_houses_desc') }}</p>
+                <a href="{{ route('houses.index') }}" class="cat-card__link">
+                    {{ __('app.cat_houses_cta') }}
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                </a>
+            </div>
+        </div>
+        <!-- Vehicles -->
+        <div class="cat-card">
+            <img src="{{ asset('images/category-car.jpg') }}" onerror="this.src='https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=800&q=80'" alt="Vehicles">
+            <div class="cat-card__content">
+                <h3 class="cat-card__title">{{ __('app.cat_vehicles_title') }}</h3>
+                <p class="cat-card__desc">{{ __('app.cat_vehicles_desc') }}</p>
+                <a href="{{ route('vehicles.index') }}" class="cat-card__link">
+                    {{ __('app.cat_vehicles_cta') }}
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- ═══════════════════════════════════════════════════════════
+     4. FEATURED PROPERTIES
+═══════════════════════════════════════════════════════════ --}}
+@php
+    $featuredPlots = \App\Models\Plot::where('is_featured', true)->with('location')->take(3)->get();
+@endphp
+@if($featuredPlots->count() > 0)
+<section class="featured-sec">
+    <div class="feat-hdr">
+        <div>
+            <span class="prm-label">{{ __('app.featured_title') }}</span>
+            <h2 class="prm-h2">{{ __('app.featured_subtitle') }}</h2>
+        </div>
+        <a href="{{ route('plots.index') }}" class="btn-link">
+            {{ __('app.view_all_plots') }}
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+    </div>
+
+    <div class="prop-grid">
+        @foreach($featuredPlots as $plot)
+        <a href="{{ route('plots.show', $plot->slug) }}" class="prop-card">
+            <div class="prop-card__img">
+                <img src="{{ $plot->featured_image_url }}" alt="{{ $plot->title }}">
+                <div class="prop-card__tag">{{ $plot->category == 'residential' ? __('app.search_residential') : __('app.search_commercial') }}</div>
+            </div>
+            <div class="prop-card__body">
+                <div class="prop-card__price">TZS {{ number_format($plot->price) }}</div>
+                <h3 class="prop-card__title">{{ $plot->title }}</h3>
+                <div class="prop-card__loc">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    {{ $plot->location ? $plot->location->display_name : 'Tanzania' }}
+                </div>
+                <div class="prop-card__meta">
+                    <div class="meta-item">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+                        {{ $plot->size }} SQM
+                    </div>
+                    <div class="meta-item">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        {{ $plot->status == 'available' ? __('app.status_available') : __('app.status_sold') }}
+                    </div>
+                </div>
+            </div>
+        </a>
+        @endforeach
+    </div>
+</section>
+@endif
+
+{{-- ═══════════════════════════════════════════════════════════
+     5. INVESTMENT VALUES SECTION
+═══════════════════════════════════════════════════════════ --}}
+<section class="invest-sec">
+    <div class="invest-grid">
+        <div class="invest-text">
+            <span class="prm-label" style="color:var(--c-gold-lt)">Power Family Investment</span>
+            <h2 class="prm-h2 prm-h2--white">
+                {!! str_replace(['Uhakika', 'Certainty'], ['<em>Uhakika</em>', '<em>Certainty</em>'], __('app.why_title')) !!}
             </h2>
-            <p class="text-gray-300 text-sm sm:text-base">
+            <p class="prm-p" style="color:rgba(255,255,255,0.7)">
                 {{ __('app.why_subtitle') }}
             </p>
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            
-            <!-- Pillar 1 -->
-            <div class="bg-white/5 border border-white/10 p-8 rounded-2xl backdrop-blur-md hover:bg-white/10 transition duration-300 space-y-4">
-                <div class="w-12 h-12 rounded-xl bg-pfi-gradient flex items-center justify-center text-[#DFB743] shadow-md border border-[#C59B27]/40">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-                </div>
-                <h3 class="text-lg font-bold text-white">{{ __('app.why_trust_title') }}</h3>
-                <p class="text-xs text-gray-300 leading-relaxed">{{ __('app.why_trust_desc') }}</p>
+        <div class="invest-vals">
+            <div class="val-item">
+                <div class="val-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg></div>
+                <h4 class="val-title">{{ __('app.why_trust_title') }}</h4>
+                <p class="val-desc">{{ __('app.why_trust_desc') }}</p>
             </div>
-
-            <!-- Pillar 2 -->
-            <div class="bg-white/5 border border-white/10 p-8 rounded-2xl backdrop-blur-md hover:bg-white/10 transition duration-300 space-y-4">
-                <div class="w-12 h-12 rounded-xl bg-pfi-gradient flex items-center justify-center text-[#DFB743] shadow-md border border-[#C59B27]/40">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
-                </div>
-                <h3 class="text-lg font-bold text-white">{{ __('app.why_variety_title') }}</h3>
-                <p class="text-xs text-gray-300 leading-relaxed">{{ __('app.why_variety_desc') }}</p>
+            <div class="val-item">
+                <div class="val-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
+                <h4 class="val-title">{{ __('app.why_variety_title') }}</h4>
+                <p class="val-desc">{{ __('app.why_variety_desc') }}</p>
             </div>
-
-            <!-- Pillar 3 -->
-            <div class="bg-white/5 border border-white/10 p-8 rounded-2xl backdrop-blur-md hover:bg-white/10 transition duration-300 space-y-4">
-                <div class="w-12 h-12 rounded-xl bg-pfi-gradient flex items-center justify-center text-[#DFB743] shadow-md border border-[#C59B27]/40">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-                </div>
-                <h3 class="text-lg font-bold text-white">{{ __('app.why_support_title') }}</h3>
-                <p class="text-xs text-gray-300 leading-relaxed">{{ __('app.why_support_desc') }}</p>
+            <div class="val-item">
+                <div class="val-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg></div>
+                <h4 class="val-title">{{ __('app.why_support_title') }}</h4>
+                <p class="val-desc">{{ __('app.why_support_desc') }}</p>
             </div>
-
-            <!-- Pillar 4 -->
-            <div class="bg-white/5 border border-white/10 p-8 rounded-2xl backdrop-blur-md hover:bg-white/10 transition duration-300 space-y-4">
-                <div class="w-12 h-12 rounded-xl bg-pfi-gradient flex items-center justify-center text-[#DFB743] shadow-md border border-[#C59B27]/40">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
-                </div>
-                <h3 class="text-lg font-bold text-white">{{ __('app.why_confidence_title') }}</h3>
-                <p class="text-xs text-gray-300 leading-relaxed">{{ __('app.why_confidence_desc') }}</p>
+            <div class="val-item">
+                <div class="val-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg></div>
+                <h4 class="val-title">{{ __('app.why_confidence_title') }}</h4>
+                <p class="val-desc">{{ __('app.why_confidence_desc') }}</p>
             </div>
-
         </div>
-
     </div>
 </section>
 
-<!-- =========================================================================
-     6. LOCATIONS WE SERVE (MAENEO TUNAYOHUDUMIA)
-     ========================================================================= -->
-<section class="py-20 bg-neutral-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-            <div class="space-y-2">
-                <span class="text-xs font-extrabold text-[#C59B27] uppercase tracking-widest block">
-                    {{ __('app.locations_title') }}
-                </span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-[#320635] tracking-tight">
-                    {{ __('app.locations_subtitle') }}
-                </h2>
-            </div>
-            <a href="{{ route('locations.index') }}" class="mt-4 md:mt-0 inline-flex items-center space-x-2 text-sm font-bold text-[#4A0E4E] hover:text-[#C59B27] transition">
-                <span>{{ app()->getLocale() === 'sw' ? 'Tazama Maeneo Yote' : 'Explore All Locations' }}</span>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-            </a>
+{{-- ═══════════════════════════════════════════════════════════
+     6. ABOUT SUMMARY & GALLERY
+═══════════════════════════════════════════════════════════ --}}
+<section class="about-sec">
+    <div class="about-grid">
+        <div class="about-img">
+            <img src="{{ asset('images/about-premium.jpg') }}" onerror="this.src='https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1000&q=80'" alt="About Power Family Investment">
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            @foreach($locations as $loc)
-                <div class="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 bg-[#220325] aspect-[4/3] flex flex-col justify-end p-6 border border-[#68176E]/30">
-                    <img 
-                        src="{{ $loc->image_url }}" 
-                        alt="{{ $loc->area_name }}" 
-                        class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-40" 
-                        loading="lazy"
-                    >
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#220325] via-[#220325]/40 to-transparent"></div>
-
-                    <div class="relative z-10 space-y-2">
-                        <span class="inline-block px-2.5 py-0.5 rounded-full bg-pfi-gradient text-[#DFB743] text-[11px] font-bold tracking-wide uppercase border border-[#C59B27]/30">
-                            {{ $loc->available_plots_count + $loc->available_houses_count }} {{ app()->getLocale() === 'sw' ? 'Mali Zinazopatikana' : 'Listings Available' }}
-                        </span>
-                        <h3 class="text-xl font-bold text-white group-hover:text-[#DFB743] transition">
-                            📍 {{ $loc->area_name }}
-                        </h3>
-                        <p class="text-xs text-gray-300 line-clamp-2 leading-relaxed">
-                            {{ $loc->description ?? ($loc->area_name . ' ni eneo zuri linalofaa kwa makazi na uwekezaji.') }}
-                        </p>
-                        <div class="pt-2">
-                            <a href="{{ route('plots.index', ['location' => $loc->id]) }}" class="inline-flex items-center space-x-2 text-xs font-bold text-[#DFB743] group-hover:text-white uppercase tracking-wider transition">
-                                <span>{{ __('app.view_plots_in_loc') }}</span>
-                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-
-    </div>
-</section>
-
-<!-- =========================================================================
-     7. HOW TO BUY (JINSI YA KUNUNUA KIWANJA - 5 STEPS)
-     ========================================================================= -->
-<section class="py-20 bg-white border-t border-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
-            <span class="text-xs font-extrabold text-[#C59B27] uppercase tracking-widest block">
-                {{ app()->getLocale() === 'sw' ? 'HATUA ZA UNUNUZI' : 'PURCHASE PROCESS' }}
-            </span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-[#320635] tracking-tight">
-                {{ __('app.how_title') }}
-            </h2>
-            <p class="text-gray-600 text-sm sm:text-base">
-                {{ __('app.how_subtitle') }}
+        <div class="about-text">
+            <span class="prm-label">Kuhusu Sisi</span>
+            <h2 class="prm-h2">Mshirika Wako Kwenye <em>Ukuaji wa Mitaji</em>.</h2>
+            <p class="prm-p">
+                Power Family Investment imejikita katika kuwapa Watanzania na wawekezaji fursa bora za kumiliki ardhi, nyumba za kisasa, na magari ya uhakika. Tunafanya mchakato wa ununuzi kuwa rahisi, salama na wenye uwazi.
             </p>
+            <br>
+            <a href="{{ route('pages.about') }}" class="btn-link">
+                {{ app()->getLocale() === 'sw' ? 'Soma Zaidi Kuhusu Sisi' : 'Read More About Us' }}
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
         </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 relative">
-            
-            <!-- Step 1 -->
-            <div class="bg-[#FAF5FB] rounded-2xl p-6 border border-[#F3E8F6] text-center space-y-3 relative group hover:bg-[#4A0E4E] hover:text-white transition duration-300">
-                <span class="w-10 h-10 rounded-full bg-white text-[#4A0E4E] font-extrabold text-sm flex items-center justify-center mx-auto shadow-md border border-[#C59B27]/30">01</span>
-                <h3 class="font-bold text-sm text-[#320635] group-hover:text-[#DFB743] transition">{{ __('app.how_step1_title') }}</h3>
-                <p class="text-xs text-gray-600 group-hover:text-gray-200 leading-relaxed">{{ __('app.how_step1_desc') }}</p>
-            </div>
-
-            <!-- Step 2 -->
-            <div class="bg-[#FAF5FB] rounded-2xl p-6 border border-[#F3E8F6] text-center space-y-3 relative group hover:bg-[#4A0E4E] hover:text-white transition duration-300">
-                <span class="w-10 h-10 rounded-full bg-white text-[#4A0E4E] font-extrabold text-sm flex items-center justify-center mx-auto shadow-md border border-[#C59B27]/30">02</span>
-                <h3 class="font-bold text-sm text-[#320635] group-hover:text-[#DFB743] transition">{{ __('app.how_step2_title') }}</h3>
-                <p class="text-xs text-gray-600 group-hover:text-gray-200 leading-relaxed">{{ __('app.how_step2_desc') }}</p>
-            </div>
-
-            <!-- Step 3 -->
-            <div class="bg-[#FAF5FB] rounded-2xl p-6 border border-[#F3E8F6] text-center space-y-3 relative group hover:bg-[#4A0E4E] hover:text-white transition duration-300">
-                <span class="w-10 h-10 rounded-full bg-white text-[#4A0E4E] font-extrabold text-sm flex items-center justify-center mx-auto shadow-md border border-[#C59B27]/30">03</span>
-                <h3 class="font-bold text-sm text-[#320635] group-hover:text-[#DFB743] transition">{{ __('app.how_step3_title') }}</h3>
-                <p class="text-xs text-gray-600 group-hover:text-gray-200 leading-relaxed">{{ __('app.how_step3_desc') }}</p>
-            </div>
-
-            <!-- Step 4 -->
-            <div class="bg-[#FAF5FB] rounded-2xl p-6 border border-[#F3E8F6] text-center space-y-3 relative group hover:bg-[#4A0E4E] hover:text-white transition duration-300">
-                <span class="w-10 h-10 rounded-full bg-white text-[#4A0E4E] font-extrabold text-sm flex items-center justify-center mx-auto shadow-md border border-[#C59B27]/30">04</span>
-                <h3 class="font-bold text-sm text-[#320635] group-hover:text-[#DFB743] transition">{{ __('app.how_step4_title') }}</h3>
-                <p class="text-xs text-gray-600 group-hover:text-gray-200 leading-relaxed">{{ __('app.how_step4_desc') }}</p>
-            </div>
-
-            <!-- Step 5 -->
-            <div class="bg-[#FAF5FB] rounded-2xl p-6 border border-[#F3E8F6] text-center space-y-3 relative group hover:bg-[#4A0E4E] hover:text-white transition duration-300">
-                <span class="w-10 h-10 rounded-full bg-white text-[#4A0E4E] font-extrabold text-sm flex items-center justify-center mx-auto shadow-md border border-[#C59B27]/30">05</span>
-                <h3 class="font-bold text-sm text-[#320635] group-hover:text-[#DFB743] transition">{{ __('app.how_step5_title') }}</h3>
-                <p class="text-xs text-gray-600 group-hover:text-gray-200 leading-relaxed">{{ __('app.how_step5_desc') }}</p>
-            </div>
-
-        </div>
-
     </div>
 </section>
 
-<!-- =========================================================================
-     8. GALLERY & PROJECT HIGHLIGHTS PREVIEW
-     ========================================================================= -->
-@if(count($galleryHighlights) > 0)
-<section class="py-20 bg-neutral-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-            <div class="space-y-2">
-                <span class="text-xs font-extrabold text-[#C59B27] uppercase tracking-widest block">
-                    {{ __('app.nav_gallery') }}
-                </span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-[#320635] tracking-tight">
-                    {{ app()->getLocale() === 'sw' ? 'Matunzio ya Miradi & Shughuli Zetu' : 'Project & Site Highlights' }}
-                </h2>
+@php
+    $galleryItems = \App\Models\GalleryItem::latest()->take(6)->get();
+@endphp
+@if($galleryItems->count() > 0)
+<section class="gallery-sec">
+    <div class="hz-gallery-scroll">
+        @foreach($galleryItems as $item)
+        <div class="hz-gallery-item">
+            <img src="{{ $item->url }}" alt="{{ $item->title }}">
+            <div class="hz-gallery-overlay">
+                <span class="hz-gallery-caption">{{ $item->title }}</span>
             </div>
-            <a href="{{ route('gallery.index') }}" class="mt-4 md:mt-0 inline-flex items-center space-x-2 text-sm font-bold text-[#4A0E4E] hover:text-[#C59B27] transition">
-                <span>{{ app()->getLocale() === 'sw' ? 'Tazama Picha Zote' : 'Explore Full Gallery' }}</span>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-            </a>
         </div>
-
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            @foreach($galleryHighlights as $item)
-                <div class="relative rounded-2xl overflow-hidden group aspect-square bg-gray-200 shadow-sm">
-                    <img 
-                        src="{{ $item->url }}" 
-                        alt="{{ $item->title }}" 
-                        class="w-full h-full object-cover group-hover:scale-110 transition duration-500" 
-                        loading="lazy"
-                    >
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#220325]/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                        <span class="text-xs font-bold text-[#DFB743] uppercase tracking-wider">{{ $item->category }}</span>
-                        <p class="text-xs font-semibold text-white truncate">{{ $item->title }}</p>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-
+        @endforeach
     </div>
 </section>
 @endif
 
-<!-- =========================================================================
-     9. INVESTMENT EDUCATION / BLOG
-     ========================================================================= -->
-@if(count($articles) > 0)
-<section class="py-20 bg-white border-t border-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-            <div class="space-y-2">
-                <span class="text-xs font-extrabold text-[#C59B27] uppercase tracking-widest block">
-                    {{ __('app.blog_title') }}
-                </span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-[#320635] tracking-tight">
-                    {{ __('app.blog_subtitle') }}
-                </h2>
-            </div>
-            <a href="{{ route('pages.blog') }}" class="mt-4 md:mt-0 inline-flex items-center space-x-2 text-sm font-bold text-[#4A0E4E] hover:text-[#C59B27] transition">
-                <span>{{ app()->getLocale() === 'sw' ? 'Soma Makala Zote' : 'View All Articles' }}</span>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+{{-- ═══════════════════════════════════════════════════════════
+     7. PREMIUM CTA
+═══════════════════════════════════════════════════════════ --}}
+<section class="cta-sec">
+    <div class="cta-content">
+        <h2 class="prm-h2 prm-h2--white">{!! str_replace(['Tayari', 'Ready'], ['<em>Tayari</em>', '<em>Ready</em>'], __('app.cta_title')) !!}</h2>
+        <p class="prm-p" style="margin:0 auto; color:rgba(255,255,255,0.8);">{{ __('app.cta_subtitle') }}</p>
+        <div class="cta-actions">
+            <a href="https://wa.me/{{ $waNum }}" target="_blank" class="btn-prm" style="background:var(--c-gold);color:var(--c-navy);">
+                {{ __('app.cta_whatsapp') }}
             </a>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            @foreach($articles as $art)
-                <div class="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group card-hover-lift">
-                    <div class="relative h-48 overflow-hidden bg-gray-100">
-                        <img 
-                            src="{{ $art->featured_image_url ?? 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80' }}" 
-                            alt="{{ $art->title }}" 
-                            class="w-full h-full object-cover group-hover:scale-105 transition duration-500" 
-                            loading="lazy"
-                        >
-                    </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-                        <div>
-                            <span class="text-[11px] font-bold text-[#C59B27] uppercase tracking-wider block mb-1">
-                                {{ $art->category ?? 'Uwekezaji' }}
-                            </span>
-                            <h3 class="text-base font-bold text-gray-900 line-clamp-2 group-hover:text-[#4A0E4E] transition">
-                                {{ $art->title }}
-                            </h3>
-                            <p class="text-xs text-gray-600 line-clamp-2 mt-2">
-                                {{ $art->summary ?? Str::limit(strip_tags($art->content), 100) }}
-                            </p>
-                        </div>
-                        <a href="{{ route('pages.article', $art->slug) }}" class="inline-flex items-center text-xs font-bold text-[#4A0E4E] hover:text-[#C59B27] transition">
-                            <span>{{ __('app.read_article') }}</span>
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                        </a>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-
-    </div>
-</section>
-@endif
-
-<!-- =========================================================================
-     10. STRONG FINAL CALL TO ACTION (CTA)
-     ========================================================================= -->
-<section class="py-20 bg-pfi-gradient text-white relative overflow-hidden">
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.2),transparent_70%)]"></div>
-
-    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-            {{ __('app.cta_title') }}
-        </h2>
-        <p class="text-base sm:text-lg text-gray-200 max-w-2xl mx-auto leading-relaxed">
-            {{ __('app.cta_subtitle') }}
-        </p>
-
-        <div class="pt-4 flex flex-wrap items-center justify-center gap-4">
-            @php
-                $whatsapp = \App\Models\Setting::get('whatsapp_number', '255700000000');
-                $phoneNum = \App\Models\Setting::get('company_phone', '+255 700 000 000');
-                $cleanWhatsapp = preg_replace('/[^0-9]/', '', $whatsapp);
-            @endphp
-            <a 
-                href="https://wa.me/{{ $cleanWhatsapp }}?text={{ rawurlencode(app()->getLocale() === 'sw' ? 'Habari Power Family Investment, ninaomba ushauri na maelezo zaidi kuhusu fursa za viwanja, nyumba na magari.' : 'Hello Power Family Investment, I would like more information and consultation regarding available plots, houses and vehicles.') }}" 
-                target="_blank" 
-                class="bg-[#25D366] text-white font-extrabold px-8 py-4 rounded-xl shadow-xl hover:brightness-110 active:scale-95 transition text-sm sm:text-base flex items-center space-x-2"
-            >
-                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.53 1.777.78 2.796.78 3.181 0 5.767-2.586 5.768-5.766 0-3.18-2.587-5.766-5.768-5.766zm9.969 5.766c0 5.518-4.482 10-10 10-1.748 0-3.385-.45-4.819-1.238l-7.181 1.884 1.918-7.009c-.878-1.493-1.385-3.23-1.385-5.084 0-5.518 4.482-10 10-10s10 4.482 10 10z"/></svg>
-                <span>{{ __('app.cta_whatsapp') }}</span>
-            </a>
-
-            <a 
-                href="tel:{{ $phoneNum }}" 
-                class="bg-gold-gradient text-[#220325] font-extrabold px-8 py-4 rounded-xl shadow-xl hover:brightness-110 active:scale-95 transition text-sm sm:text-base flex items-center space-x-2 border border-[#DFB743]"
-            >
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                <span>{{ __('app.cta_call') }}</span>
+            <a href="{{ route('plots.index') }}" class="btn-sec">
+                {{ __('app.cta_call') }}
             </a>
         </div>
     </div>

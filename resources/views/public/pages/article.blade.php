@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('title', $article->title . ' — Power Family Investment')
 
@@ -7,9 +7,9 @@
 <!-- Breadcrumbs -->
 <div class="bg-white border-b border-gray-100 py-3.5">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-xs font-semibold text-gray-500 flex items-center space-x-2">
-        <a href="{{ route('home') }}" class="hover:text-[#4A0E4E]">Mwanzo</a>
+        <a href="{{ route('home') }}" class="hover:text-[#750D15]">Mwanzo</a>
         <span>/</span>
-        <a href="{{ route('pages.blog') }}" class="hover:text-[#4A0E4E]">Elimu ya Uwekezaji</a>
+        <a href="{{ route('pages.blog') }}" class="hover:text-[#750D15]">Elimu ya Uwekezaji</a>
         <span>/</span>
         <span class="text-gray-900 truncate">{{ $article->title }}</span>
     </div>
@@ -20,10 +20,10 @@
         
         <!-- Header Container -->
         <div class="bg-white rounded-2xl p-6 sm:p-10 shadow-sm border border-gray-100 space-y-4">
-            <span class="px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider bg-pfi-gradient text-[#DFB743] border border-[#C59B27]/40 inline-block">
+            <span class="px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider bg-pfi-gradient text-[#FAC955] border border-[#D48B16]/40 inline-block">
                 {{ $article->category ?? 'Mwongozo wa Uwekezaji' }}
             </span>
-            <h1 class="text-2xl sm:text-4xl font-extrabold text-[#320635] leading-tight">
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-[#280508] leading-tight">
                 {{ $article->title }}
             </h1>
             <div class="flex items-center space-x-4 text-xs text-gray-500 pt-2 border-t border-gray-100">
@@ -53,7 +53,7 @@
                 <h3 class="text-xl font-bold">Unahitaji Ushauri Zaidi wa Kitaalamu?</h3>
                 <p class="text-xs text-gray-200">Wasiliana na wataalamu wetu wa Power Family Investment kwa ushauri bila malipo.</p>
             </div>
-            <a href="{{ route('pages.contact') }}" class="bg-gold-gradient text-[#220325] px-6 py-3 rounded-xl font-bold text-xs shadow hover:brightness-110 transition shrink-0">
+            <a href="{{ route('pages.contact') }}" class="bg-gold-gradient text-[#1C0305] px-6 py-3 rounded-xl font-bold text-xs shadow hover:brightness-110 transition shrink-0">
                 WASILIANA NASI LEO
             </a>
         </div>

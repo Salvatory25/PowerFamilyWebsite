@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('title', 'Vigezo na Masharti — Power Family Investment')
 
@@ -7,7 +7,7 @@
 <div class="py-16 bg-neutral-50 min-h-screen">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         <div class="bg-white rounded-2xl p-8 sm:p-12 shadow-sm border border-gray-100 space-y-6">
-            <h1 class="text-3xl font-extrabold text-[#320635]">Vigezo na Masharti (Terms & Conditions)</h1>
+            <h1 class="text-3xl font-extrabold text-[#280508]">Vigezo na Masharti (Terms & Conditions)</h1>
             <p class="text-xs text-gray-500">Ilisasishwa mwisho: {{ date('F Y') }}</p>
 
             <div class="prose max-w-none text-gray-700 text-sm leading-relaxed space-y-4">

@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 
 @section('title', 'Hariri Makala: ' . $article->title)
 @section('header_title', 'Hariri Makala (Edit Article)')
@@ -42,14 +42,14 @@
     .ql-editor h2 {
         font-size: 1.5em;
         font-weight: 800;
-        color: #16325c;
+        color: #750D15;
         margin-top: 1.2em;
         margin-bottom: 0.5em;
     }
     .ql-editor h3 {
         font-size: 1.25em;
         font-weight: 700;
-        color: #16325c;
+        color: #750D15;
         margin-top: 1em;
         margin-bottom: 0.5em;
     }
@@ -66,7 +66,7 @@
         </div>
 
         <div class="flex items-center gap-2">
-            <a href="{{ route('pages.article', $article->slug) }}" target="_blank" class="px-3.5 py-2 bg-[#16325c] text-[#dfb256] hover:bg-[#1f437a] rounded-xl text-xs font-bold transition flex items-center gap-1.5">
+            <a href="{{ route('pages.article', $article->slug) }}" target="_blank" class="px-3.5 py-2 bg-[#750D15] text-[#FAC955] hover:bg-[#1f437a] rounded-xl text-xs font-bold transition flex items-center gap-1.5">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                 <span>View Live</span>
             </a>
@@ -91,14 +91,14 @@
         @csrf
         @method('PUT')
 
-        <div class="bg-[#0c1c34] p-6 sm:p-8 rounded-3xl border border-[#16325c] space-y-6 shadow-xl">
+        <div class="bg-[#280508] p-6 sm:p-8 rounded-3xl border border-[#750D15] space-y-6 shadow-xl">
             
             <!-- 1. Title -->
             <div>
                 <label for="title" class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
                     Kichwa cha Habari (Title) <span class="text-rose-400">*</span>
                 </label>
-                <input type="text" id="title" name="title" value="{{ old('title', $article->title) }}" required placeholder="Kichwa cha makala..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:ring-2 focus:ring-[#c89a3b] focus:border-transparent">
+                <input type="text" id="title" name="title" value="{{ old('title', $article->title) }}" required placeholder="Kichwa cha makala..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:ring-2 focus:ring-[#D48B16] focus:border-transparent">
             </div>
 
             <!-- 2. Short Summary / Excerpt -->
@@ -106,7 +106,7 @@
                 <label for="excerpt" class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
                     Muhtasari Mfupi (Short Summary) <span class="text-rose-400">*</span>
                 </label>
-                <textarea id="excerpt" name="excerpt" rows="3" required placeholder="Andika muhtasari mfupi..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs text-white placeholder-slate-500 focus:ring-2 focus:ring-[#c89a3b]">{{ old('excerpt', $article->excerpt) }}</textarea>
+                <textarea id="excerpt" name="excerpt" rows="3" required placeholder="Andika muhtasari mfupi..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs text-white placeholder-slate-500 focus:ring-2 focus:ring-[#D48B16]">{{ old('excerpt', $article->excerpt) }}</textarea>
             </div>
 
             <!-- 3. Featured Image -->
@@ -117,24 +117,24 @@
                             <img src="{{ $article->image_url }}" alt="{{ $article->title }}" class="w-full h-full object-cover">
                         </div>
                         <div class="text-xs">
-                            <span class="text-[11px] font-bold text-[#dfb256] uppercase block">Picha ya Sasa (Current Image):</span>
+                            <span class="text-[11px] font-bold text-[#FAC955] uppercase block">Picha ya Sasa (Current Image):</span>
                             <span class="text-slate-400 break-all">{{ $article->image_url }}</span>
                         </div>
                     </div>
                 @endif
 
                 <div class="pt-2">
-                    <label for="image" class="block text-xs font-bold text-[#dfb256] uppercase tracking-wider mb-2">
+                    <label for="image" class="block text-xs font-bold text-[#FAC955] uppercase tracking-wider mb-2">
                         Badilisha Picha (Pakia faili jipya kama unataka kubadilisha):
                     </label>
-                    <input type="file" id="image" name="image" accept="image/*" class="w-full text-xs text-slate-300 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-[#16325c] file:text-[#dfb256] hover:file:bg-[#1f437a] cursor-pointer">
+                    <input type="file" id="image" name="image" accept="image/*" class="w-full text-xs text-slate-300 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-[#750D15] file:text-[#FAC955] hover:file:bg-[#1f437a] cursor-pointer">
                 </div>
 
                 <div class="pt-2 border-t border-slate-800">
                     <label for="image_url" class="block text-[11px] font-medium text-slate-400 mb-1">
                         Au kiungo cha picha (Image URL):
                     </label>
-                    <input type="text" id="image_url" name="image_url" value="{{ old('image_url', $article->image_url) }}" placeholder="/images/blogs/... au https://..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-slate-300 placeholder-slate-600 focus:ring-2 focus:ring-[#c89a3b]">
+                    <input type="text" id="image_url" name="image_url" value="{{ old('image_url', $article->image_url) }}" placeholder="/images/blogs/... au https://..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-slate-300 placeholder-slate-600 focus:ring-2 focus:ring-[#D48B16]">
                 </div>
             </div>
 
@@ -157,7 +157,7 @@
                 <label for="published_at" class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
                     Tarehe ya Kuchapisha (Date)
                 </label>
-                <input type="date" id="published_at" name="published_at" value="{{ old('published_at', $article->published_at ? $article->published_at->format('Y-m-d') : date('Y-m-d')) }}" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:ring-2 focus:ring-[#c89a3b]">
+                <input type="date" id="published_at" name="published_at" value="{{ old('published_at', $article->published_at ? $article->published_at->format('Y-m-d') : date('Y-m-d')) }}" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:ring-2 focus:ring-[#D48B16]">
             </div>
 
         </div>
@@ -167,7 +167,7 @@
             <a href="{{ route('admin.articles.index') }}" class="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition">
                 Ghairi
             </a>
-            <button type="submit" class="px-8 py-3.5 rounded-xl bg-gradient-to-r from-[#c89a3b] to-[#dfb256] text-[#0c1c34] font-black text-sm shadow-xl hover:opacity-90 transition">
+            <button type="submit" class="px-8 py-3.5 rounded-xl bg-gradient-to-r from-[#D48B16] to-[#FAC955] text-[#280508] font-black text-sm shadow-xl hover:opacity-90 transition">
                 Hifadhi Mabadiliko (Save Changes) &rarr;
             </button>
         </div>

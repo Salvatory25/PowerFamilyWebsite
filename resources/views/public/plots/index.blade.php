@@ -1,15 +1,15 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('title', __('app.catalogue_plots_title') . ' — Power Family Investment')
 
 @section('content')
 
 <!-- Header Banner -->
-<div class="bg-[#220325] text-white py-12 border-b border-[#68176E]/30 relative overflow-hidden">
-    <div class="absolute inset-0 bg-[radial-gradient(#DFB743_1px,transparent_1px)] [background-size:24px_24px] opacity-10"></div>
+<div class="bg-[#1C0305] text-white py-12 border-b border-[#961620]/30 relative overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(#FAC955_1px,transparent_1px)] [background-size:24px_24px] opacity-10"></div>
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-2xl space-y-2">
-            <span class="text-xs font-bold text-[#DFB743] uppercase tracking-widest block">
+            <span class="text-xs font-bold text-[#FAC955] uppercase tracking-widest block">
                 {{ app()->getLocale() === 'sw' ? 'MALI ZILIZOHAKIKIWA' : 'VERIFIED PLOTS' }}
             </span>
             <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
@@ -38,14 +38,14 @@
                         name="keyword" 
                         value="{{ request('keyword') }}" 
                         placeholder="Neno kuu..." 
-                        class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#4A0E4E] focus:outline-none"
+                        class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#750D15] focus:outline-none"
                     >
                 </div>
 
                 <!-- Category (Makazi / Biashara) -->
                 <div>
                     <label class="block text-xs font-semibold text-gray-700 mb-1">Aina ya Kiwanja</label>
-                    <select name="type" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#4A0E4E] focus:outline-none">
+                    <select name="type" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#750D15] focus:outline-none">
                         <option value="">{{ __('app.filter_all') }}</option>
                         @foreach($plotTypes as $pt)
                             <option value="{{ $pt->id }}" {{ request('type') == $pt->id ? 'selected' : '' }}>
@@ -58,7 +58,7 @@
                 <!-- Location -->
                 <div>
                     <label class="block text-xs font-semibold text-gray-700 mb-1">{{ __('app.filter_location') }}</label>
-                    <select name="location" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#4A0E4E] focus:outline-none">
+                    <select name="location" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#750D15] focus:outline-none">
                         <option value="">{{ __('app.search_all_locations') }}</option>
                         @foreach($locations as $loc)
                             <option value="{{ $loc->id }}" {{ request('location') == $loc->id ? 'selected' : '' }}>
@@ -71,7 +71,7 @@
                 <!-- Status -->
                 <div>
                     <label class="block text-xs font-semibold text-gray-700 mb-1">Hali</label>
-                    <select name="status" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#4A0E4E] focus:outline-none">
+                    <select name="status" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#750D15] focus:outline-none">
                         <option value="">{{ __('app.filter_all') }}</option>
                         <option value="available" {{ request('status') === 'available' ? 'selected' : '' }}>Inapatikana</option>
                         <option value="reserved" {{ request('status') === 'reserved' ? 'selected' : '' }}>Imeshikiliwa</option>
@@ -97,7 +97,7 @@
         <!-- Result count & Sorting -->
         <div class="flex items-center justify-between mb-6 text-sm text-gray-600">
             <div>
-                Inaonyesha <span class="font-bold text-[#4A0E4E]">{{ $plots->total() }}</span> viwanja vilivyopatikana
+                Inaonyesha <span class="font-bold text-[#750D15]">{{ $plots->total() }}</span> viwanja vilivyopatikana
             </div>
             <form method="GET" action="{{ route('plots.index') }}" class="flex items-center space-x-2">
                 @foreach(request()->except('sort') as $k => $v)
@@ -128,13 +128,13 @@
                                 {{ $plot->status_label }}
                             </span>
                             @if($plot->is_featured)
-                                <span class="px-2.5 py-1 rounded-md text-xs font-bold uppercase tracking-wider bg-pfi-gradient text-[#DFB743] border border-[#C59B27]/40 shadow-md">
+                                <span class="px-2.5 py-1 rounded-md text-xs font-bold uppercase tracking-wider bg-pfi-gradient text-[#FAC955] border border-[#D48B16]/40 shadow-md">
                                     Featured
                                 </span>
                             @endif
                         </div>
                         <div class="absolute bottom-3 left-3">
-                            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-[#220325]/85 backdrop-blur-md text-[#DFB743] border border-[#C59B27]/30">
+                            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-[#1C0305]/85 backdrop-blur-md text-[#FAC955] border border-[#D48B16]/30">
                                 {{ $plot->plotType?->name_sw ?? 'Kiwanja' }}
                             </span>
                         </div>
@@ -143,10 +143,10 @@
                     <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
                         <div>
                             <div class="flex items-center text-xs font-semibold text-gray-500 mb-1.5 space-x-1">
-                                <svg class="w-3.5 h-3.5 text-[#4A0E4E]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                <svg class="w-3.5 h-3.5 text-[#750D15]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                                 <span>{{ $plot->full_location }}</span>
                             </div>
-                            <h3 class="text-base font-bold text-gray-900 line-clamp-1 group-hover:text-[#4A0E4E] transition">
+                            <h3 class="text-base font-bold text-gray-900 line-clamp-1 group-hover:text-[#750D15] transition">
                                 {{ $plot->title }}
                             </h3>
                             <div class="flex items-center justify-between text-xs text-gray-600 mt-3 pt-3 border-t border-gray-100">
@@ -158,9 +158,9 @@
                         <div class="pt-3 border-t border-gray-100 flex items-center justify-between">
                             <div>
                                 <span class="text-[10px] uppercase tracking-wider font-semibold text-gray-400 block">Bei ya Mauzo</span>
-                                <span class="text-lg font-extrabold text-[#4A0E4E]">{{ $plot->formatted_price }}</span>
+                                <span class="text-lg font-extrabold text-[#750D15]">{{ $plot->formatted_price }}</span>
                             </div>
-                            <a href="{{ route('plots.show', $plot->slug) }}" class="bg-[#FAF5FB] group-hover:bg-pfi-gradient text-[#4A0E4E] group-hover:text-white px-4 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-1 shadow-sm border border-[#F3E8F6] group-hover:border-transparent">
+                            <a href="{{ route('plots.show', $plot->slug) }}" class="bg-[#FDF5F6] group-hover:bg-pfi-gradient text-[#750D15] group-hover:text-white px-4 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-1 shadow-sm border border-[#F9E4E7] group-hover:border-transparent">
                                 <span>{{ __('app.view_details') }}</span>
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                             </a>
@@ -174,7 +174,7 @@
                     </div>
                     <h3 class="text-lg font-bold text-gray-800">{{ __('app.empty_plots') }}</h3>
                     <p class="text-sm text-gray-500 max-w-sm mx-auto">{{ __('app.empty_plots_desc') }}</p>
-                    <a href="{{ route('plots.index') }}" class="inline-block bg-[#4A0E4E] text-white px-6 py-2.5 rounded-xl text-xs font-bold shadow hover:brightness-110">
+                    <a href="{{ route('plots.index') }}" class="inline-block bg-[#750D15] text-white px-6 py-2.5 rounded-xl text-xs font-bold shadow hover:brightness-110">
                         {{ __('app.reset_filters') }}
                     </a>
                 </div>

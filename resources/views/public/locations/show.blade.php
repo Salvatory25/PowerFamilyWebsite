@@ -5,18 +5,18 @@
 @section('content')
 
 @php
-    $whatsappNumber = \App\Models\Setting::get('whatsapp_number', '255700000000');
+    $whatsappNumber = \App\Models\Setting::get('whatsapp_number', '255759423626');
     $cleanWhatsapp = preg_replace('/[^0-9]/', '', $whatsappNumber);
-    $phone = \App\Models\Setting::get('company_phone', '+255 700 000 000');
+    $phone = \App\Models\Setting::get('company_phone', '+255 759 423 626');
 @endphp
 
 <!-- Header Banner -->
-<div class="relative bg-[#220325] text-white py-16 overflow-hidden">
+<div class="relative bg-[#1C0305] text-white py-16 overflow-hidden">
     <img src="{{ $location->image_url }}" alt="{{ $location->area_name }}" class="absolute inset-0 w-full h-full object-cover opacity-30">
-    <div class="absolute inset-0 bg-gradient-to-r from-[#220325] via-[#320635]/90 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-[#1C0305] via-[#280508]/90 to-transparent"></div>
     
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-3">
-        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/10 text-[#DFB743] text-xs font-bold uppercase">
+        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/10 text-[#FAC955] text-xs font-bold uppercase">
             <span>📍 {{ $location->district }}, {{ $location->region }}</span>
         </div>
         <h1 class="text-3xl sm:text-5xl font-extrabold text-white">
@@ -34,7 +34,7 @@
         <!-- Plots in this location -->
         <div>
             <div class="flex items-center justify-between mb-8">
-                <h2 class="text-2xl font-extrabold text-[#320635]">
+                <h2 class="text-2xl font-extrabold text-[#280508]">
                     Viwanja Vinavyopatikana {{ $location->area_name }}
                 </h2>
                 <span class="text-xs font-bold text-gray-500">
@@ -55,7 +55,7 @@
                         </div>
                         <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
                             <div>
-                                <h3 class="text-base font-bold text-gray-900 line-clamp-1 group-hover:text-[#4A0E4E] transition">
+                                <h3 class="text-base font-bold text-gray-900 line-clamp-1 group-hover:text-[#750D15] transition">
                                     {{ $plot->title }}
                                 </h3>
                                 <div class="flex items-center justify-between text-xs text-gray-600 mt-3 pt-3 border-t border-gray-100">
@@ -66,9 +66,9 @@
                             <div class="pt-3 border-t border-gray-100 flex items-center justify-between">
                                 <div>
                                     <span class="text-[10px] uppercase tracking-wider font-semibold text-gray-400 block">Bei ya Mauzo</span>
-                                    <span class="text-lg font-extrabold text-[#4A0E4E]">{{ $plot->formatted_price }}</span>
+                                    <span class="text-lg font-extrabold text-[#750D15]">{{ $plot->formatted_price }}</span>
                                 </div>
-                                <a href="{{ route('plots.show', $plot->slug) }}" class="bg-[#FAF5FB] group-hover:bg-pfi-gradient text-[#4A0E4E] group-hover:text-white px-4 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-1 shadow-sm">
+                                <a href="{{ route('plots.show', $plot->slug) }}" class="bg-[#FDF5F6] group-hover:bg-pfi-gradient text-[#750D15] group-hover:text-white px-4 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-1 shadow-sm">
                                     <span>{{ __('app.view_details') }}</span>
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                                 </a>

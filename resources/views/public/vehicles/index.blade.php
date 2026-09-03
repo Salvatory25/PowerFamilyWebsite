@@ -1,15 +1,15 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('title', __('app.catalogue_vehicles_title') . ' — Power Family Investment')
 
 @section('content')
 
 <!-- Header Banner -->
-<div class="bg-[#220325] text-white py-12 border-b border-[#68176E]/30 relative overflow-hidden">
-    <div class="absolute inset-0 bg-[radial-gradient(#DFB743_1px,transparent_1px)] [background-size:24px_24px] opacity-10"></div>
+<div class="bg-[#1C0305] text-white py-12 border-b border-[#961620]/30 relative overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(#FAC955_1px,transparent_1px)] [background-size:24px_24px] opacity-10"></div>
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-2xl space-y-2">
-            <span class="text-xs font-bold text-[#DFB743] uppercase tracking-widest block">
+            <span class="text-xs font-bold text-[#FAC955] uppercase tracking-widest block">
                 {{ app()->getLocale() === 'sw' ? 'MAGARI YA UHAKIKA' : 'VERIFIED VEHICLES' }}
             </span>
             <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
@@ -37,13 +37,13 @@
                         name="search" 
                         value="{{ request('search') }}" 
                         placeholder="Make / Model..." 
-                        class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#4A0E4E] focus:outline-none"
+                        class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#750D15] focus:outline-none"
                     >
                 </div>
 
                 <div>
                     <label class="block text-xs font-semibold text-gray-700 mb-1">Kampuni (Make)</label>
-                    <select name="make" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#4A0E4E] focus:outline-none">
+                    <select name="make" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#750D15] focus:outline-none">
                         <option value="">Aina Zote</option>
                         @foreach($makes as $m)
                             <option value="{{ $m }}" {{ request('make') == $m ? 'selected' : '' }}>{{ $m }}</option>
@@ -53,7 +53,7 @@
 
                 <div>
                     <label class="block text-xs font-semibold text-gray-700 mb-1">Transmission</label>
-                    <select name="transmission" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#4A0E4E] focus:outline-none">
+                    <select name="transmission" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#750D15] focus:outline-none">
                         <option value="">Zote</option>
                         <option value="Automatic" {{ request('transmission') === 'Automatic' ? 'selected' : '' }}>Automatic</option>
                         <option value="Manual" {{ request('transmission') === 'Manual' ? 'selected' : '' }}>Manual</option>
@@ -62,7 +62,7 @@
 
                 <div>
                     <label class="block text-xs font-semibold text-gray-700 mb-1">Hali</label>
-                    <select name="status" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#4A0E4E] focus:outline-none">
+                    <select name="status" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#750D15] focus:outline-none">
                         <option value="">{{ __('app.filter_all') }}</option>
                         <option value="available" {{ request('status') === 'available' ? 'selected' : '' }}>Inapatikana</option>
                         <option value="reserved" {{ request('status') === 'reserved' ? 'selected' : '' }}>Imeshikiliwa</option>
@@ -87,7 +87,7 @@
         <!-- Result count & Sorting -->
         <div class="flex items-center justify-between mb-6 text-sm text-gray-600">
             <div>
-                Inaonyesha <span class="font-bold text-[#4A0E4E]">{{ $vehicles->total() }}</span> magari yaliyopo
+                Inaonyesha <span class="font-bold text-[#750D15]">{{ $vehicles->total() }}</span> magari yaliyopo
             </div>
             <form method="GET" action="{{ route('vehicles.index') }}" class="flex items-center space-x-2">
                 @foreach(request()->except('sort') as $k => $v)
@@ -117,13 +117,13 @@
                         <div class="absolute top-3 left-3 flex items-center space-x-2">
                             {!! $vehicle->status_badge !!}
                             @if($vehicle->is_featured)
-                                <span class="px-2.5 py-1 rounded-md text-xs font-bold uppercase tracking-wider bg-pfi-gradient text-[#DFB743] border border-[#C59B27]/40 shadow-md">
+                                <span class="px-2.5 py-1 rounded-md text-xs font-bold uppercase tracking-wider bg-pfi-gradient text-[#FAC955] border border-[#D48B16]/40 shadow-md">
                                     Featured
                                 </span>
                             @endif
                         </div>
                         <div class="absolute bottom-3 left-3">
-                            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-[#220325]/85 backdrop-blur-md text-[#DFB743] border border-[#C59B27]/30">
+                            <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-[#1C0305]/85 backdrop-blur-md text-[#FAC955] border border-[#D48B16]/30">
                                 {{ $vehicle->make }}
                             </span>
                         </div>
@@ -131,7 +131,7 @@
 
                     <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
                         <div>
-                            <div class="flex items-center text-xs font-semibold text-[#C59B27] mb-1.5 space-x-2">
+                            <div class="flex items-center text-xs font-semibold text-[#D48B16] mb-1.5 space-x-2">
                                 <span>Mwaka {{ $vehicle->year }}</span>
                                 <span>&bull;</span>
                                 <span>{{ $vehicle->transmission }}</span>
@@ -140,7 +140,7 @@
                                     <span>{{ $vehicle->mileage }}</span>
                                 @endif
                             </div>
-                            <h3 class="text-base font-bold text-gray-900 line-clamp-1 group-hover:text-[#4A0E4E] transition">
+                            <h3 class="text-base font-bold text-gray-900 line-clamp-1 group-hover:text-[#750D15] transition">
                                 {{ $vehicle->title }}
                             </h3>
                             <div class="grid grid-cols-3 gap-2 text-xs text-gray-600 mt-3 pt-3 border-t border-gray-100">
@@ -153,9 +153,9 @@
                         <div class="pt-3 border-t border-gray-100 flex items-center justify-between">
                             <div>
                                 <span class="text-[10px] uppercase tracking-wider font-semibold text-gray-400 block">Bei ya Gari</span>
-                                <span class="text-lg font-extrabold text-[#4A0E4E]">{{ $vehicle->formatted_price }}</span>
+                                <span class="text-lg font-extrabold text-[#750D15]">{{ $vehicle->formatted_price }}</span>
                             </div>
-                            <a href="{{ route('vehicles.show', $vehicle->slug) }}" class="bg-[#FAF5FB] group-hover:bg-pfi-gradient text-[#4A0E4E] group-hover:text-white px-4 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-1 shadow-sm border border-[#F3E8F6] group-hover:border-transparent">
+                            <a href="{{ route('vehicles.show', $vehicle->slug) }}" class="bg-[#FDF5F6] group-hover:bg-pfi-gradient text-[#750D15] group-hover:text-white px-4 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-1 shadow-sm border border-[#F9E4E7] group-hover:border-transparent">
                                 <span>{{ __('app.view_vehicle') }}</span>
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                             </a>

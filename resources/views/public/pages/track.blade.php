@@ -1,14 +1,14 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('title', 'Fuatilia Mchakato | Track Project • RELAND')
 
 @section('content')
 <!-- Minimal Page Header -->
-<div class="relative bg-[#0c1c34] pt-24 pb-16 overflow-hidden border-b border-[#16325c]">
+<div class="relative bg-[#280508] pt-24 pb-16 overflow-hidden border-b border-[#750D15]">
     <div class="absolute inset-0 bg-[url('/public/images/pattern.svg')] opacity-5"></div>
     <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
         <h1 class="text-3xl md:text-5xl font-black text-white tracking-tight mb-4">
-            Fuatilia <span class="text-[#c89a3b]">Mchakato Wako</span>
+            Fuatilia <span class="text-[#D48B16]">Mchakato Wako</span>
         </h1>
         <p class="text-slate-300 max-w-2xl mx-auto font-medium">
             Ingiza namba yako ya kumbukumbu (Tracking Reference) na namba yako ya simu ili kuona hatua iliyofikiwa katika kazi yako ya upimaji au urasimishaji.
@@ -32,16 +32,16 @@
                 @csrf
                 <div class="md:col-span-5">
                     <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Tracking Reference *</label>
-                    <input type="text" name="tracking_reference" required placeholder="e.g. REQ-A8F9B2" value="{{ old('tracking_reference') }}" class="w-full bg-slate-50 border border-slate-200 text-slate-800 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-[#c89a3b] focus:border-[#c89a3b] font-mono font-bold uppercase transition placeholder:text-slate-400 placeholder:font-normal">
+                    <input type="text" name="tracking_reference" required placeholder="e.g. REQ-A8F9B2" value="{{ old('tracking_reference') }}" class="w-full bg-slate-50 border border-slate-200 text-slate-800 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-[#D48B16] focus:border-[#D48B16] font-mono font-bold uppercase transition placeholder:text-slate-400 placeholder:font-normal">
                 </div>
                 <div class="md:col-span-4">
                     <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Phone Number *</label>
-                    <input type="text" name="phone" required placeholder="e.g. 0742448965" value="{{ old('phone') }}" class="w-full bg-slate-50 border border-slate-200 text-slate-800 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-[#c89a3b] focus:border-[#c89a3b] font-semibold transition placeholder:text-slate-400 placeholder:font-normal">
+                    <input type="text" name="phone" required placeholder="e.g. 0742448965" value="{{ old('phone') }}" class="w-full bg-slate-50 border border-slate-200 text-slate-800 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-[#D48B16] focus:border-[#D48B16] font-semibold transition placeholder:text-slate-400 placeholder:font-normal">
                 </div>
                 <div class="md:col-span-3 flex items-end">
-                    <button type="submit" class="w-full bg-[#0c1c34] hover:bg-[#16325c] text-white font-bold px-6 py-3.5 rounded-xl shadow-lg transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                    <button type="submit" class="w-full bg-[#280508] hover:bg-[#750D15] text-white font-bold px-6 py-3.5 rounded-xl shadow-lg transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
                         <span>Tafuta</span>
-                        <svg class="w-4 h-4 text-[#c89a3b]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        <svg class="w-4 h-4 text-[#D48B16]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                     </button>
                 </div>
             </form>
@@ -105,7 +105,7 @@
                             
                             <div class="flex items-start gap-4 sm:gap-6 relative z-10">
                                 <!-- Status Node -->
-                                <div class="shrink-0 flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 rounded-full border-4 {{ $isCompleted ? 'bg-emerald-500 border-emerald-100' : ($isCurrent ? 'bg-[#c89a3b] border-[#c89a3b]/20 ring-4 ring-[#c89a3b]/10' : 'bg-white border-slate-200') }} transition-all duration-300">
+                                <div class="shrink-0 flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 rounded-full border-4 {{ $isCompleted ? 'bg-emerald-500 border-emerald-100' : ($isCurrent ? 'bg-[#D48B16] border-[#D48B16]/20 ring-4 ring-[#D48B16]/10' : 'bg-white border-slate-200') }} transition-all duration-300">
                                     @if($isCompleted)
                                         <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
                                     @elseif($isCurrent)
@@ -122,7 +122,7 @@
                                             {{ $stage['sw'] }} <span class="text-xs sm:text-sm font-normal text-slate-400 ml-1">/ {{ $stage['label'] }}</span>
                                         </h3>
                                         @if($isCurrent)
-                                            <span class="inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-[#c89a3b]/10 text-[#b5882e] uppercase tracking-wider">In Progress</span>
+                                            <span class="inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-[#D48B16]/10 text-[#b5882e] uppercase tracking-wider">In Progress</span>
                                         @endif
                                     </div>
                                     <p class="text-sm {{ $isCompleted || $isCurrent ? 'text-slate-600' : 'text-slate-400' }}">

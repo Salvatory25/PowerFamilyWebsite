@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @php
     $isSw = app()->getLocale() === 'sw';
@@ -20,10 +20,10 @@
 @section('content')
 
 <!-- 1. SERVICE HERO SECTION -->
-<div class="relative bg-[#0c1c34] text-white py-16 lg:py-24 border-b border-[#c89a3b]/20 overflow-hidden">
+<div class="relative bg-[#280508] text-white py-16 lg:py-24 border-b border-[#D48B16]/20 overflow-hidden">
     <div class="absolute inset-0 z-0 opacity-20 pointer-events-none">
         <img src="{{ $selectedService['hero_image'] }}" alt="{{ $serviceTitle }}" class="w-full h-full object-cover">
-        <div class="absolute inset-0 bg-gradient-to-t from-[#0c1c34] via-[#0c1c34]/85 to-[#0c1c34]/90"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#280508] via-[#280508]/85 to-[#280508]/90"></div>
     </div>
 
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,10 +34,10 @@
                 <span>/</span>
                 <a href="{{ route('pages.services') }}" class="hover:text-white transition">{{ __('app.nav_services') }}</a>
                 <span>/</span>
-                <span class="text-[#dfb256] font-semibold">{{ $serviceTitle }}</span>
+                <span class="text-[#FAC955] font-semibold">{{ $serviceTitle }}</span>
             </div>
 
-            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#c89a3b]/20 text-[#dfb256] text-xs font-bold uppercase tracking-wider border border-[#c89a3b]/30">
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#D48B16]/20 text-[#FAC955] text-xs font-bold uppercase tracking-wider border border-[#D48B16]/30">
                 {{ $badge }}
             </div>
 
@@ -50,7 +50,7 @@
             </p>
 
             <div class="pt-4 flex flex-wrap items-center gap-3">
-                <a href="#enquiry-section" class="px-6 py-3.5 rounded-xl bg-[#c89a3b] hover:bg-[#b5882e] text-[#0c1c34] font-extrabold text-xs shadow-lg transition transform hover:-translate-y-0.5">
+                <a href="#enquiry-section" class="px-6 py-3.5 rounded-xl bg-[#D48B16] hover:bg-[#b5882e] text-[#280508] font-extrabold text-xs shadow-lg transition transform hover:-translate-y-0.5">
                     {{ $isSw ? 'Tuma Maombi ya Huduma Hii' : 'Request This Service' }}
                 </a>
 
@@ -71,10 +71,10 @@
             <!-- Professional Explanation -->
             <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-xs space-y-6">
                 <div>
-                    <span class="text-xs font-extrabold uppercase tracking-wider text-[#c89a3b] block mb-1">
+                    <span class="text-xs font-extrabold uppercase tracking-wider text-[#D48B16] block mb-1">
                         {{ $isSw ? 'Maelezo ya Kitaalamu' : 'Professional Scope & Authority' }}
                     </span>
-                    <h2 class="text-2xl font-extrabold text-[#16325c]">
+                    <h2 class="text-2xl font-extrabold text-[#750D15]">
                         {{ $isSw ? 'Kuhusu Huduma Hii' : 'About This Service' }}
                     </h2>
                 </div>
@@ -84,7 +84,7 @@
 
                 <!-- Key Deliverables / Benefits -->
                 <div class="pt-4 border-t border-slate-100">
-                    <h3 class="text-sm font-extrabold text-[#16325c] mb-3">
+                    <h3 class="text-sm font-extrabold text-[#750D15] mb-3">
                         {{ $isSw ? 'Mambo Muhimu Yanayotekelezwa (Deliverables):' : 'Key Deliverables & Specifications:' }}
                     </h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -101,10 +101,10 @@
             <!-- Execution Process / Workflow (4 Steps) -->
             <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-xs space-y-6">
                 <div>
-                    <span class="text-xs font-extrabold uppercase tracking-wider text-[#c89a3b] block mb-1">
+                    <span class="text-xs font-extrabold uppercase tracking-wider text-[#D48B16] block mb-1">
                         {{ $isSw ? 'Hatua za Utekelezaji' : 'Operational Workflow' }}
                     </span>
-                    <h2 class="text-2xl font-extrabold text-[#16325c]">
+                    <h2 class="text-2xl font-extrabold text-[#750D15]">
                         {{ $isSw ? 'Mchakato wa Kazi Hatua kwa Hatua' : 'Step-by-Step Execution Roadmap' }}
                     </h2>
                 </div>
@@ -112,8 +112,8 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     @foreach($processes as $proc)
                         <div class="p-5 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
-                            <span class="text-2xl font-black text-[#c89a3b] block">{{ $proc['step'] }}</span>
-                            <h3 class="font-extrabold text-sm text-[#16325c]">{{ $proc['title'] }}</h3>
+                            <span class="text-2xl font-black text-[#D48B16] block">{{ $proc['step'] }}</span>
+                            <h3 class="font-extrabold text-sm text-[#750D15]">{{ $proc['title'] }}</h3>
                             <p class="text-xs text-slate-600 leading-relaxed">{{ $proc['desc'] }}</p>
                         </div>
                     @endforeach
@@ -123,15 +123,15 @@
             <!-- Service FAQs -->
             @if(isset($selectedService['faqs']) && count($selectedService['faqs']) > 0)
             <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-xs space-y-4">
-                <h2 class="text-xl font-extrabold text-[#16325c]">
+                <h2 class="text-xl font-extrabold text-[#750D15]">
                     {{ $isSw ? 'Maswali ya Kawaida Kuhusu ' . $serviceTitle : 'Frequently Asked Questions' }}
                 </h2>
                 <div class="space-y-3">
                     @foreach($selectedService['faqs'] as $faq)
                         <details class="bg-slate-50 p-4 rounded-xl border border-slate-200/80 group cursor-pointer">
-                            <summary class="font-bold text-xs sm:text-sm text-[#16325c] flex items-center justify-between list-none">
+                            <summary class="font-bold text-xs sm:text-sm text-[#750D15] flex items-center justify-between list-none">
                                 <span>{{ $isSw ? $faq['q_sw'] : $faq['q_en'] }}</span>
-                                <span class="text-[#c89a3b] font-bold group-open:rotate-45 transition transform">+</span>
+                                <span class="text-[#D48B16] font-bold group-open:rotate-45 transition transform">+</span>
                             </summary>
                             <p class="mt-2 text-xs text-slate-600 border-t border-slate-200/60 pt-2 leading-relaxed">
                                 {{ $isSw ? $faq['a_sw'] : $faq['a_en'] }}
@@ -146,10 +146,10 @@
         <!-- Right 1 Col: In-Page Inquiry Form & Other Services -->
         <div class="space-y-8" id="enquiry-section">
             <!-- Fast Lead Capture Card -->
-            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-[#c89a3b]/40 shadow-xl shadow-slate-200/50 space-y-5">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-[#D48B16]/40 shadow-xl shadow-slate-200/50 space-y-5">
                 <div class="border-b border-slate-100 pb-4">
-                    <span class="text-[10px] font-extrabold uppercase tracking-wider text-[#c89a3b] block">Direct Consultation</span>
-                    <h3 class="text-lg font-extrabold text-[#16325c]">
+                    <span class="text-[10px] font-extrabold uppercase tracking-wider text-[#D48B16] block">Direct Consultation</span>
+                    <h3 class="text-lg font-extrabold text-[#750D15]">
                         {{ $isSw ? 'Wasilisha Mahitaji Yako' : 'Consult a Land Specialist' }}
                     </h3>
                     <p class="text-xs text-slate-500 mt-1">
@@ -163,22 +163,22 @@
 
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1">{{ __('app.form_full_name') }} *</label>
-                        <input type="text" name="name" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:ring-2 focus:ring-[#16325c] focus:bg-white transition" placeholder="e.g. John Mrema">
+                        <input type="text" name="name" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:ring-2 focus:ring-[#750D15] focus:bg-white transition" placeholder="e.g. John Mrema">
                     </div>
 
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1">{{ __('app.form_phone') }} *</label>
-                        <input type="tel" name="phone" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:ring-2 focus:ring-[#16325c] focus:bg-white transition" placeholder="+255 7XX XXX XXX">
+                        <input type="tel" name="phone" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:ring-2 focus:ring-[#750D15] focus:bg-white transition" placeholder="+255 7XX XXX XXX">
                     </div>
 
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1">{{ __('app.form_email') }}</label>
-                        <input type="email" name="email" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:ring-2 focus:ring-[#16325c] focus:bg-white transition" placeholder="john@example.com">
+                        <input type="email" name="email" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:ring-2 focus:ring-[#750D15] focus:bg-white transition" placeholder="john@example.com">
                     </div>
 
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1">{{ __('app.form_preferred_contact') }}</label>
-                        <select name="preferred_contact_method" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:ring-2 focus:ring-[#16325c] focus:bg-white transition">
+                        <select name="preferred_contact_method" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:ring-2 focus:ring-[#750D15] focus:bg-white transition">
                             <option value="whatsapp">WhatsApp</option>
                             <option value="phone">Phone Call</option>
                             <option value="email">Email</option>
@@ -187,10 +187,10 @@
 
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1">{{ __('app.form_message') }} *</label>
-                        <textarea name="message" rows="3" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:ring-2 focus:ring-[#16325c] focus:bg-white transition" placeholder="{{ $isSw ? 'Eleza eneo lilipo na unachohitaji kufanyiwa...' : 'Specify parcel location, acreage, or requirements...' }}"></textarea>
+                        <textarea name="message" rows="3" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:ring-2 focus:ring-[#750D15] focus:bg-white transition" placeholder="{{ $isSw ? 'Eleza eneo lilipo na unachohitaji kufanyiwa...' : 'Specify parcel location, acreage, or requirements...' }}"></textarea>
                     </div>
 
-                    <button type="submit" class="w-full py-3 rounded-xl bg-[#16325c] hover:bg-[#0c1c34] text-white font-extrabold text-xs shadow-md transition transform hover:-translate-y-0.5 border border-[#c89a3b]/40">
+                    <button type="submit" class="w-full py-3 rounded-xl bg-[#750D15] hover:bg-[#280508] text-white font-extrabold text-xs shadow-md transition transform hover:-translate-y-0.5 border border-[#D48B16]/40">
                         {{ __('app.form_submit') }}
                     </button>
                 </form>
@@ -205,14 +205,14 @@
 
             <!-- Other Services Navigation -->
             <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-xs space-y-3">
-                <h4 class="font-extrabold text-xs text-[#16325c] uppercase tracking-wider border-b border-slate-100 pb-2">
+                <h4 class="font-extrabold text-xs text-[#750D15] uppercase tracking-wider border-b border-slate-100 pb-2">
                     {{ __('app.our_services') }}
                 </h4>
                 <div class="space-y-1 text-xs">
                     @foreach($services as $sSlug => $sItem)
-                        <a href="{{ route('services.show', $sItem['slug']) }}" class="flex items-center justify-between p-2 rounded-xl transition {{ $sItem['slug'] === $selectedService['slug'] ? 'bg-[#fbf6ea] text-[#16325c] font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
+                        <a href="{{ route('services.show', $sItem['slug']) }}" class="flex items-center justify-between p-2 rounded-xl transition {{ $sItem['slug'] === $selectedService['slug'] ? 'bg-[#fbf6ea] text-[#750D15] font-bold' : 'text-slate-600 hover:bg-slate-50' }}">
                             <span>{{ $isSw ? $sItem['title_sw'] : $sItem['title_en'] }}</span>
-                            <span class="text-[#c89a3b]">&rarr;</span>
+                            <span class="text-[#D48B16]">&rarr;</span>
                         </a>
                     @endforeach
                 </div>

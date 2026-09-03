@@ -13,15 +13,30 @@ return [
     'nav_gallery' => 'Gallery',
     'nav_blog' => 'Investment Education',
     'nav_about' => 'About Us',
-    'nav_contact' => 'Contact',
+    'nav_contact' => 'Contact Us',
     'nav_cta' => 'Contact Us',
     'nav_admin' => 'Admin Portal',
+    'nav_properties' => 'Properties',
+    'nav_res_plots' => 'Residential Plots',
+    'nav_com_plots' => 'Commercial Plots',
+    'nav_avail_vehicles' => 'Available Vehicles',
+    'nav_feat_vehicles' => 'Featured Vehicles',
+    'nav_investment' => 'Investment',
+    'nav_inv_opp' => 'Investment Opportunities',
+    'nav_why_invest' => 'Why Invest With Us?',
+    'nav_how_invest' => 'How to Invest',
+    'nav_offers' => 'Offers',
+    'top_tagline' => 'Your Trusted Partner in Property & Investment',
+    'top_call' => 'Call Us',
+    'top_email' => 'Email',
+    'contact_us_title' => 'Contact Power Family Investment',
+    'contact_us_subtitle' => 'We are here to help you secure your ideal plot, modern house, or quality vehicle in Tanzania. Reach out to our team today.',
 
     // Hero
-    'hero_badge' => 'Trusted Investments in Tanzania',
-    'hero_title' => 'INVEST TODAY. BUILD TOMORROW.',
-    'hero_subtitle' => 'Acquire prime residential and commercial plots, modern family homes, and quality vehicles from Power Family Investment with complete security and peace of mind.',
-    'hero_cta_plots' => 'EXPLORE PLOTS',
+    'hero_badge' => 'INVESTMENT THAT CREATES VALUE',
+    'hero_title' => 'Build Your Future Through Smarter Investment.',
+    'hero_subtitle' => 'Discover quality plots, homes and investment opportunities designed to help you build a better future and create lasting value.',
+    'hero_cta_plots' => 'EXPLORE PROPERTIES',
     'hero_cta_contact' => 'CONTACT US',
 
     // Search Bar
@@ -65,17 +80,17 @@ return [
     'status_reserved' => 'Reserved',
     'status_sold' => 'Sold',
 
-    // Why Choose Us
-    'why_title' => 'WHY POWER FAMILY INVESTMENT?',
-    'why_subtitle' => 'We build a foundation of trust and transparency across every stage of your investment journey.',
-    'why_trust_title' => 'TRUST & INTEGRITY',
-    'why_trust_desc' => 'Professional service and clear communication at every step without friction or doubt.',
-    'why_variety_title' => 'DIVERSE OPPORTUNITIES',
-    'why_variety_desc' => 'Residential and commercial plots, modern houses, and vehicles all in one accessible place.',
-    'why_support_title' => 'CUSTOMER SUPPORT',
-    'why_support_desc' => 'Expert guidance and end-to-end support from physical site inspection to ownership handover.',
-    'why_confidence_title' => 'INVEST WITH CONFIDENCE',
-    'why_confidence_desc' => 'Accurate location details, authentic land dimensions, and secure legal processes.',
+    // Why Choose Us (Investment)
+    'why_title' => 'INVEST WITH CERTAINTY. BUILD WITH VISION.',
+    'why_subtitle' => 'Reasons why Power Family Investment is the right choice for the security and growth of your capital.',
+    'why_trust_title' => 'Valuable Properties',
+    'why_trust_desc' => 'We select fast-growing areas to ensure capital appreciation for your investment.',
+    'why_variety_title' => 'Reliable Service',
+    'why_variety_desc' => 'Our expert team provides honest advice and transparency at every step.',
+    'why_support_title' => 'Investment Opportunities',
+    'why_support_desc' => 'We provide accurate information and market analysis to guide you to better decisions.',
+    'why_confidence_title' => 'Simple Process',
+    'why_confidence_desc' => 'From inspection to legal documentation, our process is fast and hassle-free.',
 
     // Locations
     'locations_title' => 'LOCATIONS WE SERVE',
@@ -103,9 +118,9 @@ return [
 
     // CTA
     'cta_title' => 'Ready to Begin Your Investment Journey?',
-    'cta_subtitle' => 'Our professional team is here to help you secure the ideal plot, house, or vehicle matching your goals.',
-    'cta_whatsapp' => 'CHAT ON WHATSAPP',
-    'cta_call' => 'CALL US NOW',
+    'cta_subtitle' => 'We can help you find the property that matches your goals and budget. Take action today.',
+    'cta_whatsapp' => 'CONTACT US',
+    'cta_call' => 'EXPLORE PROPERTIES',
 
     // Forms
     'form_name' => 'Full Name',

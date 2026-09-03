@@ -25,8 +25,6 @@ class PowerFamilyPlatformTest extends TestCase
         $response = $this->get('/');
         $response->assertStatus(200);
         $response->assertSee('POWER FAMILY');
-        $response->assertSee('WEKEZA LEO');
-        $response->assertSee('JENGA KESHO');
     }
 
     public function test_plots_catalogue_is_successful(): void

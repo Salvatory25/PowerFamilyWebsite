@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 
 @section('title', 'Client Leads & Service Inquiries')
 @section('header_title', 'Client CRM & Inquiries')
@@ -13,14 +13,14 @@
     </div>
 
     <!-- Filters -->
-    <div class="bg-[#0c1c34] border border-[#16325c] rounded-2xl p-4">
+    <div class="bg-[#280508] border border-[#750D15] rounded-2xl p-4">
         <form method="GET" action="{{ route('admin.enquiries.index') }}" class="grid grid-cols-1 sm:grid-cols-4 gap-3">
             <div>
-                <input type="text" name="search" value="{{ request('search') }}" placeholder="Search client name, phone, message..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:ring-2 focus:ring-[#c89a3b]">
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Search client name, phone, message..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:ring-2 focus:ring-[#D48B16]">
             </div>
 
             <div>
-                <select name="category" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-white focus:ring-2 focus:ring-[#c89a3b]">
+                <select name="category" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-white focus:ring-2 focus:ring-[#D48B16]">
                     <option value="">All Categories</option>
                     <option value="service" {{ request('category') === 'service' ? 'selected' : '' }}>Land Services</option>
                     <option value="project" {{ request('category') === 'project' ? 'selected' : '' }}>Project Case Studies</option>
@@ -29,7 +29,7 @@
             </div>
 
             <div>
-                <select name="status" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-white focus:ring-2 focus:ring-[#c89a3b]">
+                <select name="status" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-white focus:ring-2 focus:ring-[#D48B16]">
                     <option value="">All Statuses</option>
                     <option value="new" {{ request('status') === 'new' ? 'selected' : '' }}>New</option>
                     <option value="contacted" {{ request('status') === 'contacted' ? 'selected' : '' }}>Contacted</option>
@@ -39,7 +39,7 @@
             </div>
 
             <div class="flex gap-2">
-                <button type="submit" class="flex-1 py-2 px-3 rounded-xl bg-[#16325c] hover:bg-[#1e4277] text-white font-bold text-xs transition border border-slate-700">
+                <button type="submit" class="flex-1 py-2 px-3 rounded-xl bg-[#750D15] hover:bg-[#1e4277] text-white font-bold text-xs transition border border-slate-700">
                     Filter Leads
                 </button>
                 @if(request()->anyFilled(['search', 'category', 'status']))
@@ -52,9 +52,9 @@
     </div>
 
     <!-- Leads Table -->
-    <div class="bg-[#0c1c34] border border-[#16325c] rounded-3xl overflow-hidden shadow-xl">
+    <div class="bg-[#280508] border border-[#750D15] rounded-3xl overflow-hidden shadow-xl">
         <table class="w-full text-left text-xs text-slate-300">
-            <thead class="bg-[#16325c]/60 text-[10px] uppercase font-bold text-slate-400 border-b border-[#16325c]">
+            <thead class="bg-[#750D15]/60 text-[10px] uppercase font-bold text-slate-400 border-b border-[#750D15]">
                 <tr>
                     <th class="py-4 px-5">Client Info</th>
                     <th class="py-4 px-5">Service / Subject</th>
@@ -64,13 +64,13 @@
                     <th class="py-4 px-5 text-right">Actions</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-[#16325c]/50 font-medium">
+            <tbody class="divide-y divide-[#750D15]/50 font-medium">
                 @forelse($enquiries as $lead)
-                    <tr class="hover:bg-[#16325c]/30 transition">
+                    <tr class="hover:bg-[#750D15]/30 transition">
                         <td class="py-4 px-5">
                             <div class="font-bold text-white">{{ $lead->name }}</div>
                             <div class="text-[11px] text-slate-400 flex items-center gap-2 mt-0.5">
-                                <a href="tel:{{ $lead->phone }}" class="hover:text-[#dfb256] font-mono">{{ $lead->phone }}</a>
+                                <a href="tel:{{ $lead->phone }}" class="hover:text-[#FAC955] font-mono">{{ $lead->phone }}</a>
                                 @if($lead->email)
                                     <span>&bull;</span>
                                     <span class="truncate max-w-[140px]">{{ $lead->email }}</span>
@@ -80,16 +80,16 @@
 
                         <td class="py-4 px-5">
                             @if($lead->service_type)
-                                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-[#c89a3b]/20 text-[#dfb256] font-bold text-[11px] border border-[#c89a3b]/30">
+                                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-[#D48B16]/20 text-[#FAC955] font-bold text-[11px] border border-[#D48B16]/30">
                                     {{ ucfirst(str_replace('-', ' ', $lead->service_type)) }}
                                 </span>
                             @elseif($lead->project)
-                                <a href="{{ route('projects.show', $lead->project->slug) }}" target="_blank" class="font-bold text-slate-200 hover:text-[#dfb256] block">
+                                <a href="{{ route('projects.show', $lead->project->slug) }}" target="_blank" class="font-bold text-slate-200 hover:text-[#FAC955] block">
                                     {{ $lead->project->name }}
                                 </a>
                                 <span class="text-[10px] text-slate-400">Project Case Study</span>
                             @elseif($lead->plot)
-                                <a href="{{ route('plots.show', $lead->plot->slug) }}" target="_blank" class="font-mono text-[#dfb256] hover:underline font-bold">
+                                <a href="{{ route('plots.show', $lead->plot->slug) }}" target="_blank" class="font-mono text-[#FAC955] hover:underline font-bold">
                                     {{ $lead->plot->plot_reference }}
                                 </a>
                                 <div class="text-[11px] text-slate-400 truncate max-w-xs">{{ $lead->plot->title }}</div>
@@ -109,14 +109,14 @@
                         </td>
 
                         <td class="py-4 px-5 text-center">
-                            <span class="inline-flex px-2.5 py-1 rounded-full text-[10px] font-bold uppercase {{ $lead->status === 'new' ? 'bg-[#c89a3b] text-[#0c1c34]' : ($lead->status === 'site_visit_scheduled' ? 'bg-emerald-950 text-emerald-300 border border-emerald-800' : 'bg-slate-900 text-slate-300 border border-slate-700') }}">
+                            <span class="inline-flex px-2.5 py-1 rounded-full text-[10px] font-bold uppercase {{ $lead->status === 'new' ? 'bg-[#D48B16] text-[#280508]' : ($lead->status === 'site_visit_scheduled' ? 'bg-emerald-950 text-emerald-300 border border-emerald-800' : 'bg-slate-900 text-slate-300 border border-slate-700') }}">
                                 {{ str_replace('_', ' ', $lead->status) }}
                             </span>
                         </td>
 
                         <td class="py-4 px-5 text-right">
                             <div class="flex items-center justify-end gap-2">
-                                <a href="{{ route('admin.enquiries.show', $lead->id) }}" class="px-3 py-1.5 rounded-lg bg-[#16325c] hover:bg-[#1f437a] text-white transition font-semibold text-xs border border-slate-700" title="View & Process">
+                                <a href="{{ route('admin.enquiries.show', $lead->id) }}" class="px-3 py-1.5 rounded-lg bg-[#750D15] hover:bg-[#1f437a] text-white transition font-semibold text-xs border border-slate-700" title="View & Process">
                                     Process
                                 </a>
 
@@ -140,7 +140,7 @@
             </tbody>
         </table>
 
-        <div class="p-4 border-t border-[#16325c]">
+        <div class="p-4 border-t border-[#750D15]">
             {{ $enquiries->links() }}
         </div>
     </div>

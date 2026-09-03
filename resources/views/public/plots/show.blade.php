@@ -5,17 +5,17 @@
 @section('content')
 
 @php
-    $whatsappNumber = \App\Models\Setting::get('whatsapp_number', '255700000000');
+    $whatsappNumber = \App\Models\Setting::get('whatsapp_number', '255759423626');
     $cleanWhatsapp = preg_replace('/[^0-9]/', '', $whatsappNumber);
-    $phone = \App\Models\Setting::get('company_phone', '+255 700 000 000');
+    $phone = \App\Models\Setting::get('company_phone', '+255 759 423 626');
 @endphp
 
 <!-- Breadcrumbs Bar -->
 <div class="bg-white border-b border-gray-100 py-3.5">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-xs font-semibold text-gray-500 flex items-center space-x-2">
-        <a href="{{ route('home') }}" class="hover:text-[#4A0E4E]">Mwanzo</a>
+        <a href="{{ route('home') }}" class="hover:text-[#750D15]">Mwanzo</a>
         <span>/</span>
-        <a href="{{ route('plots.index') }}" class="hover:text-[#4A0E4E]">Viwanja</a>
+        <a href="{{ route('plots.index') }}" class="hover:text-[#750D15]">Viwanja</a>
         <span>/</span>
         <span class="text-gray-900 truncate max-w-xs sm:max-w-md">{{ $plot->title }}</span>
     </div>
@@ -31,22 +31,22 @@
                     <span class="px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider shadow-sm {{ $plot->status_badge_classes }}">
                         {{ $plot->status_label }}
                     </span>
-                    <span class="px-3 py-1 rounded-md text-xs font-bold bg-[#FAF5FB] text-[#4A0E4E] border border-[#F3E8F6]">
+                    <span class="px-3 py-1 rounded-md text-xs font-bold bg-[#FDF5F6] text-[#750D15] border border-[#F9E4E7]">
                         Ref: {{ $plot->plot_reference }}
                     </span>
                 </div>
-                <h1 class="text-2xl sm:text-3xl font-extrabold text-[#320635]">
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-[#280508]">
                     {{ $plot->title }}
                 </h1>
                 <div class="flex items-center text-xs sm:text-sm font-semibold text-gray-600 space-x-2">
-                    <svg class="w-4 h-4 text-[#4A0E4E]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    <svg class="w-4 h-4 text-[#750D15]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                     <span>{{ $plot->full_location }}</span>
                 </div>
             </div>
 
             <div class="md:text-right border-t md:border-t-0 pt-4 md:pt-0">
                 <span class="text-xs uppercase tracking-wider font-semibold text-gray-400 block">Bei ya Mauzo</span>
-                <span class="text-3xl sm:text-4xl font-extrabold text-[#4A0E4E] block mt-1">
+                <span class="text-3xl sm:text-4xl font-extrabold text-[#750D15] block mt-1">
                     {{ $plot->formatted_price }}
                 </span>
                 <span class="text-xs text-gray-500 font-medium">Inalipika kwa Makubaliano</span>
@@ -77,7 +77,7 @@
                                 type="button"
                                 @click="activeImage = '{{ $plot->featured_image_url }}'"
                                 class="w-20 h-16 rounded-lg overflow-hidden border-2 shrink-0 transition"
-                                :class="activeImage === '{{ $plot->featured_image_url }}' ? 'border-[#4A0E4E] ring-2 ring-[#4A0E4E]/30' : 'border-transparent opacity-70 hover:opacity-100'"
+                                :class="activeImage === '{{ $plot->featured_image_url }}' ? 'border-[#750D15] ring-2 ring-[#750D15]/30' : 'border-transparent opacity-70 hover:opacity-100'"
                             >
                                 <img src="{{ $plot->featured_image_url }}" class="w-full h-full object-cover">
                             </button>
@@ -86,7 +86,7 @@
                                     type="button"
                                     @click="activeImage = '{{ $img->url }}'"
                                     class="w-20 h-16 rounded-lg overflow-hidden border-2 shrink-0 transition"
-                                    :class="activeImage === '{{ $img->url }}' ? 'border-[#4A0E4E] ring-2 ring-[#4A0E4E]/30' : 'border-transparent opacity-70 hover:opacity-100'"
+                                    :class="activeImage === '{{ $img->url }}' ? 'border-[#750D15] ring-2 ring-[#750D15]/30' : 'border-transparent opacity-70 hover:opacity-100'"
                                 >
                                     <img src="{{ $img->url }}" class="w-full h-full object-cover">
                                 </button>
@@ -97,19 +97,19 @@
 
                 <!-- Key Attributes Bar -->
                 <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 grid grid-cols-2 sm:grid-cols-4 gap-4">
-                    <div class="p-4 rounded-xl bg-[#FAF5FB] border border-[#F3E8F6]">
+                    <div class="p-4 rounded-xl bg-[#FDF5F6] border border-[#F9E4E7]">
                         <span class="text-[11px] font-semibold text-gray-500 uppercase block">Ukubwa</span>
-                        <span class="text-base font-extrabold text-[#4A0E4E] mt-0.5 block">{{ $plot->formatted_size }}</span>
+                        <span class="text-base font-extrabold text-[#750D15] mt-0.5 block">{{ $plot->formatted_size }}</span>
                     </div>
-                    <div class="p-4 rounded-xl bg-[#FAF5FB] border border-[#F3E8F6]">
+                    <div class="p-4 rounded-xl bg-[#FDF5F6] border border-[#F9E4E7]">
                         <span class="text-[11px] font-semibold text-gray-500 uppercase block">Matumizi</span>
-                        <span class="text-base font-extrabold text-[#4A0E4E] mt-0.5 block">{{ $plot->plotType?->name_sw ?? 'Makazi' }}</span>
+                        <span class="text-base font-extrabold text-[#750D15] mt-0.5 block">{{ $plot->plotType?->name_sw ?? 'Makazi' }}</span>
                     </div>
-                    <div class="p-4 rounded-xl bg-[#FAF5FB] border border-[#F3E8F6]">
+                    <div class="p-4 rounded-xl bg-[#FDF5F6] border border-[#F9E4E7]">
                         <span class="text-[11px] font-semibold text-gray-500 uppercase block">Hali ya Nyaraka</span>
-                        <span class="text-base font-extrabold text-[#4A0E4E] mt-0.5 block">{{ $plot->ownership_title_type ?? 'Kimepimwa' }}</span>
+                        <span class="text-base font-extrabold text-[#750D15] mt-0.5 block">{{ $plot->ownership_title_type ?? 'Kimepimwa' }}</span>
                     </div>
-                    <div class="p-4 rounded-xl bg-[#FAF5FB] border border-[#F3E8F6]">
+                    <div class="p-4 rounded-xl bg-[#FDF5F6] border border-[#F9E4E7]">
                         <span class="text-[11px] font-semibold text-gray-500 uppercase block">Upatikanaji</span>
                         <span class="text-base font-extrabold text-emerald-600 mt-0.5 block">{{ $plot->status_label }}</span>
                     </div>
@@ -117,7 +117,7 @@
 
                 <!-- Detailed Description -->
                 <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-100 space-y-4">
-                    <h2 class="text-xl font-bold text-[#320635] border-b border-gray-100 pb-3">
+                    <h2 class="text-xl font-bold text-[#280508] border-b border-gray-100 pb-3">
                         Maelezo ya Kina ya Kiwanja
                     </h2>
                     <div class="prose max-w-none text-gray-700 text-sm sm:text-base leading-relaxed">
@@ -127,7 +127,7 @@
 
                 <!-- Features & Amenities Checklist -->
                 <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-100 space-y-4">
-                    <h2 class="text-xl font-bold text-[#320635] border-b border-gray-100 pb-3">
+                    <h2 class="text-xl font-bold text-[#280508] border-b border-gray-100 pb-3">
                         Sifa Kuu za Eneo
                     </h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
@@ -152,22 +152,47 @@
 
                 <!-- Interactive Map / Location Coordinates Area -->
                 <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-100 space-y-4">
-                    <h2 class="text-xl font-bold text-[#320635] border-b border-gray-100 pb-3">
-                        Ramani & Eneo Lililopo
-                    </h2>
-                    <div class="aspect-[16/9] rounded-xl overflow-hidden bg-gray-200 relative border border-gray-200">
-                        @if($plot->google_maps_embed_url)
-                            <iframe src="{{ $plot->google_maps_embed_url }}" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                        @elseif($plot->latitude && $plot->longitude)
-                            <iframe src="https://maps.google.com/maps?q={{ $plot->latitude }},{{ $plot->longitude }}&hl=sw&z=14&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                        @else
-                            <!-- Placeholder Map Visualizer -->
-                            <div class="w-full h-full bg-[#FAF5FB] flex flex-col items-center justify-center p-6 text-center">
-                                <svg class="w-12 h-12 text-[#4A0E4E] mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                                <h4 class="font-bold text-gray-900">{{ $plot->full_location }}</h4>
-                                <p class="text-xs text-gray-500 max-w-sm mt-1">Kwa ajili ya kufika site moja kwa moja, wasiliana nasi kupanga ratiba ya ukaguzi.</p>
-                            </div>
-                        @endif
+                    <div class="flex items-center justify-between border-b border-gray-100 pb-3">
+                        <div>
+                            <h2 class="text-xl font-bold text-[#280508]">
+                                Ramani ya Eneo (Location Map)
+                            </h2>
+                            <p class="text-xs text-gray-500 mt-0.5">
+                                📍 {{ $plot->full_location }}
+                            </p>
+                        </div>
+                        <a 
+                            href="https://maps.google.com/maps?q={{ urlencode($plot->full_location) }}" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-[#FDF5F6] text-[#750D15] hover:bg-[#750D15] hover:text-white transition text-xs font-bold border border-[#750D15]/20"
+                        >
+                            <span>Fungua Google Maps</span>
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                        </a>
+                    </div>
+
+                    <div class="aspect-[16/9] w-full rounded-2xl overflow-hidden bg-gray-100 relative border border-gray-200 shadow-inner">
+                        <iframe 
+                            src="{{ $plot->map_embed_url }}" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Ramani ya {{ $plot->title }}"
+                        ></iframe>
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs text-gray-500 pt-1">
+                        <span class="flex items-center space-x-1">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                            <span>Eneo limethibitishwa na wataalamu wa Power Family Investment</span>
+                        </span>
+                        <span class="text-[11px] font-semibold text-[#D48B16]">
+                            Site Visit inapatikana kila wiki
+                        </span>
                     </div>
                 </div>
 
@@ -178,7 +203,7 @@
                 <div class="bg-white rounded-2xl p-6 shadow-xl border border-gray-100 sticky top-28 space-y-6">
                     
                     <div class="bg-pfi-gradient text-white p-5 rounded-xl space-y-2">
-                        <span class="text-xs font-semibold text-[#DFB743] uppercase tracking-wider">Mawasiliano ya Moja kwa Moja</span>
+                        <span class="text-xs font-semibold text-[#FAC955] uppercase tracking-wider">Mawasiliano ya Moja kwa Moja</span>
                         <h3 class="text-lg font-bold text-white">Unahitaji Kiwanja Hiki?</h3>
                         <p class="text-xs text-gray-200 leading-relaxed">
                             Wasiliana na msimamizi wetu kupitia WhatsApp au simu ili kupata taarifa zote na kupanga ratiba ya kutembelea.
@@ -198,9 +223,9 @@
 
                         <a 
                             href="tel:{{ $phone }}" 
-                            class="w-full bg-[#FAF5FB] hover:bg-[#F3E8F6] text-[#4A0E4E] border border-[#4A0E4E]/30 py-3.5 px-4 rounded-xl font-bold text-sm transition flex items-center justify-center space-x-2"
+                            class="w-full bg-[#FDF5F6] hover:bg-[#F9E4E7] text-[#750D15] border border-[#750D15]/30 py-3.5 px-4 rounded-xl font-bold text-sm transition flex items-center justify-center space-x-2"
                         >
-                            <svg class="w-5 h-5 text-[#4A0E4E]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                            <svg class="w-5 h-5 text-[#750D15]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                             <span>📞 PIGA SIMU</span>
                         </a>
                     </div>
@@ -214,16 +239,16 @@
                             <input type="hidden" name="category" value="kiwanja">
                             
                             <div>
-                                <input type="text" name="name" required placeholder="Jina Lako *" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 text-xs focus:ring-2 focus:ring-[#4A0E4E] focus:outline-none">
+                                <input type="text" name="name" required placeholder="Jina Lako *" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 text-xs focus:ring-2 focus:ring-[#750D15] focus:outline-none">
                             </div>
                             <div>
-                                <input type="tel" name="phone" required placeholder="Namba ya Simu *" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 text-xs focus:ring-2 focus:ring-[#4A0E4E] focus:outline-none">
+                                <input type="tel" name="phone" required placeholder="Namba ya Simu *" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 text-xs focus:ring-2 focus:ring-[#750D15] focus:outline-none">
                             </div>
                             <div>
-                                <input type="email" name="email" placeholder="Barua Pepe (Email)" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 text-xs focus:ring-2 focus:ring-[#4A0E4E] focus:outline-none">
+                                <input type="email" name="email" placeholder="Barua Pepe (Email)" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 text-xs focus:ring-2 focus:ring-[#750D15] focus:outline-none">
                             </div>
                             <div>
-                                <textarea name="message" rows="3" required class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 text-xs focus:ring-2 focus:ring-[#4A0E4E] focus:outline-none resize-none">Habari, ninahitaji taarifa zaidi na kupanga ratiba ya kuona kiwanja hiki [{{ $plot->plot_reference }} - {{ $plot->title }}].</textarea>
+                                <textarea name="message" rows="3" required class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 text-xs focus:ring-2 focus:ring-[#750D15] focus:outline-none resize-none">Habari, ninahitaji taarifa zaidi na kupanga ratiba ya kuona kiwanja hiki [{{ $plot->plot_reference }} - {{ $plot->title }}].</textarea>
                             </div>
                             <button type="submit" class="w-full bg-pfi-gradient text-white py-3 rounded-xl font-bold text-xs shadow hover:brightness-110 transition">
                                 TUMA OMBI SASA
@@ -240,7 +265,7 @@
 
     <!-- Fullscreen Lightbox Modal -->
     <div x-show="lightboxOpen" x-transition class="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4">
-        <button @click="lightboxOpen = false" class="absolute top-6 right-6 text-white text-3xl font-bold hover:text-[#DFB743] transition">✕</button>
+        <button @click="lightboxOpen = false" class="absolute top-6 right-6 text-white text-3xl font-bold hover:text-[#FAC955] transition">✕</button>
         <img :src="activeImage" class="max-w-full max-h-[90vh] object-contain rounded-xl">
     </div>
 </div>

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @php
     $isSw = app()->getLocale() === 'sw';
@@ -9,10 +9,10 @@
 
 @section('content')
 <!-- Header Banner -->
-<div class="bg-[#0c1c34] text-white py-16 lg:py-20 border-b border-[#c89a3b]/20 relative overflow-hidden">
+<div class="bg-[#280508] text-white py-16 lg:py-20 border-b border-[#D48B16]/20 relative overflow-hidden">
     <div class="absolute inset-0 z-0 opacity-15 bg-[radial-gradient(circle_at_top_right,rgba(200,154,59,0.25),transparent_50%)]"></div>
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-4">
-        <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#c89a3b]/15 text-[#dfb256] text-xs font-extrabold tracking-wider uppercase border border-[#c89a3b]/30">
+        <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#D48B16]/15 text-[#FAC955] text-xs font-extrabold tracking-wider uppercase border border-[#D48B16]/30">
             RELAND CONSULT LTD &bull; Professional Solutions
         </span>
         <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
@@ -28,9 +28,9 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         @foreach($services as $slug => $service)
-            <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-xs hover:shadow-2xl transition-all duration-300 flex flex-col justify-between hover:border-[#c89a3b]/50 group">
+            <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-xs hover:shadow-2xl transition-all duration-300 flex flex-col justify-between hover:border-[#D48B16]/50 group">
                 <div class="space-y-4">
-                    <div class="w-14 h-14 rounded-2xl bg-[#fbf6ea] text-[#16325c] group-hover:bg-[#16325c] group-hover:text-[#dfb256] flex items-center justify-center font-bold transition duration-300 border border-[#f5e9c9]">
+                    <div class="w-14 h-14 rounded-2xl bg-[#fbf6ea] text-[#750D15] group-hover:bg-[#750D15] group-hover:text-[#FAC955] flex items-center justify-center font-bold transition duration-300 border border-[#f5e9c9]">
                         @if($service['icon'] === 'surveying')
                             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
                         @elseif($service['icon'] === 'formalization')
@@ -47,10 +47,10 @@
                     </div>
 
                     <div>
-                        <span class="text-[11px] font-bold uppercase tracking-wider text-[#c89a3b] block mb-1">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-[#D48B16] block mb-1">
                             {{ $isSw ? $service['badge_sw'] : $service['badge_en'] }}
                         </span>
-                        <h2 class="text-xl font-extrabold text-[#16325c] group-hover:text-[#c89a3b] transition">
+                        <h2 class="text-xl font-extrabold text-[#750D15] group-hover:text-[#D48B16] transition">
                             {{ $isSw ? $service['title_sw'] : $service['title_en'] }}
                         </h2>
                     </div>
@@ -64,7 +64,7 @@
                         <ul class="text-xs text-slate-600 space-y-1.5">
                             @foreach(array_slice($isSw ? $service['deliverables_sw'] : $service['deliverables_en'], 0, 3) as $deliv)
                                 <li class="flex items-start gap-1.5">
-                                    <span class="text-[#c89a3b] font-bold">✓</span>
+                                    <span class="text-[#D48B16] font-bold">✓</span>
                                     <span>{{ $deliv }}</span>
                                 </li>
                             @endforeach
@@ -73,7 +73,7 @@
                 </div>
 
                 <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
-                    <a href="{{ route('services.show', $service['slug']) }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-[#16325c] group-hover:text-[#c89a3b] transition">
+                    <a href="{{ route('services.show', $service['slug']) }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-[#750D15] group-hover:text-[#D48B16] transition">
                         <span>{{ $isSw ? 'Soma Zaidi & Mchakato' : 'Full Process & Details' }}</span>
                         <svg class="w-4 h-4 transform group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                     </a>
@@ -91,7 +91,7 @@
 <div class="bg-slate-50 py-16 sm:py-24 border-t border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-            <h2 class="text-2xl sm:text-4xl font-black text-[#16325c] tracking-tight mb-4">
+            <h2 class="text-2xl sm:text-4xl font-black text-[#750D15] tracking-tight mb-4">
                 {{ $isSw ? 'Unahitaji Nini Kuanza?' : 'What Do You Need to Start?' }}
             </h2>
             <p class="text-sm sm:text-base text-slate-600 font-medium leading-relaxed">
@@ -120,7 +120,7 @@
 
             <!-- Doc 3 -->
             <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-lg shadow-slate-200/50 hover:-translate-y-1 transition transform duration-300">
-                <div class="w-12 h-12 rounded-xl bg-[#fbf6ea] text-[#c89a3b] flex items-center justify-center mb-5">
+                <div class="w-12 h-12 rounded-xl bg-[#fbf6ea] text-[#D48B16] flex items-center justify-center mb-5">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
                 </div>
                 <h3 class="text-base font-bold text-slate-800 mb-2">{{ $isSw ? 'Ramani ya Zamani' : 'Old Survey Plan' }}</h3>
@@ -150,7 +150,7 @@
 </div>
 
 <!-- Consultation Direct CTA Banner -->
-<div class="bg-[#16325c] text-white py-16 border-t border-slate-800">
+<div class="bg-[#750D15] text-white py-16 border-t border-slate-800">
     <div class="max-w-4xl mx-auto px-4 text-center space-y-4">
         <h2 class="text-2xl sm:text-3xl font-extrabold text-white">
             {{ $isSw ? 'Je, Unahitaji Ushauri wa Moja kwa Moja Kuhusu Eneo Lako?' : 'Need Authoritative Guidance on Your Land in Arusha?' }}
@@ -159,7 +159,7 @@
             {{ $isSw ? 'Wapimaji wetu waliosajiliwa wapo tayari kukagua nyaraka zako na kukupa mwongozo sahihi wa kisheria na kiufundi.' : 'Our licensed surveyors and urban planning team are available to review your parcel records and provide definitive legal and technical guidance.' }}
         </p>
         <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <a href="{{ route('pages.contact') }}" class="px-6 py-3 rounded-xl bg-[#c89a3b] text-[#0c1c34] font-extrabold text-xs shadow-lg transition hover:bg-[#b5882e]">
+            <a href="{{ route('pages.contact') }}" class="px-6 py-3 rounded-xl bg-[#D48B16] text-[#280508] font-extrabold text-xs shadow-lg transition hover:bg-[#b5882e]">
                 {{ __('app.talk_to_us') }}
             </a>
             <a href="https://wa.me/{{ $siteWhatsappClean ?? '255742448965' }}?text={{ rawurlencode('Hello RELAND Arusha, I would like to book a land services consultation.') }}" target="_blank" rel="noopener" class="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-lg transition inline-flex items-center gap-2">

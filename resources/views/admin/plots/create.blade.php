@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 
 @section('title', 'Add New Plot Listing')
 
@@ -310,10 +310,10 @@
 
         <!-- Submit Bar -->
         <div class="flex items-center justify-end gap-3 pt-4">
-            <a href="{{ route('admin.plots.index') }}" class="px-5 py-3 rounded-xl bg-[#0c1c34] hover:bg-[#16325c] text-slate-300 text-xs font-bold transition border border-[#16325c]">
+            <a href="{{ route('admin.plots.index') }}" class="px-5 py-3 rounded-xl bg-[#280508] hover:bg-[#750D15] text-slate-300 text-xs font-bold transition border border-[#750D15]">
                 Cancel
             </a>
-            <button type="submit" class="px-8 py-3.5 rounded-xl bg-[#c89a3b] hover:bg-[#dfb256] text-[#0c1c34] font-black text-xs uppercase tracking-wider shadow-lg shadow-[#c89a3b]/20 transition">
+            <button type="submit" class="px-8 py-3.5 rounded-xl bg-[#D48B16] hover:bg-[#FAC955] text-[#280508] font-black text-xs uppercase tracking-wider shadow-lg shadow-[#D48B16]/20 transition">
                 Save & Publish Plot
             </button>
         </div>

@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 
 @section('title', 'Manage Plots')
 
@@ -11,21 +11,21 @@
             <p class="text-xs text-slate-400 mt-1">Manage, publish, mark featured and update plot statuses</p>
         </div>
 
-        <a href="{{ route('admin.plots.create') }}" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#c89a3b] hover:bg-[#dfb256] text-[#0c1c34] font-black text-xs shadow-md shadow-[#c89a3b]/20 transition">
+        <a href="{{ route('admin.plots.create') }}" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#D48B16] hover:bg-[#FAC955] text-[#280508] font-black text-xs shadow-md shadow-[#D48B16]/20 transition">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
             <span>Add New Plot</span>
         </a>
     </div>
 
     <!-- Filters Bar -->
-    <div class="bg-[#0c1c34] border border-[#16325c] rounded-2xl p-4">
+    <div class="bg-[#280508] border border-[#750D15] rounded-2xl p-4">
         <form method="GET" action="{{ route('admin.plots.index') }}" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
             <div>
-                <input type="text" name="search" value="{{ request('search') }}" placeholder="Search title, REF, street..." class="w-full bg-[#07101f] border border-[#16325c] rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:ring-2 focus:ring-[#c89a3b]">
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Search title, REF, street..." class="w-full bg-[#1C0305] border border-[#750D15] rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:ring-2 focus:ring-[#D48B16]">
             </div>
 
             <div>
-                <select name="location_id" class="w-full bg-[#07101f] border border-[#16325c] rounded-xl px-3 py-2 text-xs text-white focus:ring-2 focus:ring-[#c89a3b]">
+                <select name="location_id" class="w-full bg-[#1C0305] border border-[#750D15] rounded-xl px-3 py-2 text-xs text-white focus:ring-2 focus:ring-[#D48B16]">
                     <option value="">All Locations</option>
                     @foreach($locations as $loc)
                         <option value="{{ $loc->id }}" {{ request('location_id') == $loc->id ? 'selected' : '' }}>{{ $loc->area_name }}</option>
@@ -34,7 +34,7 @@
             </div>
 
             <div>
-                <select name="plot_type_id" class="w-full bg-[#07101f] border border-[#16325c] rounded-xl px-3 py-2 text-xs text-white focus:ring-2 focus:ring-[#c89a3b]">
+                <select name="plot_type_id" class="w-full bg-[#1C0305] border border-[#750D15] rounded-xl px-3 py-2 text-xs text-white focus:ring-2 focus:ring-[#D48B16]">
                     <option value="">All Types</option>
                     @foreach($plotTypes as $pt)
                         <option value="{{ $pt->id }}" {{ request('plot_type_id') == $pt->id ? 'selected' : '' }}>{{ $pt->name_en }}</option>
@@ -43,7 +43,7 @@
             </div>
 
             <div>
-                <select name="status" class="w-full bg-[#07101f] border border-[#16325c] rounded-xl px-3 py-2 text-xs text-white focus:ring-2 focus:ring-[#c89a3b]">
+                <select name="status" class="w-full bg-[#1C0305] border border-[#750D15] rounded-xl px-3 py-2 text-xs text-white focus:ring-2 focus:ring-[#D48B16]">
                     <option value="">All Statuses</option>
                     <option value="available" {{ request('status') === 'available' ? 'selected' : '' }}>Available</option>
                     <option value="reserved" {{ request('status') === 'reserved' ? 'selected' : '' }}>Reserved</option>
@@ -52,11 +52,11 @@
             </div>
 
             <div class="flex gap-2">
-                <button type="submit" class="flex-1 py-2 px-3 rounded-xl bg-[#16325c] hover:bg-[#0c1c34] text-[#dfb256] border border-[#c89a3b]/40 font-bold text-xs transition">
+                <button type="submit" class="flex-1 py-2 px-3 rounded-xl bg-[#750D15] hover:bg-[#280508] text-[#FAC955] border border-[#D48B16]/40 font-bold text-xs transition">
                     Filter
                 </button>
                 @if(request()->anyFilled(['search', 'location_id', 'plot_type_id', 'status']))
-                    <a href="{{ route('admin.plots.index') }}" class="py-2 px-3 rounded-xl bg-[#07101f] hover:bg-[#16325c] text-slate-300 font-bold text-xs transition border border-[#16325c]">
+                    <a href="{{ route('admin.plots.index') }}" class="py-2 px-3 rounded-xl bg-[#1C0305] hover:bg-[#750D15] text-slate-300 font-bold text-xs transition border border-[#750D15]">
                         Reset
                     </a>
                 @endif
@@ -65,10 +65,10 @@
     </div>
 
     <!-- Table Card -->
-    <div class="bg-[#0c1c34] border border-[#16325c] rounded-2xl overflow-hidden shadow-xs">
+    <div class="bg-[#280508] border border-[#750D15] rounded-2xl overflow-hidden shadow-xs">
         <div class="overflow-x-auto">
             <table class="w-full text-left text-xs text-slate-300">
-                <thead class="bg-[#07101f] text-[11px] uppercase font-bold text-[#dfb256] border-b border-[#16325c]">
+                <thead class="bg-[#1C0305] text-[11px] uppercase font-bold text-[#FAC955] border-b border-[#750D15]">
                     <tr>
                         <th class="py-3.5 px-4">Plot Info & Ref</th>
                         <th class="py-3.5 px-4">Location</th>
@@ -79,14 +79,14 @@
                         <th class="py-3.5 px-4 text-right">Actions</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-[#16325c] font-medium">
+                <tbody class="divide-y divide-[#750D15] font-medium">
                     @forelse($plots as $plot)
-                        <tr class="hover:bg-[#16325c]/30 transition">
+                        <tr class="hover:bg-[#750D15]/30 transition">
                             <!-- Title & Ref -->
                             <td class="py-3.5 px-4">
                                 <div class="font-bold text-white max-w-xs truncate">{{ $plot->title }}</div>
                                 <div class="flex items-center gap-2 mt-0.5 text-[11px] text-slate-400">
-                                    <span class="font-mono text-[#dfb256] font-bold">{{ $plot->plot_reference }}</span>
+                                    <span class="font-mono text-[#FAC955] font-bold">{{ $plot->plot_reference }}</span>
                                     <span>&bull;</span>
                                     <span>{{ $plot->ownership_title_type }}</span>
                                 </div>
@@ -101,7 +101,7 @@
                             <!-- Type & Size -->
                             <td class="py-3.5 px-4">
                                 <div class="text-white">{{ $plot->plotType?->name_en }}</div>
-                                <div class="text-[11px] text-[#dfb256] font-bold">{{ $plot->formatted_size }}</div>
+                                <div class="text-[11px] text-[#FAC955] font-bold">{{ $plot->formatted_size }}</div>
                             </td>
 
                             <!-- Price -->
@@ -114,7 +114,7 @@
                             <td class="py-3.5 px-4">
                                 <form action="{{ route('admin.plots.status', $plot->id) }}" method="POST">
                                     @csrf
-                                    <select name="listing_status" onchange="this.form.submit()" class="bg-[#07101f] border border-[#16325c] rounded-lg px-2.5 py-1 text-[11px] font-bold cursor-pointer {{ $plot->listing_status === 'available' ? 'text-[#dfb256]' : ($plot->listing_status === 'reserved' ? 'text-amber-400' : 'text-rose-400') }}">
+                                    <select name="listing_status" onchange="this.form.submit()" class="bg-[#1C0305] border border-[#750D15] rounded-lg px-2.5 py-1 text-[11px] font-bold cursor-pointer {{ $plot->listing_status === 'available' ? 'text-[#FAC955]' : ($plot->listing_status === 'reserved' ? 'text-amber-400' : 'text-rose-400') }}">
                                         <option value="available" {{ $plot->listing_status === 'available' ? 'selected' : '' }}>Available</option>
                                         <option value="reserved" {{ $plot->listing_status === 'reserved' ? 'selected' : '' }}>Reserved</option>
                                         <option value="sold" {{ $plot->listing_status === 'sold' ? 'selected' : '' }}>Sold</option>
@@ -128,7 +128,7 @@
                                     <!-- Publish toggle -->
                                     <form action="{{ route('admin.plots.toggle-publish', $plot->id) }}" method="POST">
                                         @csrf
-                                        <button type="submit" class="px-2 py-0.5 rounded text-[10px] font-bold {{ $plot->is_published ? 'bg-[#16325c] text-[#dfb256] border border-[#c89a3b]/50' : 'bg-[#07101f] text-slate-500 border border-[#16325c]' }}" title="Toggle Publish">
+                                        <button type="submit" class="px-2 py-0.5 rounded text-[10px] font-bold {{ $plot->is_published ? 'bg-[#750D15] text-[#FAC955] border border-[#D48B16]/50' : 'bg-[#1C0305] text-slate-500 border border-[#750D15]' }}" title="Toggle Publish">
                                             {{ $plot->is_published ? 'Published' : 'Draft' }}
                                         </button>
                                     </form>
@@ -136,7 +136,7 @@
                                     <!-- Featured toggle -->
                                     <form action="{{ route('admin.plots.toggle-featured', $plot->id) }}" method="POST">
                                         @csrf
-                                        <button type="submit" class="px-2 py-0.5 rounded text-[10px] font-bold {{ $plot->is_featured ? 'bg-[#c89a3b] text-[#0c1c34]' : 'bg-[#07101f] text-slate-500 border border-[#16325c]' }}" title="Toggle Featured">
+                                        <button type="submit" class="px-2 py-0.5 rounded text-[10px] font-bold {{ $plot->is_featured ? 'bg-[#D48B16] text-[#280508]' : 'bg-[#1C0305] text-slate-500 border border-[#750D15]' }}" title="Toggle Featured">
                                             {{ $plot->is_featured ? '★ Featured' : 'Normal' }}
                                         </button>
                                     </form>
@@ -146,11 +146,11 @@
                             <!-- Actions -->
                             <td class="py-3.5 px-4 text-right">
                                 <div class="flex items-center justify-end gap-2">
-                                    <a href="{{ route('plots.show', $plot->slug) }}" target="_blank" class="p-1.5 rounded-lg bg-[#07101f] hover:bg-[#16325c] text-slate-300 transition border border-[#16325c]" title="Preview Public Page">
+                                    <a href="{{ route('plots.show', $plot->slug) }}" target="_blank" class="p-1.5 rounded-lg bg-[#1C0305] hover:bg-[#750D15] text-slate-300 transition border border-[#750D15]" title="Preview Public Page">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                                     </a>
 
-                                    <a href="{{ route('admin.plots.edit', $plot->id) }}" class="p-1.5 rounded-lg bg-[#16325c] hover:bg-[#0c1c34] text-[#dfb256] hover:text-white transition border border-[#c89a3b]/40" title="Edit Plot">
+                                    <a href="{{ route('admin.plots.edit', $plot->id) }}" class="p-1.5 rounded-lg bg-[#750D15] hover:bg-[#280508] text-[#FAC955] hover:text-white transition border border-[#D48B16]/40" title="Edit Plot">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                                     </a>
 
@@ -175,7 +175,7 @@
             </table>
         </div>
 
-        <div class="p-4 border-t border-[#16325c]">
+        <div class="p-4 border-t border-[#750D15]">
             {{ $plots->links() }}
         </div>
     </div>

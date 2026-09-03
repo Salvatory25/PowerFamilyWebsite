@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 
 @section('title', 'Manage Blog Articles')
 @section('header_title', 'Blog & Land Insights Management')
@@ -13,21 +13,21 @@
             <p class="text-xs text-slate-400">Publish, edit, and manage educational articles and news on land surveying, formalization, and title deeds.</p>
         </div>
 
-        <a href="{{ route('admin.articles.create') }}" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#c89a3b] hover:bg-[#b5882e] text-[#0c1c34] font-extrabold text-xs shadow-lg transition">
+        <a href="{{ route('admin.articles.create') }}" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#D48B16] hover:bg-[#b5882e] text-[#280508] font-extrabold text-xs shadow-lg transition">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
             <span>+ Andika Makala Mpya (New Article)</span>
         </a>
     </div>
 
     <!-- Search / Filter Box -->
-    <div class="bg-[#0c1c34] p-4 rounded-2xl border border-[#16325c]">
+    <div class="bg-[#280508] p-4 rounded-2xl border border-[#750D15]">
         <form action="{{ route('admin.articles.index') }}" method="GET" class="flex flex-col sm:flex-row items-center gap-3">
             <div class="flex-1 w-full">
-                <input type="text" name="search" value="{{ request('search') }}" placeholder="Tafuta jina la makala, maneno muhimu (Search title or content)..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:ring-2 focus:ring-[#c89a3b]">
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Tafuta jina la makala, maneno muhimu (Search title or content)..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:ring-2 focus:ring-[#D48B16]">
             </div>
 
             <div class="flex items-center gap-2 w-full sm:w-auto">
-                <button type="submit" class="px-5 py-2.5 bg-[#16325c] hover:bg-[#1f437a] text-white font-bold text-xs rounded-xl transition border border-slate-700 shrink-0">
+                <button type="submit" class="px-5 py-2.5 bg-[#750D15] hover:bg-[#1f437a] text-white font-bold text-xs rounded-xl transition border border-slate-700 shrink-0">
                     Search Articles
                 </button>
                 @if(request()->has('search'))
@@ -40,11 +40,11 @@
     </div>
 
     <!-- Articles Table -->
-    <div class="bg-[#0c1c34] rounded-3xl border border-[#16325c] overflow-hidden shadow-xl">
+    <div class="bg-[#280508] rounded-3xl border border-[#750D15] overflow-hidden shadow-xl">
         @if($articles->count() > 0)
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-xs text-slate-300">
-                    <thead class="bg-[#16325c]/60 text-slate-300 uppercase tracking-wider font-bold border-b border-[#16325c] text-[10px]">
+                    <thead class="bg-[#750D15]/60 text-slate-300 uppercase tracking-wider font-bold border-b border-[#750D15] text-[10px]">
                         <tr>
                             <th class="px-6 py-4">Makala / Title</th>
                             <th class="px-6 py-4">Muhtasari (Excerpt)</th>
@@ -52,9 +52,9 @@
                             <th class="px-6 py-4 text-right">Vitendo (Actions)</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-[#16325c]">
+                    <tbody class="divide-y divide-[#750D15]">
                         @foreach($articles as $article)
-                            <tr class="hover:bg-[#16325c]/30 transition">
+                            <tr class="hover:bg-[#750D15]/30 transition">
                                 <td class="px-6 py-4">
                                     <div class="flex items-center gap-3.5">
                                         <div class="w-16 h-12 rounded-xl bg-slate-800 overflow-hidden shrink-0 border border-slate-700">
@@ -65,7 +65,7 @@
                                             @endif
                                         </div>
                                         <div>
-                                            <a href="{{ route('admin.articles.edit', $article) }}" class="font-bold text-white hover:text-[#dfb256] transition block line-clamp-1 max-w-xs text-sm">
+                                            <a href="{{ route('admin.articles.edit', $article) }}" class="font-bold text-white hover:text-[#FAC955] transition block line-clamp-1 max-w-xs text-sm">
                                                 {{ $article->title }}
                                             </a>
                                             <span class="text-[11px] text-slate-400">/insights/{{ $article->slug }}</span>
@@ -86,7 +86,7 @@
                                         <a href="{{ route('pages.article', $article->slug) }}" target="_blank" class="p-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition" title="Preview on Website">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                                         </a>
-                                        <a href="{{ route('admin.articles.edit', $article) }}" class="p-2 rounded-lg bg-[#16325c] text-[#dfb256] hover:bg-[#c89a3b] hover:text-[#0c1c34] transition font-bold" title="Edit Article">
+                                        <a href="{{ route('admin.articles.edit', $article) }}" class="p-2 rounded-lg bg-[#750D15] text-[#FAC955] hover:bg-[#D48B16] hover:text-[#280508] transition font-bold" title="Edit Article">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                                         </a>
                                         <form method="POST" action="{{ route('admin.articles.destroy', $article) }}" onsubmit="return confirm('Una uhakika unataka kufuta makala hii? (Are you sure you want to delete this article?)')">
@@ -104,7 +104,7 @@
                 </table>
             </div>
 
-            <div class="p-4 border-t border-[#16325c]">
+            <div class="p-4 border-t border-[#750D15]">
                 {{ $articles->links() }}
             </div>
         @else
@@ -112,7 +112,7 @@
                 <svg class="w-12 h-12 mx-auto mb-3 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
                 <p class="text-base font-bold text-white mb-1">Hakuna Makala Zilizopatikana</p>
                 <p class="text-xs text-slate-400 mb-4">Anza kuandika makala mpya kwa ajili ya wateja wako.</p>
-                <a href="{{ route('admin.articles.create') }}" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#c89a3b] text-[#0c1c34] font-bold text-xs">
+                <a href="{{ route('admin.articles.create') }}" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#D48B16] text-[#280508] font-bold text-xs">
                     <span>+ Andika Makala Mpya</span>
                 </a>
             </div>

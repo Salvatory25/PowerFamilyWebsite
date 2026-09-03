@@ -180,8 +180,22 @@ class Plot extends Model
         } else {
             $text = "Habari Power Family Investment, nimevutiwa na Kiwanja [{$this->plot_reference}] - \"{$this->title}\" kilichopo {$this->full_location} chenye bei ya {$this->formatted_price}. Naomba maelezo zaidi.";
         }
-        
+
         return "https://wa.me/{$cleanedNumber}?text=" . rawurlencode($text);
+    }
+
+    public function getMapEmbedUrlAttribute(): string
+    {
+        if (!empty($this->google_maps_embed_url)) {
+            return $this->google_maps_embed_url;
+        }
+
+        if ($this->latitude && $this->longitude) {
+            return "https://maps.google.com/maps?q={$this->latitude},{$this->longitude}&hl=sw&z=15&output=embed";
+        }
+
+        $query = urlencode($this->full_location ?: ($this->location?->area_name . ', ' . ($this->location?->region ?? 'Tanzania')));
+        return "https://maps.google.com/maps?q={$query}&hl=sw&z=14&output=embed";
     }
 
     protected static function boot()
