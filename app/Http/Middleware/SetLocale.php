@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 namespace App\Http\Middleware;
 
@@ -17,13 +17,17 @@ class SetLocale
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $locale = Session::get('locale', config('app.locale', 'sw'));
+        $locale = $request->cookie('locale') 
+            ?? Session::get('locale') 
+            ?? $request->query('lang') 
+            ?? config('app.locale', 'sw');
 
         if (!in_array($locale, ['en', 'sw'])) {
             $locale = 'sw';
         }
 
         App::setLocale($locale);
+        Session::put('locale', $locale);
 
         return $next($request);
     }

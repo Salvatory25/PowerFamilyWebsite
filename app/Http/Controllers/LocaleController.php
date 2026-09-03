@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 namespace App\Http\Controllers;
 
@@ -12,8 +12,14 @@ class LocaleController extends Controller
     {
         if (in_array($locale, ['en', 'sw'])) {
             Session::put('locale', $locale);
+            cookie()->queue('locale', $locale, 60 * 24 * 365);
         }
 
-        return redirect()->back();
+        $referer = $request->headers->get('referer');
+        if ($referer) {
+            return redirect($referer)->withCookie(cookie('locale', $locale, 60 * 24 * 365));
+        }
+
+        return redirect()->route('home')->withCookie(cookie('locale', $locale, 60 * 24 * 365));
     }
 }
