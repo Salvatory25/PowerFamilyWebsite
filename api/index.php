@@ -94,7 +94,7 @@ try {
 } catch (\Throwable $e) {
     http_response_code(500);
     error_log('Vercel Serverless Exception: ' . $e->getMessage() . "\n" . $e->getTraceAsString());
-    echo '<h1>Reland Serverless Diagnostic</h1>';
+    echo '<h1>Power Family Investment Serverless Diagnostic</h1>';
     echo '<p><strong>Message:</strong> ' . htmlspecialchars($e->getMessage()) . '</p>';
     echo '<p><strong>File:</strong> ' . htmlspecialchars($e->getFile()) . ':' . $e->getLine() . '</p>';
     echo '<pre>' . htmlspecialchars($e->getTraceAsString()) . '</pre>';
