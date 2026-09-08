@@ -40,7 +40,7 @@
         "APP_NAME": "Power Family Investment",
         "APP_ENV": "production",
         "APP_KEY": "base64:G4dJQTj748dhrF9Gd98BLK8oZWJEmVC+RHJ/wAZLjMw=",
-        "APP_DEBUG": "false",
+        "APP_DEBUG": "true",
         "APP_URL": "https://powerfamilywebsite.vercel.app",
         "APP_STORAGE": "/tmp/storage",
         "APP_SERVICES_CACHE": "/tmp/storage/bootstrap/services.php",
