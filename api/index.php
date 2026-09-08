@@ -2,15 +2,24 @@
 
 if (isset($_GET['test_hash'])) {
     require __DIR__ . '/../vendor/autoload.php';
-    $app = require_once __DIR__ . '/../bootstrap/app.php';
-    $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
-    echo "Hashing config: " . json_encode(config('hashing')) . "\n";
     try {
-        $hash = app('hash')->make('password123');
-        echo "Laravel Hash: " . $hash . "\n";
+        $hasher = new \Illuminate\Hashing\BcryptHasher(['rounds' => 12]);
+        $h = $hasher->make('password123');
+        echo "BcryptHasher worked: " . $h . "\n";
     } catch (\Throwable $e) {
-        echo "Laravel Hash Error: " . get_class($e) . " - " . $e->getMessage() . "\n";
-        echo "Previous: " . ($e->getPrevious() ? get_class($e->getPrevious()) . " - " . $e->getPrevious()->getMessage() : "none") . "\n";
+        echo "BcryptHasher failed: " . get_class($e) . " - " . $e->getMessage() . "\n";
+    }
+    try {
+        $h2 = password_hash('password123', PASSWORD_BCRYPT, ['cost' => 12]);
+        echo "Native cost 12: " . $h2 . "\n";
+    } catch (\Throwable $e) {
+        echo "Native failed: " . get_class($e) . " - " . $e->getMessage() . "\n";
+    }
+    try {
+        $hasherDefault = new \Illuminate\Hashing\BcryptHasher();
+        echo "Default hasher: " . $hasherDefault->make('password123') . "\n";
+    } catch (\Throwable $e) {
+        echo "Default hasher failed: " . $e->getMessage() . "\n";
     }
     exit;
 }
