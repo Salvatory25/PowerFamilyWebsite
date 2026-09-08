@@ -1,6 +1,15 @@
 <?php
 
-// 1. Prepare writeable directories in /tmp for Vercel Serverless environment
+if (isset($_GET['test_hash'])) {
+    try {
+        $h = password_hash('password123', PASSWORD_BCRYPT, ['cost' => 10]);
+        echo "Bcrypt works: " . $h;
+    } catch (\Throwable $e) {
+        echo "Bcrypt failed: " . get_class($e) . " - " . $e->getMessage();
+    }
+    exit;
+}
+
 $storagePaths = [
     '/tmp/storage/bootstrap',
     '/tmp/storage/framework/views',
