@@ -1,4 +1,4 @@
-﻿@extends('layouts.admin')
+@extends('layouts.admin')
 
 @section('title', 'Lead Details: ' . $enquiry->name)
 @section('header_title', 'Client Inquiry Details')
@@ -40,7 +40,7 @@
                     @php
                         $cleanPhone = preg_replace('/[^0-9]/', '', $enquiry->phone);
                     @endphp
-                    <a href="https://wa.me/{{ $cleanPhone }}?text={{ rawurlencode('Hello ' . $enquiry->name . ', thank you for contacting RELAND regarding our Land Services & Plots.') }}" target="_blank" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs">
+                    <a href="https://wa.me/{{ $cleanPhone }}?text={{ rawurlencode('Hello ' . $enquiry->name . ', thank you for contacting Power Family Investment regarding our Plots, Houses & Vehicles.') }}" target="_blank" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs">
                         Open WhatsApp
                     </a>
                 </div>
@@ -52,31 +52,43 @@
             </div>
         </div>
 
-        @if($enquiry->service_type)
+        @if($enquiry->category)
             <div class="p-4 rounded-2xl bg-[#750D15]/50 border border-[#D48B16]/40">
-                <span class="text-[10px] font-bold uppercase tracking-wider text-[#FAC955] block mb-1">Requested Land Service</span>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-[#FAC955] block mb-1">Inquiry Category</span>
                 <div class="flex items-center justify-between">
                     <div>
-                        <h2 class="font-bold text-white text-sm">{{ ucfirst(str_replace('-', ' ', $enquiry->service_type)) }}</h2>
-                        <span class="text-xs text-slate-300">Professional Land Consultation & Field Assignment</span>
+                        <h2 class="font-bold text-white text-sm">{{ ucfirst($enquiry->category) }}</h2>
+                        <span class="text-xs text-slate-300">Power Family Client Consultation</span>
                     </div>
-                    <a href="{{ route('services.show', $enquiry->service_type) }}" target="_blank" class="px-3 py-1.5 rounded-lg bg-[#D48B16] text-[#280508] text-xs font-bold hover:bg-[#FAC955]">
-                        View Service Page &rarr;
+                </div>
+            </div>
+        @endif
+
+        @if($enquiry->house)
+            <div class="p-4 rounded-2xl bg-[#750D15]/50 border border-[#750D15]">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-[#FAC955] block mb-1">Associated House Listing</span>
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="font-bold text-white text-sm">{{ $enquiry->house->title }}</h2>
+                        <span class="text-xs text-slate-400">{{ $enquiry->house->location?->area_name }} &bull; {{ $enquiry->house->formatted_price }}</span>
+                    </div>
+                    <a href="{{ route('houses.show', $enquiry->house->slug) }}" target="_blank" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 text-xs font-bold hover:bg-slate-700">
+                        View House &rarr;
                     </a>
                 </div>
             </div>
         @endif
 
-        @if($enquiry->project)
+        @if($enquiry->vehicle)
             <div class="p-4 rounded-2xl bg-[#750D15]/50 border border-[#750D15]">
-                <span class="text-[10px] font-bold uppercase tracking-wider text-[#FAC955] block mb-1">Referenced Land Project</span>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-[#FAC955] block mb-1">Associated Vehicle Listing</span>
                 <div class="flex items-center justify-between">
                     <div>
-                        <h2 class="font-bold text-white text-sm">{{ $enquiry->project->name }}</h2>
-                        <span class="text-xs text-slate-400">{{ $enquiry->project->project_type }} &bull; {{ $enquiry->project->location_name }}</span>
+                        <h2 class="font-bold text-white text-sm">{{ $enquiry->vehicle->title }}</h2>
+                        <span class="text-xs text-slate-400">{{ $enquiry->vehicle->formatted_price }} &bull; {{ $enquiry->vehicle->year }}</span>
                     </div>
-                    <a href="{{ route('projects.show', $enquiry->project->slug) }}" target="_blank" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 text-xs font-bold hover:bg-slate-700">
-                        View Project Case Study &rarr;
+                    <a href="{{ route('vehicles.show', $enquiry->vehicle->slug) }}" target="_blank" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 text-xs font-bold hover:bg-slate-700">
+                        View Vehicle &rarr;
                     </a>
                 </div>
             </div>

@@ -110,5 +110,28 @@ class PowerFamilyPlatformTest extends TestCase
         $response = $this->actingAs($admin)->get('/admin/dashboard');
         $response->assertStatus(200);
         $response->assertSee('Dashibodi');
+
+        $adminRoutes = [
+            '/admin/plots',
+            '/admin/plots/create',
+            '/admin/houses',
+            '/admin/houses/create',
+            '/admin/vehicles',
+            '/admin/vehicles/create',
+            '/admin/locations',
+            '/admin/locations/create',
+            '/admin/plot-types',
+            '/admin/plot-types/create',
+            '/admin/articles',
+            '/admin/articles/create',
+            '/admin/gallery',
+            '/admin/gallery/create',
+            '/admin/enquiries',
+            '/admin/settings',
+        ];
+
+        foreach ($adminRoutes as $route) {
+            $this->actingAs($admin)->get($route)->assertStatus(200);
+        }
     }
 }

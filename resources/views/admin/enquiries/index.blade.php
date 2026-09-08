@@ -1,4 +1,4 @@
-﻿@extends('layouts.admin')
+@extends('layouts.admin')
 
 @section('title', 'Client Leads & Service Inquiries')
 @section('header_title', 'Client CRM & Inquiries')
@@ -22,9 +22,10 @@
             <div>
                 <select name="category" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-white focus:ring-2 focus:ring-[#D48B16]">
                     <option value="">All Categories</option>
-                    <option value="service" {{ request('category') === 'service' ? 'selected' : '' }}>Land Services</option>
-                    <option value="project" {{ request('category') === 'project' ? 'selected' : '' }}>Project Case Studies</option>
-                    <option value="plot" {{ request('category') === 'plot' ? 'selected' : '' }}>Plot Listings</option>
+                    <option value="kiwanja" {{ request('category') === 'kiwanja' ? 'selected' : '' }}>Viwanja (Plots)</option>
+                    <option value="nyumba" {{ request('category') === 'nyumba' ? 'selected' : '' }}>Nyumba (Houses)</option>
+                    <option value="gari" {{ request('category') === 'gari' || request('category') === 'magari' ? 'selected' : '' }}>Magari (Vehicles)</option>
+                    <option value="ushauri" {{ request('category') === 'ushauri' ? 'selected' : '' }}>Ushauri / Consultation</option>
                 </select>
             </div>
 
@@ -39,7 +40,7 @@
             </div>
 
             <div class="flex gap-2">
-                <button type="submit" class="flex-1 py-2 px-3 rounded-xl bg-[#750D15] hover:bg-[#1e4277] text-white font-bold text-xs transition border border-slate-700">
+                <button type="submit" class="flex-1 py-2 px-3 rounded-xl bg-[#750D15] hover:bg-[#961620] text-white font-bold text-xs transition border border-[#D48B16]/30">
                     Filter Leads
                 </button>
                 @if(request()->anyFilled(['search', 'category', 'status']))
@@ -57,7 +58,7 @@
             <thead class="bg-[#750D15]/60 text-[10px] uppercase font-bold text-slate-400 border-b border-[#750D15]">
                 <tr>
                     <th class="py-4 px-5">Client Info</th>
-                    <th class="py-4 px-5">Service / Subject</th>
+                    <th class="py-4 px-5">Category / Item</th>
                     <th class="py-4 px-5">Channel</th>
                     <th class="py-4 px-5">Received</th>
                     <th class="py-4 px-5 text-center">Status</th>
@@ -79,20 +80,25 @@
                         </td>
 
                         <td class="py-4 px-5">
-                            @if($lead->service_type)
-                                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-[#D48B16]/20 text-[#FAC955] font-bold text-[11px] border border-[#D48B16]/30">
-                                    {{ ucfirst(str_replace('-', ' ', $lead->service_type)) }}
-                                </span>
-                            @elseif($lead->project)
-                                <a href="{{ route('projects.show', $lead->project->slug) }}" target="_blank" class="font-bold text-slate-200 hover:text-[#FAC955] block">
-                                    {{ $lead->project->name }}
-                                </a>
-                                <span class="text-[10px] text-slate-400">Project Case Study</span>
-                            @elseif($lead->plot)
-                                <a href="{{ route('plots.show', $lead->plot->slug) }}" target="_blank" class="font-mono text-[#FAC955] hover:underline font-bold">
-                                    {{ $lead->plot->plot_reference }}
+                            @if($lead->plot)
+                                <a href="{{ route('plots.show', $lead->plot->slug) }}" target="_blank" class="font-mono text-[#FAC955] hover:underline font-bold block">
+                                    {{ $lead->plot->plot_reference }} &bull; Plot
                                 </a>
                                 <div class="text-[11px] text-slate-400 truncate max-w-xs">{{ $lead->plot->title }}</div>
+                            @elseif($lead->house)
+                                <a href="{{ route('houses.show', $lead->house->slug) }}" target="_blank" class="font-bold text-[#FAC955] hover:underline block">
+                                    {{ $lead->house->title }}
+                                </a>
+                                <span class="text-[10px] text-slate-400">House Listing</span>
+                            @elseif($lead->vehicle)
+                                <a href="{{ route('vehicles.show', $lead->vehicle->slug) }}" target="_blank" class="font-bold text-[#FAC955] hover:underline block">
+                                    {{ $lead->vehicle->title }}
+                                </a>
+                                <span class="text-[10px] text-slate-400">Vehicle Listing</span>
+                            @elseif($lead->category)
+                                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-[#D48B16]/20 text-[#FAC955] font-bold text-[11px] border border-[#D48B16]/30">
+                                    {{ ucfirst($lead->category) }}
+                                </span>
                             @else
                                 <span class="text-slate-500 italic">General Consultation</span>
                             @endif

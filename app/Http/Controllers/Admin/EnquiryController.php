@@ -12,20 +12,14 @@ class EnquiryController extends Controller
 {
     public function index(Request $request): View
     {
-        $query = Enquiry::with(['plot', 'project']);
+        $query = Enquiry::with(['plot', 'house', 'vehicle']);
 
         if ($request->filled('status')) {
             $query->where('status', $request->status);
         }
 
         if ($request->filled('category')) {
-            if ($request->category === 'service') {
-                $query->whereNotNull('service_type');
-            } elseif ($request->category === 'project') {
-                $query->whereNotNull('project_id');
-            } elseif ($request->category === 'plot') {
-                $query->whereNotNull('plot_id');
-            }
+            $query->where('category', $request->category);
         }
 
         if ($request->filled('search')) {
@@ -34,7 +28,7 @@ class EnquiryController extends Controller
                 $q->where('name', 'like', "%{$search}%")
                   ->orWhere('phone', 'like', "%{$search}%")
                   ->orWhere('email', 'like', "%{$search}%")
-                  ->orWhere('service_type', 'like', "%{$search}%")
+                  ->orWhere('category', 'like', "%{$search}%")
                   ->orWhere('message', 'like', "%{$search}%");
             });
         }
@@ -46,7 +40,7 @@ class EnquiryController extends Controller
 
     public function show(Enquiry $enquiry): View
     {
-        $enquiry->load(['plot', 'project']);
+        $enquiry->load(['plot', 'house', 'vehicle']);
         return view('admin.enquiries.show', compact('enquiry'));
     }
 
