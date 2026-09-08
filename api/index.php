@@ -1,11 +1,16 @@
 <?php
 
 if (isset($_GET['test_hash'])) {
+    require __DIR__ . '/../vendor/autoload.php';
+    $app = require_once __DIR__ . '/../bootstrap/app.php';
+    $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
+    echo "Hashing config: " . json_encode(config('hashing')) . "\n";
     try {
-        $h = password_hash('password123', PASSWORD_BCRYPT, ['cost' => 10]);
-        echo "Bcrypt works: " . $h;
+        $hash = app('hash')->make('password123');
+        echo "Laravel Hash: " . $hash . "\n";
     } catch (\Throwable $e) {
-        echo "Bcrypt failed: " . get_class($e) . " - " . $e->getMessage();
+        echo "Laravel Hash Error: " . get_class($e) . " - " . $e->getMessage() . "\n";
+        echo "Previous: " . ($e->getPrevious() ? get_class($e->getPrevious()) . " - " . $e->getPrevious()->getMessage() : "none") . "\n";
     }
     exit;
 }
