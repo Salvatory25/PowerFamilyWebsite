@@ -2,24 +2,20 @@
 
 if (isset($_GET['test_hash'])) {
     require __DIR__ . '/../vendor/autoload.php';
+    /** @var \Illuminate\Foundation\Application $app */
+    $app = require_once __DIR__ . '/../bootstrap/app.php';
+    $kernel = $app->make(\Illuminate\Contracts\Http\Kernel::class);
+    $response = $kernel->handle(
+        $request = \Illuminate\Http\Request::create('/admin/login', 'GET')
+    );
+    
+    echo "Hashing config: " . json_encode(config('hashing')) . "\n";
     try {
-        $hasher = new \Illuminate\Hashing\BcryptHasher(['rounds' => 12]);
-        $h = $hasher->make('password123');
-        echo "BcryptHasher worked: " . $h . "\n";
+        $attempt = \Illuminate\Support\Facades\Auth::attempt(['email' => 'admin@powerfamily.co.tz', 'password' => 'password123']);
+        echo "Auth attempt result: " . ($attempt ? "SUCCESS" : "FAILED") . "\n";
     } catch (\Throwable $e) {
-        echo "BcryptHasher failed: " . get_class($e) . " - " . $e->getMessage() . "\n";
-    }
-    try {
-        $h2 = password_hash('password123', PASSWORD_BCRYPT, ['cost' => 12]);
-        echo "Native cost 12: " . $h2 . "\n";
-    } catch (\Throwable $e) {
-        echo "Native failed: " . get_class($e) . " - " . $e->getMessage() . "\n";
-    }
-    try {
-        $hasherDefault = new \Illuminate\Hashing\BcryptHasher();
-        echo "Default hasher: " . $hasherDefault->make('password123') . "\n";
-    } catch (\Throwable $e) {
-        echo "Default hasher failed: " . $e->getMessage() . "\n";
+        echo "Auth attempt exception: " . get_class($e) . " - " . $e->getMessage() . "\n";
+        echo $e->getTraceAsString();
     }
     exit;
 }
