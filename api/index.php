@@ -1,24 +1,6 @@
 <?php
 
-if (isset($_GET['test_hash'])) {
-    require __DIR__ . '/../vendor/autoload.php';
-    /** @var \Illuminate\Foundation\Application $app */
-    $app = require_once __DIR__ . '/../bootstrap/app.php';
-    $kernel = $app->make(\Illuminate\Contracts\Http\Kernel::class);
-    $response = $kernel->handle(
-        $request = \Illuminate\Http\Request::create('/admin/login', 'GET')
-    );
-    
-    echo "Hashing config: " . json_encode(config('hashing')) . "\n";
-    try {
-        $attempt = \Illuminate\Support\Facades\Auth::attempt(['email' => 'admin@powerfamily.co.tz', 'password' => 'password123']);
-        echo "Auth attempt result: " . ($attempt ? "SUCCESS" : "FAILED") . "\n";
-    } catch (\Throwable $e) {
-        echo "Auth attempt exception: " . get_class($e) . " - " . $e->getMessage() . "\n";
-        echo $e->getTraceAsString();
-    }
-    exit;
-}
+// 1. Prepare writeable directories in /tmp for Vercel Serverless environment
 
 $storagePaths = [
     '/tmp/storage/bootstrap',
@@ -84,7 +66,8 @@ $runtimeEnvs = [
     'VERCEL' => '1',
     'APP_ENV' => getenv('APP_ENV') ?: 'production',
     'APP_KEY' => $appKey,
-    'APP_DEBUG' => getenv('APP_DEBUG') ?: 'true',
+    'APP_DEBUG' => getenv('APP_DEBUG') ?: 'false',
+    'BCRYPT_ROUNDS' => '12',
     'APP_STORAGE' => '/tmp/storage',
     'APP_SERVICES_CACHE' => '/tmp/storage/bootstrap/services.php',
     'APP_PACKAGES_CACHE' => '/tmp/storage/bootstrap/packages.php',
